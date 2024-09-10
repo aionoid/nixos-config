@@ -12,10 +12,14 @@
     fastfetch
     bat
     lsd
+    vlc
     # nodePackages.gitmoji-cli
     # gotop
     # htop
+    qbittorrent
   ];
+
+  programs.kitty.enable = true;
 
   xsession.enable = true;
   xsession.numlock.enable = true;

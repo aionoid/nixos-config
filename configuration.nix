@@ -11,7 +11,13 @@
     ./hardware-configuration.nix
   ];
 
+  ovo.hyprland.enable = true;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -45,18 +51,18 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  ## Enable the X11 windowing system.
+  #services.xserver.enable = true;
 
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  ## Enable the XFCE Desktop Environment.
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.xfce.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  ## Configure keymap in X11
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

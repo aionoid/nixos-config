@@ -16,6 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyperland.url = "github:hyprwm/Hyprland";
+
     home-manager = {
       #url = "github:nix-community/home-manager/release-24.05";
       url = "github:nix-community/home-manager/master";
@@ -46,19 +48,23 @@
           #{ _module.args = inputs; }
           ./configuration.nix
           ./theme.nix
+          #./nixosModules
 
           stylix.nixosModules.stylix
 
           home-manager.nixosModules.home-manager
           {
+            extraSpecialArgs = {inherit inputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ovo = import ./home.nix;
+            home-manager.users.modules = [
+              inputs.self.outputs.homeModules.default
+            ];
           }
         ];
       };
     };
-    #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-    #packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+    homeModules.default = ./homeModules;
   };
 }
