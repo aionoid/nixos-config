@@ -1,7 +1,5 @@
-{lib, ...}: {
+{...}: {
   imports = [
-    ./hypr.nix
+    ./theme.nix
   ];
-
-  ovo.hyprland.enable = lib.mkDefault false;
 }
