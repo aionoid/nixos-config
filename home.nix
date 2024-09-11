@@ -4,8 +4,8 @@
   ...
 }: {
   # TODO please change the username & home directory to your own
-  home.username = "ovo";
-  home.homeDirectory = "/home/ovo";
+  #  home.username = "ovo";
+  #  home.homeDirectory = "/home/ovo";
 
   home.packages = with pkgs; [
     pa_applet

@@ -45,19 +45,46 @@
         specialArgs = {inherit system inputs nixvim;};
 
         modules = [
-          #{ _module.args = inputs; }
-          ./configuration.nix
-          ./theme.nix
-          #./nixosModules
+          ./hosts/home/configuration.nix
+          #./theme.nix
+          ./nixosModules
 
           stylix.nixosModules.stylix
 
           home-manager.nixosModules.home-manager
           {
-            extraSpecialArgs = {inherit inputs;};
+            specialArgs = {inherit inputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ovo = import ./home.nix;
+            home-manager.users.modules = [
+              inputs.self.outputs.homeModules.default
+            ];
+          }
+        ];
+      };
+
+      work = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit system inputs nixvim;};
+
+        modules = [
+          #{ _module.args = inputs; }
+          ./hosts/work/configuration.nix
+          #./theme.nix
+          ./nixosModules
+
+          stylix.nixosModules.stylix
+
+          home-manager.nixosModules.home-manager
+          {
+            specialArgs = {inherit inputs;};
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.antiroot = import ./home.nix;
+            home-manager.home = {
+              home.homeDirectory = "/home/antiroot";
+              home.username = "antiroot";
+            };
             home-manager.users.modules = [
               inputs.self.outputs.homeModules.default
             ];

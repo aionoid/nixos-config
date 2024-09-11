@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -11,19 +8,13 @@
     ./hardware-configuration.nix
   ];
 
-  #ovo.hyprland.enable = true;
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "home"; # Define your hostname.
+  networking.hostName = "work"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -51,18 +42,22 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  ## Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
 
-  ## Enable the XFCE Desktop Environment.
+  # Enable the XFCE Desktop Environment.
   #services.xserver.displayManager.lightdm.enable = true;
   #services.xserver.desktopManager.xfce.enable = true;
 
-  ## Configure keymap in X11
-  #services.xserver.xkb = {
-  #  layout = "us";
-  #  variant = "";
-  #};
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -86,11 +81,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ovo = {
+  users.users.antiroot = {
     isNormalUser = true;
-    description = "ovo";
+    description = "antiroot";
     extraGroups = ["networkmanager" "wheel"];
     useDefaultShell = true;
     packages = with pkgs; [
@@ -100,7 +94,10 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  # Install zsh
   programs.zsh.enable = true;
+  # set default shell for all users
+  users.defaultUserShell = pkgs.zsh;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -139,5 +136,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
