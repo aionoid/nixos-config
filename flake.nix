@@ -6,7 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs
     # at the same time. Here's an working example:
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
@@ -38,7 +38,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
+    # lib = nixpkgs.lib // home-manager.lib;
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
@@ -50,7 +50,7 @@
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
-    pkgsFor = lib.genAttrs (import systems) (
+    pkgsFor = nixpkgs.lib.genAttrs (import systems) (
       system:
         import nixpkgs {
           inherit system;
@@ -58,7 +58,7 @@
         }
     );
   in {
-    inherit lib;
+    # inherit lib;
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
@@ -87,15 +87,15 @@
       #     ./nixos/configuration.nix
       #   ];
       #   };
-      home = lib.nixosSystem {
-        modules = [./hosts/home ./hosts/global.nix];
+      home = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/home];
         specialArgs = {
           inherit inputs outputs;
         };
       };
       # Secondary desktop
-      work = lib.nixosSystem {
-        modules = [./hosts/work ./hosts/global.nix];
+      work = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/work];
         specialArgs = {
           inherit inputs outputs;
         };

@@ -5,45 +5,50 @@
 }: {
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
-    inputs.hardware.nixosModules.common-gpu-amd
+    # inputs.hardware.nixosModules.common-gpu-nvidia
     inputs.hardware.nixosModules.common-pc-ssd
 
     ./hardware-configuration.nix
+    ./nvidia.nix
 
-    ../common/global
-    ../common/users/gabriel
-
-    ../common/optional/peripherals.nix
-    ../common/optional/greetd.nix
-    ../common/optional/pipewire.nix
-    ../common/optional/quietboot.nix
-    ../common/optional/wireless.nix
-
-    ../common/optional/starcitizen-fixes.nix
+    ../global.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    hello
-  ];
   networking = {
-    hostName = "atlas";
-    useDHCP = true;
+    hostName = "home";
+    #useDHCP = true;
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-    binfmt.emulatedSystems = [
-      "aarch64-linux"
-      "i686-linux"
+  # set defaultUserShell for all users
+  users.defaultUserShell = pkgs.zsh;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.ovo = {
+    isNormalUser = true;
+    description = "ovo";
+    extraGroups = ["networkmanager" "wheel"];
+    useDefaultShell = true;
+    packages = with pkgs; [
+      #  thunderbird
     ];
   };
 
-  programs = {
-    adb.enable = true;
-    dconf.enable = true;
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the XFCE Desktop Environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
+
+  # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us, ara";
+    options = "terminate:ctrl_alt_bksp";
+    variant = "";
   };
-
-  hardware.graphics.enable = true;
-
-  system.stateVersion = "22.05";
 }

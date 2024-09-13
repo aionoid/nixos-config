@@ -1,4 +1,5 @@
 {...}: {
+  imports = [./home.nix];
   # username
   home = {
     username = "antiroot";
