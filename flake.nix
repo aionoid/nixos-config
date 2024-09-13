@@ -88,14 +88,14 @@
       #   ];
       #   };
       home = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/home];
+        modules = [self.nixosModules ./hosts/home];
         specialArgs = {
           inherit inputs outputs;
         };
       };
       # Secondary desktop
       work = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/work];
+        modules = [./hosts/work self.nixosModules];
         specialArgs = {
           inherit inputs outputs;
         };
@@ -116,7 +116,11 @@
       # };
 
       "ovo@home" = home-manager.lib.homeManagerConfiguration {
-        modules = [./home-manager/ovo.nix ./home-manager/home.nix];
+        modules = [
+          ./home-manager/ovo.nix
+          ./home-manager/home.nix
+          self.homeManagerModules
+        ];
         # pkgs = pkgsFor.x86_64-linux;
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {
@@ -126,7 +130,11 @@
 
       # Main desktop
       "antiroot@work" = home-manager.lib.homeManagerConfiguration {
-        modules = [./home-manager/antiroot.nix ./home-manager/home.nix];
+        modules = [
+          ./home-manager/antiroot.nix
+          ./home-manager/home.nix
+          self.homeManagerModules
+        ];
         # pkgs = pkgsFor.x86_64-linux;
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {

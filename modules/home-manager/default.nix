@@ -3,6 +3,8 @@
 {inputs, ...}: {
   # List your module files here
   # my-module = import ./my-module.nix;
-  import = [inputs.stylix.homeManagerModules.stylix];
-  theme = import ./theme.nix;
+  imports = [
+    inputs.stylix.homeManagerModules.stylix
+    ../theme.nix
+  ];
 }
