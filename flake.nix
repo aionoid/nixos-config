@@ -13,6 +13,12 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # firefox-addons
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -26,7 +32,15 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     # hyprland
-    hyperland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    #gBar
+    gBar.url = "github:scorpion-26/gBar";
   };
 
   outputs = {

@@ -4,18 +4,18 @@
   outputs,
   ...
 }: {
-  # imports = [
-  #   # inputs.stylix.nixosModules.stylix
-  #   # # use as modeule ?
-  #   # ../modules/nixos/theme.nix
-  #
-  #   # inputs.home-manager.nixosModules.home-manager
-  #   # {
-  #   #   home-manager.useGlobalPkgs = true;
-  #   #   home-manager.useUserPackages = true;
-  #   #   # home-manager.users.antiroot = import ./home.nix;
-  #   # }
-  # ];
+  imports = [
+    #   # inputs.stylix.nixosModules.stylix
+    #   # # use as modeule ?
+    #   # ../modules/nixos/theme.nix
+    #
+    #   # inputs.home-manager.nixosModules.home-manager
+    #   # {
+    #   #   home-manager.useGlobalPkgs = true;
+    #   #   home-manager.useUserPackages = true;
+    #   #   # home-manager.users.antiroot = import ./home.nix;
+    #   # }
+  ];
   # home-manager = {
   #   extraSpecialArgs = {inherit inputs outputs;};
   #   users = {
@@ -56,6 +56,8 @@
     inputs.nixvim.packages.x86_64-linux.default
     #TODO: config nix tool  nh
     nh
+    # icon theme
+    gnome-icon-theme
   ];
 
   # Enable networking
