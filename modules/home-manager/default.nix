@@ -5,6 +5,9 @@
   # my-module = import ./my-module.nix;
   imports = [
     inputs.stylix.homeManagerModules.stylix
+    inputs.gBar.homeManagerModules.x86_64-linux.default
     ../theme.nix
+    ./gbar.nix
+    ./hyprland.nix
   ];
 }
