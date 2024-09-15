@@ -41,13 +41,13 @@
           ublock-origin
           # bitwarden
           darkreader
-          # enhancer-for-youtube
           vimium
           duckduckgo-privacy-essentials
           sidebery
           sponsorblock
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
+          (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
         ];
@@ -130,12 +130,12 @@
           # bitwarden
           darkreader
           vimium
-          # enhancer-for-youtube
-          # duckduckgo-privacy-essentials
+          duckduckgo-privacy-essentials
           sidebery
           sponsorblock
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
+          (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
         ];

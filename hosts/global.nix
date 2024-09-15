@@ -102,6 +102,10 @@
   environment.sessionVariables = {
     FLAKE = "/etc/nixos";
   };
+
+  environment.variables = {
+    FLAKE = "/etc/nixos";
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 

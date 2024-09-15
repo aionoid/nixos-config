@@ -4,11 +4,14 @@
 ╹  ┗━┛╹ ╹ ╹ ┗━┛
 */
 :root {
-  --main-font: "FantasqueSansM Nerd Font";
+  /*--main-font: "FantasqueSansM Nerd Font";*/
+  --main-font: "Hermit Nerd Font Mono";
 }
 
-pre, code, samp, var
-{
+pre,
+code,
+samp,
+var {
   font-family: var(--main-font) !important;
 }
 
@@ -37,38 +40,38 @@ pre, code, samp, var
 ╹ ╹┗━┛╹ ╹┗━╸╹  ╹ ╹┗━┛┗━╸
 */
 
-@-moz-document url("about:home"), url("about:newtab"){
-    .search-wrapper,
-    .top-site-outer .title{
-        font-family: var(--main-font) !important;
-    }
+@-moz-document url("about:home"), url("about:newtab") {
+  .search-wrapper,
+  .top-site-outer .title {
+    font-family: var(--main-font) !important;
+  }
 
-    .top-site-outer .title{
-        font-size: 1rem !important;
-    }
+  .top-site-outer .title {
+    font-size: 1rem !important;
+  }
 
-    .top-site-outer .top-site-inner > a {
-        padding: 10px 10px 4px !important;
-    }
+  .top-site-outer .top-site-inner > a {
+    padding: 10px 10px 4px !important;
+  }
 
-    .search-handoff-button, .search-wrapper input {
-        background: #d8d8d81f !important;
-        border-radius: 5px !important;
-    }
+  .search-handoff-button,
+  .search-wrapper input {
+    background: #d8d8d81f !important;
+    border-radius: 5px !important;
+  }
 
-    #newtab-search-text::placeholder {
-        opacity: 0 !important;
-    }
-    :root[lwt-newtab-brighttext]{
-            --newtab-primary-action-background: transparent !important;
-    }
+  #newtab-search-text::placeholder {
+    opacity: 0 !important;
+  }
+  :root[lwt-newtab-brighttext] {
+    --newtab-primary-action-background: transparent !important;
+  }
 
-    .search-wrapper .search-button,
-    .search-wrapper .logo-and-wordmark .logo,
-    .fake-textbox,
-    .top-site-outer .tile,
-    .icon.icon-pin-small {
-        display: none !important;
-    }
-
+  /*.search-wrapper .search-button,*/
+  /*.search-wrapper .logo-and-wordmark .logo,*/
+  /*.fake-textbox,*/
+  /*.top-site-outer .tile,*/
+  /*.icon.icon-pin-small {*/
+  /*  display: none !important;*/
+  /*}*/
 }
