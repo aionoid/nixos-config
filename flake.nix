@@ -1,6 +1,11 @@
 {
   description = "MY nix config";
 
+  # nixConfig = {
+  #   extra-substituters = ["https://hyprland.cachix.org"];
+  #   extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  # };
+
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -33,6 +38,12 @@
 
     # hyprland
     hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # hyprland = {
+    #   type = "git";
+    #   url = "https://github.com/hyprwm/Hyprland";
+    #   submodules = true;
+    # };
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -102,14 +113,14 @@
       #   ];
       #   };
       home = nixpkgs.lib.nixosSystem {
-        modules = [self.nixosModules ./hosts/home];
+        modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
           inherit inputs outputs;
         };
       };
       # Secondary desktop
       work = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/work self.nixosModules];
+        modules = [./hosts/work self.nixosModules ./cachix.nix];
         specialArgs = {
           inherit inputs outputs;
         };

@@ -13,8 +13,8 @@
 
     ../global.nix
     # desktop manager
-    # ../xfce.nix
-    ../hyprland.nix
+    ../xfce.nix
+    # ../hyprland.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
