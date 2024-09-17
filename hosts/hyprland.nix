@@ -10,20 +10,23 @@
 
   programs.hyprland = {
     enable = true;
+    #FIXME: using hyprland repo package break on mason.build
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
-      };
-    };
-  };
+  # INFO: we can use sddm+theme
+  # using regreet for now better than regreetd
+  programs.regreet.enable = true;
+  # services.regreetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
 
   environment.systemPackages = with pkgs; [
     # hyprpaper

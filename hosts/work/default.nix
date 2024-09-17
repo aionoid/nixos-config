@@ -11,14 +11,11 @@
     ./hardware-configuration.nix
 
     ../global.nix
-    ../gnome.nix
-    # ../hyprland.nix
+    # ../gnome.nix
+    ../hyprland.nix
   ];
 
-  networking = {
-    #useDHCP = true;
-    hostName = "work";
-  };
+  networking.hostName = "work";
   # set defaultUserShell for all users
   users.defaultUserShell = pkgs.zsh;
   # Define a user account. Don't forget to set a password with ‘passwd’.

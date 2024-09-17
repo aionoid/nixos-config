@@ -54,7 +54,7 @@
     nodePackages.gitmoji-cli
     home-manager
     inputs.nixvim.packages.x86_64-linux.default
-    #TODO: config nix tool  nh
+    #setting FLAKE=/etc/nixos/ config for nh
     nh
     # icon theme
     gnome-icon-theme
