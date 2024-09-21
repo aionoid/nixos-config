@@ -13,8 +13,8 @@
 
     ../global.nix
     # desktop manager
-    ../xfce.nix
-    # ../hyprland.nix
+    # ../xfce.nix
+    ../hyprland.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
@@ -23,7 +23,7 @@
   users.users.ovo = {
     isNormalUser = true;
     description = "ovo";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire"];
     useDefaultShell = true;
     # packages = with pkgs; [];
   };

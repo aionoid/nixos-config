@@ -26,6 +26,16 @@
     appearance.greeting_msg = "HELLO BOSS";
     backgound.path = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
   };
+
+  # SDDM
+  # services.displayManager.sddm = {
+  #   wayland.enable = true;
+  #   enable = true;
+  #   autoNumlock = true;
+  #   # settings.Theme.Current = "catppuccin-mocha";
+  #   theme = "catppuccin-mocha";
+  #   package = pkgs.kdePackages.sddm;
+  # };
   # services.regreetd = {
   #   enable = true;
   #   settings = {
@@ -37,11 +47,59 @@
   # };
 
   environment.systemPackages = with pkgs; [
+    (catppuccin-sddm.override
+      {
+        flavor = "mocha";
+        background = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
+        loginBackground = true;
+      })
     # hyprpaper
     # kitty
+    nemo-with-extensions
+    # TODO: enable from home-manager to add configuration
     rofi-wayland
     waybar
     swww
     gnome-icon-theme
+
+    #==> #### Yurihikari #### <== #
+    swaylock-effects
+    hyprlock
+    rofi-wayland
+    neofetch
+    cava
+    foot
+    # hyprland ==> home-manager config
+    # mpd ===> home-manager config
+    mpc-cli
+    rose-pine-cursor
+    hyprcursor
+    # rose-pine-hyprcursor
+    font-awesome
+    # nerd-fonts
+    hyprpicker
+    wireplumber
+    nwg-launchers
+    mako
+    most
+    pavucontrol
+    pamixer
+    swayfx
+    bluez
+    bluez-tools
+    grimblast
+    gpu-screen-recorder
+    btop
+    networkmanager
+    matugen
+    wl-clipboard
+    swww
+    dart-sass
+    brightnessctl
+    gnome-bluetooth
+    # aylurs-gtk-shell
+    micro # INFO: remove it :x
+    blueberry
+    slurp
   ];
 }
