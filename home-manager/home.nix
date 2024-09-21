@@ -49,10 +49,11 @@
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
+  xdg.userDirs.enable = true;
 
   home.packages = with pkgs; [
-    pa_applet
     fastfetch
+    ranger
     bat
     lsd
     vlc
@@ -227,6 +228,28 @@
       "--border"
     ];
     tmux.enableShellIntegration = true;
+  };
+
+  programs.ncmpcpp.enable = true;
+  # run 'mpc update' after adding files to
+  # ~/Music the default location
+  services.mpd = {
+    enable = true;
+    network.listenAddress = "any"; # if you want to allow non-localhost connections
+    network.startWhenNeeded = true;
+  };
+  #TODO: move to theme folder
+  gtk = {
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
 
   programs.git = {
