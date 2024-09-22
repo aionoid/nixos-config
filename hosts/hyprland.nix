@@ -3,16 +3,15 @@
   pkgs,
   ...
 }: {
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
+  # nix.settings = {
+  #   substituters = ["https://hyprland.cachix.org"];
+  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  # };
 
   programs.hyprland = {
     enable = true;
-    #FIXME: using hyprland repo package break on mason.build
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   # INFO: we can use sddm+theme
@@ -47,12 +46,12 @@
   # };
 
   environment.systemPackages = with pkgs; [
-    (catppuccin-sddm.override
-      {
-        flavor = "mocha";
-        background = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
-        loginBackground = true;
-      })
+    # (catppuccin-sddm.override
+    #   {
+    #     flavor = "mocha";
+    #     background = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
+    #     loginBackground = true;
+    #   })
     # hyprpaper
     # kitty
     nemo-with-extensions
@@ -60,46 +59,46 @@
     rofi-wayland
     waybar
     swww
-    gnome-icon-theme
+    # gnome-icon-theme
 
     #==> #### Yurihikari #### <== #
-    swaylock-effects
+    # swaylock-effects
     hyprlock
     rofi-wayland
-    neofetch
+    # neofetch
     cava
     foot
     # hyprland ==> home-manager config
     # mpd ===> home-manager config
     mpc-cli
-    rose-pine-cursor
+    # rose-pine-cursor
     hyprcursor
     # rose-pine-hyprcursor
     font-awesome
     # nerd-fonts
     hyprpicker
-    wireplumber
+    # wireplumber
     nwg-launchers
-    mako
     most
     pavucontrol
     pamixer
-    swayfx
+    # swayfx
     bluez
     bluez-tools
-    grimblast
     gpu-screen-recorder
     btop
     networkmanager
-    matugen
     wl-clipboard
-    swww
+    # tools to get/generate color chema
     dart-sass
-    brightnessctl
-    gnome-bluetooth
+    matugen
+    # brightnessctl
+    # gnome-bluetooth
     # aylurs-gtk-shell
-    micro # INFO: remove it :x
     blueberry
+    # tools for screenshots
     slurp
+    grim
+    grimblast
   ];
 }

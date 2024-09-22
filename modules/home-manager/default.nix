@@ -9,5 +9,7 @@
     ../theme.nix
     ./gbar.nix
     ./hyprland.nix
+    ./waybar.nix
+    ./mako.nix
   ];
 }

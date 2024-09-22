@@ -32,15 +32,13 @@
     # ~/.config/hypr/scripts/gtkthemes &
 
     # Lauch notification daemon (mako)
-    ~/.config/hypr/scripts/notifications &
+    #~/.config/hypr/scripts/notifications &
 
     # Lauch statusbar (waybar)
-    ~/.config/hypr/scripts/statusbar &
+    # ~/.config/hypr/scripts/statusbar &
 
     # Start network manager applet
-    ${pkgs.nm-tray}/bin/nm-tray &
     # $\{pkgs.gbar}/bin/gbar &
-    # $\{pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww-daemon &
 
     sleep 1
@@ -49,27 +47,29 @@
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    #:FIXME: hyprland flake mason fail build
-    # plugins = [
-    #   inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
-    # ];
+    #:INFO: hyprland and some plugins have version mismatch ?
 
+    plugins = [
+      #   inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    ];
+    #
     settings = {
-      # "plugin:borders-plus-plus" = {
-      #   add_borders = 1; # 0 - 9
+      #   "plugin:borders-plus-plus" = {
+      #     add_borders = 1; # 0 - 9
       #
-      #   # you can add up to 9 borders
-      #   "col.border_1" = "rgb(ffffff)";
-      #   "col.border_2" = "rgb(2222ff)";
+      #     # you can add up to 9 borders
+      #     "col.border_1" = "rgb(ffffff)";
+      #     "col.border_2" = "rgb(2222ff)";
       #
-      #   # -1 means "default" as in the one defined in general:border_size
-      #   border_size_1 = 10;
-      #   border_size_2 = -1;
+      #     # -1 means "default" as in the one defined in general:border_size
+      #     border_size_1 = 10;
+      #     border_size_2 = -1;
       #
-      #   # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
-      #   natural_rounding = "yes";
-      # };
-
+      #     # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
+      #     natural_rounding = "yes";
+      #   };
+      #
       #-- Startup ----------------------------------------------------
       # exec-once = ["~/.config/hypr/scripts/startup"];
       exec-once = ''${startupScript}/bin/start'';

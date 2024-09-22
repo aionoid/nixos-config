@@ -26,6 +26,7 @@
   # };
   hardware.graphics.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixpkgs-unstable";
 
   # Install firefox.adb,dconf,zsh
   programs = {
