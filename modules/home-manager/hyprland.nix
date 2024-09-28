@@ -55,6 +55,11 @@ in {
     ];
     #
     settings = {
+      plugin = {
+        borders-plus-plus = {
+          count = 6;
+        };
+      };
       #   "plugin:borders-plus-plus" = {
       #     add_borders = 1; # 0 - 9
       #
@@ -222,10 +227,10 @@ in {
       ];
 
       # #-- WORKSPACE ------------------------
-      workspace = [
-        "1,monitor:DP-2,default:true"
-        "2,monitor:DP-2,persistent:true"
-      ];
+      # workspace = [
+      #   "1,monitor:DP-2,default:true"
+      #   "2,monitor:DP-2,persistent:true"
+      # ];
 
       # #-- Layout : Dwindle ------------------
       dwindle = {
@@ -396,16 +401,16 @@ in {
         "SUPER,Tab,bringactivetotop,"
         #
         # # Workspaces
-        "SUPER, 1, workspace, 1 "
-        "SUPER, 2, workspace, 2 "
-        "SUPER, 3, workspace, 3 "
-        "SUPER, 4, workspace, 4 "
-        "SUPER, 5, workspace, 5 "
-        "SUPER, 6, workspace, 6 "
-        "SUPER, 7, workspace, 7 "
-        "SUPER, 8, workspace, 8 "
-        "SUPER, 9, workspace, 9 "
-        "SUPER, 0, workspace, 10"
+        "SUPER, 1, split-workspace, 1 "
+        "SUPER, 2, split-workspace, 2 "
+        "SUPER, 3, split-workspace, 3 "
+        "SUPER, 4, split-workspace, 4 "
+        "SUPER, 5, split-workspace, 5 "
+        "SUPER, 6, split-workspace, 6 "
+        # "SUPER, 7, split-workspace, 7 "
+        # "SUPER, 8, split-workspace, 8 "
+        # "SUPER, 9, split-workspace, 9 "
+        # "SUPER, 0, split-workspace, 10"
         #
         # bind = SUPER, ampersand, workspace, 1
         # bind = SUPER, eacute, workspace, 2
@@ -419,15 +424,25 @@ in {
         # bind = SUPER, agrave, workspace, 10
         #
         # # Send to Workspaces
-        "SUPER_SHIFT, 1, movetoworkspace, 1"
-        "SUPER_SHIFT, 2, movetoworkspace, 2"
-        "SUPER_SHIFT, 3, movetoworkspace, 3"
-        "SUPER_SHIFT, 4, movetoworkspace, 4"
-        "SUPER_SHIFT, 5, movetoworkspace, 5"
-        "SUPER_SHIFT, 6, movetoworkspace, 6"
-        "SUPER_SHIFT, 7, movetoworkspace, 7"
-        "SUPER_SHIFT, 8, movetoworkspace, 8"
+        "SUPER_SHIFT, 1, split-movetoworkspace, 1"
+        "SUPER_SHIFT, 2, split-movetoworkspace, 2"
+        "SUPER_SHIFT, 3, split-movetoworkspace, 3"
+        "SUPER_SHIFT, 4, split-movetoworkspace, 4"
+        "SUPER_SHIFT, 5, split-movetoworkspace, 5"
+        "SUPER_SHIFT, 6, split-movetoworkspace, 6"
+        # "SUPER_SHIFT, 7, split-movetoworkspace, 7"
+        # "SUPER_SHIFT, 8, split-movetoworkspace, 8"
         #
+        # ==> Send to MONITOR <== #
+        "SUPER_SHIFT, l, split-changemonitor, next"
+        "SUPER_SHIFT, h, split-changemonitor, prev"
+        #
+        # ==> Focus to MONITOR <== #
+        "SUPER, l, movefocus,r"
+        "SUPER, h, movefocus,l"
+        "SUPER, k, movefocus,u"
+        "SUPER, j, movefocus,d"
+
         # bind = SUPER_SHIFT, ampersand, movetoworkspace, 1
         # bind = SUPER_SHIFT, eacute, movetoworkspace, 2
         # bind = SUPER_SHIFT, quotedbl, movetoworkspace, 3

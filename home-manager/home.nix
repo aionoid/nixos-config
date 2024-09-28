@@ -53,7 +53,6 @@
 
   home.packages = with pkgs; [
     fastfetch
-    ranger
     bat
     lsd
     vlc
@@ -63,7 +62,9 @@
     qbittorrent
   ];
 
+  # enable programs
   programs.kitty.enable = true;
+  programs.ranger.enable = true;
 
   xsession.enable = true;
   xsession.numlock.enable = true;

@@ -27,6 +27,11 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
+    ags.url = "github:Aylur/ags";
+    # matugen.url = "github:InioX/matugen?ref=v2.2.0";
+    # nix-gaming.url = "github:fufexan/nix-gaming";
+    # microfetch.url = "github:NotAShelf/microfetch";
+
     # auto ricing
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";

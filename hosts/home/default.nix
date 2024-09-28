@@ -23,16 +23,9 @@
   users.users.ovo = {
     isNormalUser = true;
     description = "ovo";
-    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input"];
     useDefaultShell = true;
     # packages = with pkgs; [];
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,ara";
-    options = "grp:lalt_lshift_toggle";
-    variant = "";
-  };
 }

@@ -1,198 +1,206 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  modules = {
+    #MODULES
+    cava = {
+      #        "cava_config"= "$XDG_CONFIG_HOME/cava/config";
+      "framerate" = 30;
+      "autosens" = 1;
+      "sensitivity" = 100;
+      "bars" = 14;
+      "lower_cutoff_freq" = 50;
+      "higher_cutoff_freq" = 10000;
+      "method" = "pulse";
+      "source" = "auto";
+      "stereo" = true;
+      "reverse" = false;
+      "bar_delimiter" = 0;
+      "monstercat" = false;
+      "waves" = false;
+      "noise_reduction" = 0.77;
+      "input_delay" = 2;
+      "format-icons" = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+      "actions" = {
+        "on-click-right" = "mode";
+      };
+    };
+    "hyprland/workspaces" = {
+      "format" = "{name}";
+      # "format" = "{name}: {icon}";
+      "format-icons" = {
+        "1" = "";
+        "2" = "";
+        "3" = "";
+        "4" = "";
+        "5" = "";
+        "active" = "";
+        "default" = "";
+      };
+      # "persistent-workspaces" = {
+      #   "*" = 5; # 5 workspaces by default on every monitor
+      #   "HDMI-A-1" = 3; # but only three on HDMI-A-1
+      # };
+    };
+    "mpd" = {
+      "tooltip" = true;
+      "tooltip-format" = "{artist} - {album} - {title} - Total Time : {totalTime:%M:%S}";
+      "format" = " {elapsedTime:%M:%S}";
+      "format-disconnected" = "⚠  Disconnected";
+      "format-stopped" = " Not Playing";
+      "on-click" = "mpc toggle";
+      "state-icons" = {
+        "playing" = "";
+        "paused" = "";
+      };
+    };
+    "mpd#2" = {
+      "format" = "";
+      "format-disconnected" = "";
+      "format-paused" = "";
+      "format-stopped" = "";
+      # Commands to execute on events
+      "on-click" = "mpc -q pause && mpc -q prev && mpc -q start";
+    };
+    "mpd#3" = {
+      "interval" = 1;
+      "format" = "{stateIcon}";
+      "format-disconnected" = "";
+      "format-paused" = "{stateIcon}";
+      "format-stopped" = "";
+      "state-icons" = {
+        "paused" = "";
+        "playing" = "";
+      };
+      # Commands to execute on events
+      "on-click" = "mpc toggle";
+    };
+    "mpd#4" = {
+      "format" = "";
+      "format-disconnected" = "";
+      "format-paused" = "";
+      "format-stopped" = "";
+      # Commands to execute on events
+      "on-click" = "mpc -q pause && mpc -q next && mpc -q start";
+    };
+    "hypr/workspaces" = {
+      "disable-scroll" = true;
+      "all-outputs" = false;
+      "format" = "{icon}";
+      # "format"= "< %g >";
+      "format_focused" = "< %g ● >";
+      "format-icons" = {
+        "1" = "";
+        "2" = "";
+        "3" = "";
+        "4" = "";
+        "5" = "";
+        "6" = "";
+        "7" = "";
+        "8" = "";
+        "9" = "";
+        "10" = "";
+      };
+    };
+    "sway/workspaces" = {
+      disable-scroll = true;
+      sort-by-name = true;
+      format = " {icon} ";
+      format-icons = {
+        default = "";
+      };
+    };
+    tray = {
+      icon-size = 21;
+      spacing = 10;
+    };
+    "custom/music" = {
+      "format" = "  {}";
+      "escape" = true;
+      "interval" = 5;
+      "tooltip" = false;
+      "exec" = "playerctl metadata --format='{{ title }}'";
+      "on-click" = "playerctl play-pause";
+      "max-length" = 50;
+    };
+    clock = {
+      "timezone" = "Africa/Algiers";
+      "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      "format-alt" = " {:%d/%m/%Y}";
+      "format" = " {:%H:%M}";
+    };
+    backlight = {
+      "device" = "intel_backlight";
+      "format" = "{icon}";
+      "format-icons" = ["" "" "" "" "" "" "" "" ""];
+    };
+    pulseaudio = {
+      # "scroll-step"= 1; // %, can be a float
+      "format" = "{icon} {volume}%";
+      "format-muted" = "";
+      "format-icons" = {
+        "default" = ["" "" " "];
+      };
+      "on-click" = "pavucontrol";
+    };
+    "custom/lock" = {
+      "tooltip" = false;
+      "on-click" = "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown";
+      "format" = "";
+    };
+    "custom/power" = {
+      "tooltip" = false;
+      "on-click" = "wlogout &";
+      "format" = "⏻";
+    };
+  };
+in {
   programs.waybar.enable = true;
   programs.waybar.systemd.enable = true;
   programs.waybar.settings = {
-    leftBar = {
-      layer = "top"; # Waybar at top layer
-      position = "top"; # Waybar position (top|bottom|left|right)
-      # "width"= 1280; # Waybar width
-      # Choose the order of the modules
-      output = [
-        # "DP-2"
-        "HDMI-A-1"
-      ];
-      modules-left = ["hyprland/workspaces"];
-      modules-center = ["mpd" "mpd#2" "mpd#3" "mpd#4"];
-      modules-right = ["pulseaudio" "clock" "tray" "custom/lock" "custom/power"];
+    leftBar =
+      {
+        layer = "top"; # Waybar at top layer
+        position = "top"; # Waybar position (top|bottom|left|right)
+        # "width"= 1280; # Waybar width
+        # Choose the order of the modules
+        output = [
+          # "DP-2"
+          "HDMI-A-1"
+        ];
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["mpd" "mpd#2" "mpd#3" "mpd#4" "cava"];
+        modules-right = ["pulseaudio" "clock" "tray" "custom/lock" "custom/power"];
+      }
+      // modules;
 
-      #MODULES
-      "hyprland/workspaces" = {
-        "format" = "{name}: {icon}";
-        "format-icons" = {
-          "1" = "";
-          "2" = "";
-          "3" = "";
-          "4" = "";
-          "5" = "";
-          "active" = "";
-          "default" = "";
-        };
-        # "persistent-workspaces" = {
-        #   "*" = 5; # 5 workspaces by default on every monitor
-        #   "HDMI-A-1" = 3; # but only three on HDMI-A-1
+    mainBar =
+      {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [
+          "DP-2"
+          #"HDMI-A-1"
+        ];
+        modules-left = ["hyprland/workspaces" "hyprland/mode" "wlr/taskbar"];
+        modules-center = ["hyprland/window"];
+        modules-right = ["cpu" "memory" "network" "clock" "temperature"];
+
+        # "hyprland/workspaces" = {
+        #   disable-scroll = true;
+        #   all-outputs = false;
         # };
-      };
-      # "hyprland/workspaces" = {
-      #   "format" = "<sub>{icon}</sub>\n{windows}";
-      #   "format-window-separator" = "\n";
-      #   "window-rewrite-default" = "";
-      #   "window-rewrite" = {
-      #     "title<.*youtube.*>" = ""; # Windows whose titles contain "youtube"
-      #     "class<firefox>" = ""; # Windows whose classes are "firefox"
-      #     "class<firefox> title<.*github.*>" = ""; # Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
-      #     "foot" = ""; # Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
-      #     "code" = "󰨞";
-      #   };
-      # };
-      "mpd" = {
-        "tooltip" = true;
-        "tooltip-format" = "{artist} - {album} - {title} - Total Time : {totalTime:%M:%S}";
-        "format" = " {elapsedTime:%M:%S}";
-        "format-disconnected" = "⚠  Disconnected";
-        "format-stopped" = " Not Playing";
-        "on-click" = "mpc toggle";
-        "state-icons" = {
-          "playing" = "";
-          "paused" = "";
-        };
-      };
-      "mpd#2" = {
-        "format" = "";
-        "format-disconnected" = "";
-        "format-paused" = "";
-        "format-stopped" = "";
-        # Commands to execute on events
-        "on-click" = "mpc -q pause && mpc -q prev && mpc -q start";
-      };
-      "mpd#3" = {
-        "interval" = 1;
-        "format" = "{stateIcon}";
-        "format-disconnected" = "";
-        "format-paused" = "{stateIcon}";
-        "format-stopped" = "";
-        "state-icons" = {
-          "paused" = "";
-          "playing" = "";
-        };
-        # Commands to execute on events
-        "on-click" = "mpc toggle";
-      };
-      "mpd#4" = {
-        "format" = "";
-        "format-disconnected" = "";
-        "format-paused" = "";
-        "format-stopped" = "";
-        # Commands to execute on events
-        "on-click" = "mpc -q pause && mpc -q next && mpc -q start";
-      };
-      "hypr/workspaces" = {
-        "disable-scroll" = true;
-        "all-outputs" = true;
-        "format" = "{icon}";
-        # "format"= "< %g >";
-        # "format_focused" = "< %g ● >";
-        "format-icons" = {
-          "1" = "";
-          "2" = "";
-          "3" = "";
-          "4" = "";
-          "5" = "";
-          "6" = "";
-          "7" = "";
-          "8" = "";
-          "9" = "";
-          "10" = "";
-        };
-      };
-      "sway/workspaces" = {
-        disable-scroll = true;
-        sort-by-name = true;
-        format = " {icon} ";
-        format-icons = {
-          default = "";
-        };
-      };
-      tray = {
-        icon-size = 21;
-        spacing = 10;
-      };
-      "custom/music" = {
-        "format" = "  {}";
-        "escape" = true;
-        "interval" = 5;
-        "tooltip" = false;
-        "exec" = "playerctl metadata --format='{{ title }}'";
-        "on-click" = "playerctl play-pause";
-        "max-length" = 50;
-      };
-      clock = {
-        "timezone" = "Asia/Dubai";
-        "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        "format-alt" = " {:%d/%m/%Y}";
-        "format" = " {:%H:%M}";
-      };
-      backlight = {
-        "device" = "intel_backlight";
-        "format" = "{icon}";
-        "format-icons" = ["" "" "" "" "" "" "" "" ""];
-      };
-      battery = {
-        "states" = {
-          "warning" = 30;
-          "critical" = 15;
-        };
-        "format" = "{icon}";
-        "format-charging" = "";
-        "format-plugged" = "";
-        "format-alt" = "{icon}";
-        "format-icons" = ["" "" "" "" "" "" "" "" "" "" "" ""];
-      };
-      pulseaudio = {
-        # "scroll-step"= 1; // %, can be a float
-        "format" = "{icon} {volume}%";
-        "format-muted" = "";
-        "format-icons" = {
-          "default" = ["" "" " "];
-        };
-        "on-click" = "pavucontrol";
-      };
-      "custom/lock" = {
-        "tooltip" = false;
-        "on-click" = "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown";
-        "format" = "";
-      };
-      "custom/power" = {
-        "tooltip" = false;
-        "on-click" = "wlogout &";
-        "format" = "襤";
-      };
-    };
-    mainBar = {
-      layer = "top";
-      position = "top";
-      height = 30;
-      output = [
-        "DP-2"
-        #"HDMI-A-1"
-      ];
-      modules-left = ["sway/workspaces" "sway/mode" "wlr/taskbar"];
-      modules-center = ["sway/window" "custom/hello-from-waybar"];
-      modules-right = ["mpd" "custom/mymodule#with-css-id" "temperature"];
-
-      "sway/workspaces" = {
-        disable-scroll = true;
-        all-outputs = true;
-      };
-      "custom/hello-from-waybar" = {
-        format = "hello {}";
-        max-length = 40;
-        interval = "once";
-        exec = pkgs.writeShellScript "hello-from-waybar" ''
-          echo "from within waybar"
-        '';
-      };
-    };
+        # "custom/hello-from-waybar" = {
+        #   format = "hello {}";
+        #   max-length = 40;
+        #   interval = "once";
+        #   exec = pkgs.writeShellScript "hello-from-waybar" ''
+        #     echo "from within waybar"
+        #   '';
+        # };
+      }
+      // modules;
   };
+
   programs.waybar.style = ''
         @define-color rosewater #f5e0dc;
         @define-color flamingo #f2cdcd;

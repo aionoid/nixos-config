@@ -45,7 +45,7 @@
   #   };
   # };
 
-  environment.systemPackages = with pkgs; [
+  home.systemPackages = with pkgs; [
     # (catppuccin-sddm.override
     #   {
     #     flavor = "mocha";
