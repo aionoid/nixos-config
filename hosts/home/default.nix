@@ -5,7 +5,6 @@
 }: {
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-gpu-nvidia
     inputs.hardware.nixosModules.common-pc-ssd
 
     ./hardware-configuration.nix
@@ -15,6 +14,11 @@
     # desktop manager
     # ../xfce.nix
     ../hyprland.nix
+    # greeter
+    ../greetd.nix
+    # ../sddm.nix
+    ## boot theme
+    ../plymouth.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users

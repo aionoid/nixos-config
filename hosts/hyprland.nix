@@ -14,91 +14,53 @@
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-  # INFO: we can use sddm+theme
-  # using regreet for now better than regreetd
-  programs.regreet.enable = true;
-  programs.regreet.settings = {
-    GTK.application_prefer_dark_theme = true;
-    # GTK.theme_name = "Gtk";
-    # GTK.cursor_theme_name = "Bibata-Modern-Ice";
-    # GTK.font_name = "JetBrainsMono Nerd Font Mono";
-    appearance.greeting_msg = "HELLO BOSS";
-    backgound.path = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
-  };
+  # allow home-manager hyprlock to work
+  security.pam.services.hyprlock = {};
 
-  # SDDM
-  # services.displayManager.sddm = {
-  #   wayland.enable = true;
-  #   enable = true;
-  #   autoNumlock = true;
-  #   # settings.Theme.Current = "catppuccin-mocha";
-  #   theme = "catppuccin-mocha";
-  #   package = pkgs.kdePackages.sddm;
-  # };
-  # services.regreetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #       user = "greeter";
-  #     };
-  #   };
-  # };
+  #TODO: clean for only apps used by hyprland
+  environment.systemPackages = with pkgs; #host/Hyprland
+  
+    [
+      nautilus
+      gthumb
+      loupe
+      # nemo-with-extensions
+      swww
+      # gnome-icon-theme
 
-  home.systemPackages = with pkgs; [
-    # (catppuccin-sddm.override
-    #   {
-    #     flavor = "mocha";
-    #     background = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
-    #     loginBackground = true;
-    #   })
-    # hyprpaper
-    # kitty
-    nemo-with-extensions
-    # TODO: enable from home-manager to add configuration
-    rofi-wayland
-    waybar
-    swww
-    # gnome-icon-theme
-
-    #==> #### Yurihikari #### <== #
-    # swaylock-effects
-    hyprlock
-    rofi-wayland
-    # neofetch
-    cava
-    foot
-    # hyprland ==> home-manager config
-    # mpd ===> home-manager config
-    mpc-cli
-    # rose-pine-cursor
-    hyprcursor
-    # rose-pine-hyprcursor
-    font-awesome
-    # nerd-fonts
-    hyprpicker
-    # wireplumber
-    nwg-launchers
-    most
-    pavucontrol
-    pamixer
-    # swayfx
-    bluez
-    bluez-tools
-    gpu-screen-recorder
-    btop
-    networkmanager
-    wl-clipboard
-    # tools to get/generate color chema
-    dart-sass
-    matugen
-    # brightnessctl
-    # gnome-bluetooth
-    # aylurs-gtk-shell
-    blueberry
-    # tools for screenshots
-    slurp
-    grim
-    grimblast
-  ];
+      #==> #### Yurihikari #### <== #
+      # swaylock-effects
+      hyprlock
+      rofi-wayland
+      cava
+      foot
+      mpc-cli
+      hyprcursor
+      font-awesome
+      hyprpicker
+      nwg-launchers
+      most
+      pavucontrol
+      pamixer
+      bluez
+      bluez-tools
+      gpu-screen-recorder
+      btop
+      networkmanager
+      networkmanagerapplet
+      wl-clipboard
+      # tools to get/generate color chema
+      dart-sass
+      blueberry
+      # tools for screenshots
+      slurp
+      grim
+      grimblast
+      # TODO: for later case of use
+      # matugen
+      # brightnessctl
+      # gnome-bluetooth
+      # aylurs-gtk-shell
+      # swayfx
+    ];
 }

@@ -37,11 +37,11 @@
     options = ["fmask=0000" "dmask=0000"];
   };
 
-  fileSystems."/mnt/DISK03" = {
-    device = "/dev/disk/by-uuid/10039AFF0DD845A8";
-    fsType = "ntfs3";
-    options = ["fmask=0000" "dmask=0000"];
-  };
+  # fileSystems."/mnt/DISK03" = {
+  #   device = "/dev/disk/by-uuid/10039AFF0DD845A8";
+  #   fsType = "ntfs3";
+  #   options = ["fmask=0000" "dmask=0000"];
+  # };
 
   fileSystems."/mnt/FAST" = {
     device = "/dev/disk/by-uuid/AC02035102031FC6";

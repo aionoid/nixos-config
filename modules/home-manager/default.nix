@@ -6,10 +6,13 @@
   imports = [
     inputs.stylix.homeManagerModules.stylix
     ../theme.nix
-    ./gbar.nix
+    # ./gbar.nix
     ./hyprland.nix
     ./waybar.nix
     ./mako.nix
     ./ags.nix
+    ./ranger.nix
+    ./hypridle.nix
+    ./hyprlock.nix
   ];
 }

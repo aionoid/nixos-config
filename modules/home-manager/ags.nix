@@ -8,7 +8,7 @@
   ];
 
   programs.ags = {
-    enable = true;
+    enable = false;
 
     configDir = null;
 
@@ -18,10 +18,10 @@
       accountsservice
     ];
   };
-  home.packages = with pkgs; [
-    gtksourceview
-    webkitgtk
-    accountsservice
-    brightnessctl
-  ];
+  # home.packages = with pkgs; [
+  #   gtksourceview
+  #   webkitgtk
+  #   accountsservice
+  #   brightnessctl
+  # ];
 }

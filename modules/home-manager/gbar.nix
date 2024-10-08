@@ -3,7 +3,7 @@
     inputs.gBar.homeManagerModules.x86_64-linux.default
   ];
   programs.gBar = {
-    enable = true;
+    enable = false;
     config = {
       Location = "L";
       EnableSNI = true;

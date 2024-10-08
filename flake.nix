@@ -27,6 +27,7 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     ags.url = "github:Aylur/ags";
     # matugen.url = "github:InioX/matugen?ref=v2.2.0";
     # nix-gaming.url = "github:fufexan/nix-gaming";
@@ -83,12 +84,23 @@
     ];
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
+    system = "x86_64-linux"; # change to whatever your system should be.
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        inputs.hyprpanel.overlay
+      ];
+    };
     forAllSystems = nixpkgs.lib.genAttrs systems;
     pkgsFor = nixpkgs.lib.genAttrs (import systems) (
       system:
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [
+            inputs.hyprpanel.overlay
+          ];
         }
     );
   in {
@@ -124,7 +136,7 @@
       home = nixpkgs.lib.nixosSystem {
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs pkgs;
         };
       };
       # Secondary desktop
@@ -156,7 +168,8 @@
           self.homeManagerModules
         ];
         # pkgs = pkgsFor.x86_64-linux;
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        # pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        inherit pkgs;
         extraSpecialArgs = {
           inherit inputs outputs;
         };

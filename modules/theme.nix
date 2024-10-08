@@ -6,7 +6,9 @@
   stylix.enable = true;
   stylix.polarity = "dark";
   stylix.image = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
 
   stylix.cursor = {
     package = pkgs.bibata-cursors;

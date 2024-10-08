@@ -40,12 +40,9 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      allowUnfreePredicate = _: true;
     };
   };
-
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
@@ -53,8 +50,8 @@
 
   home.packages = with pkgs; [
     fastfetch
-    bat
-    lsd
+    # bat
+    # lsd
     vlc
     # nodePackages.gitmoji-cli
     # gotop
@@ -63,8 +60,10 @@
   ];
 
   # enable programs
+  # TODO: move to own nix file for config
   programs.kitty.enable = true;
-  programs.ranger.enable = true;
+  programs.bat.enable = true;
+  programs.lsd.enable = true;
 
   xsession.enable = true;
   xsession.numlock.enable = true;
@@ -231,6 +230,7 @@
     tmux.enableShellIntegration = true;
   };
 
+  #TODO: move mpd and mpc,ncmcpp to own nix file
   programs.ncmpcpp.enable = true;
   # run 'mpc update' after adding files to
   # ~/Music the default location
@@ -239,6 +239,7 @@
     network.listenAddress = "any"; # if you want to allow non-localhost connections
     network.startWhenNeeded = true;
   };
+
   #TODO: move to theme folder
   gtk = {
     iconTheme = {
@@ -253,14 +254,30 @@
     };
   };
 
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk3";
+    style.name = "adwaita-dark";
+  };
+
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+
+    # QT_STYLE_OVERRIDE = "adwaita-dark";
+    # QT_STYLE_OVERRIDE = "adwaita";
+
+    EDITOR = "nvim";
+
+    # GTK_IM_MODULE = "fcitx";
+    # QT_IM_MODULE = "fcitx";
+    # SDL_IM_MODULE = "fcitx";
+    # XMODIFIERS = "@im=fcitx";
+  };
+
   programs.git = {
     enable = true;
     userName = "Farouk Brown";
     userEmail = "aionoid.xd@gmail.com";
-  };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
   };
 
   home.stateVersion = "24.11";
