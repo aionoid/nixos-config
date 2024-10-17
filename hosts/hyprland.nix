@@ -25,19 +25,23 @@
       gthumb
       loupe
       # nemo-with-extensions
-      swww
       # gnome-icon-theme
+      # ENABLED IN STARTUP APPS
+      # swww
 
       #==> #### Yurihikari #### <== #
       # swaylock-effects
-      hyprlock
-      rofi-wayland
-      cava
-      foot
+      # ENABLED FORM HOME CONFIGURATIONS
+      # hyprlock
+      # cava
+      # foot
+      # btop
+      # networkmanager
+      # networkmanagerapplet
       mpc-cli
-      hyprcursor
       font-awesome
       hyprpicker
+      hyprcursor
       nwg-launchers
       most
       pavucontrol
@@ -45,9 +49,6 @@
       bluez
       bluez-tools
       gpu-screen-recorder
-      btop
-      networkmanager
-      networkmanagerapplet
       wl-clipboard
       # tools to get/generate color chema
       dart-sass

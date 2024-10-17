@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{config, ...}: {
   services.mako = {
     enable = true;
 
-    anchor = "top-left";
+    anchor = "top-right";
     borderRadius = 15;
     borderSize = 2;
     # borderColor =
@@ -20,6 +20,7 @@
     sort = "-time";
     # textColor = "";
 
+    #TODO: make colors "#${config.lib.stylix.scheme.base00}"
     extraConfig = ''
       [urgency=low]
       border-color=#B4A1DB

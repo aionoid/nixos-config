@@ -5,7 +5,11 @@
   # my-module = import ./my-module.nix;
   imports = [
     inputs.stylix.homeManagerModules.stylix
-    ../theme.nix
+    inputs.nixvim.homeManagerModules.nixvim
+    ./nixvim
+    ./theme.nix
+    ./scripts
+    ./rofi
     # ./gbar.nix
     ./hyprland.nix
     ./waybar.nix
@@ -14,5 +18,6 @@
     ./ranger.nix
     ./hypridle.nix
     ./hyprlock.nix
+    # ./googlefonts.nix
   ];
 }

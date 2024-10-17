@@ -55,7 +55,10 @@
     git
     nodePackages.gitmoji-cli
     home-manager
-    inputs.nixvim.packages.x86_64-linux.default
+    # inputs.nixvim.packages.x86_64-linux.default
+    # (inputs.nixvim.packages.x86_64-linux.default.override {
+    #   plugins.nvim-colorizer.enable = true;
+    # })
     #setting FLAKE=/etc/nixos/ config for nh
     nh
     # icon theme

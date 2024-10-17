@@ -5,6 +5,7 @@
   # my-module = import ./my-module.nix;
   imports = [
     inputs.stylix.nixosModules.stylix
+    ./googlefonts.nix
     ../theme.nix
   ];
 }

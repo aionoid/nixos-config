@@ -39,7 +39,8 @@
 
     #TODO: user nixvim direct config
     # nixvim like lazyvim profile
-    nixvim.url = "github:dc-tec/nixvim";
+    # nixvim.url = "github:dc-tec/nixvim";
+    nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     # hyprland

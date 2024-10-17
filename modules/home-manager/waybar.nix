@@ -24,22 +24,107 @@
       };
     };
     "hyprland/workspaces" = {
-      "format" = "{name}";
-      # "format" = "{name}: {icon}";
-      "format-icons" = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        "active" = "";
-        "default" = "";
-      };
-      # "persistent-workspaces" = {
-      #   "*" = 5; # 5 workspaces by default on every monitor
-      #   "HDMI-A-1" = 3; # but only three on HDMI-A-1
+      "active-only" = false;
+      "disable-scroll" = true;
+      "all-outputs" = false;
+      "format" = "{icon}";
+      "window-rewrite-default" = "";
+      # "format_focused" = "< %g ● >";
+      # "format-active" = {
+      #   "1" = "󰎥";
+      #   "2" = "󰎨";
+      #   "3" = "󰎫";
+      #   "4" = "󰎲";
+      #   "5" = "󰎯";
+      #   "6" = "󰎴";
+      #   "7" = "󰎷";
+      #   "8" = "󰎺";
+      #   "9" = "󰎽";
+      #   "10" = "󰿫";
+      #   "11" = "󰎥";
+      #   "12" = "󰎨";
+      #   "13" = "󰎫";
+      #   "14" = "󰎲";
+      #   "15" = "󰎯";
+      #   "16" = "󰎴";
+      #   "17" = "󰎷";
+      #   "18" = "󰎺";
+      #   "19" = "󰎽";
+      #   "20" = "󰿫";
       # };
+      # "format-icons" = {
+      #   "1" = "󰎦";
+      #   "2" = "󰎩";
+      #   "3" = "󰎬";
+      #   "4" = "󰎮";
+      #   "5" = "󰎰";
+      #   "6" = "󰎵";
+      #   "7" = "󰎸";
+      #   "8" = "󰎻";
+      #   "9" = "󰎾";
+      #   "10" = "󰽾";
+      #   "11" = "󰎦";
+      #   "12" = "󰎩";
+      #   "13" = "󰎬";
+      #   "14" = "󰎮";
+      #   "15" = "󰎰";
+      #   "16" = "󰎵";
+      #   "17" = "󰎸";
+      #   "18" = "󰎻";
+      #   "19" = "󰎾";
+      #   "20" = "󰽾";
+      #   "active" = "󰼎";
+      #   "default" = "󰬻";
+      #   "empty" = "󰼎";
+      #   "persistent" = "󰬼";
+      #   "special" = "󰬽";
+      #   "urgent" = "󰬾";
+      # };
+      "format-icons" = {
+        "1" = "󰎤";
+        "2" = "󰎧";
+        "3" = "󰎪";
+        "4" = "󰎭";
+        "5" = "󰎱";
+        "6" = "󰎳";
+        "7" = "󰎶";
+        "8" = "󰎹";
+        "9" = "󰎼";
+        "10" = "󰽽";
+        "11" = "󰎤";
+        "12" = "󰎧";
+        "13" = "󰎪";
+        "14" = "󰎭";
+        "15" = "󰎱";
+        "16" = "󰎳";
+        "17" = "󰎶";
+        "18" = "󰎹";
+        "19" = "󰎼";
+        "20" = "󰽽";
+        "active" = "󰼎";
+        "default" = "󰬻";
+        "empty" = "󰼎";
+        "persistent" = "󰬼";
+        "special" = "󰬽";
+        "urgent" = "󰬾";
+      };
     };
+    # "hyprland/workspaces" = {
+    #   "format" = "{name}";
+    #   # "format" = "{name}: {icon}";
+    #   "format-icons" = {
+    #     "1" = "";
+    #     "2" = "";
+    #     "3" = "";
+    #     "4" = "";
+    #     "5" = "";
+    #     "active" = "";
+    #     "default" = "";
+    #   };
+    # "persistent-workspaces" = {
+    #   "*" = 5; # 5 workspaces by default on every monitor
+    #   "HDMI-A-1" = 3; # but only three on HDMI-A-1
+    # };
     "mpd" = {
       "tooltip" = true;
       "tooltip-format" = "{artist} - {album} - {title} - Total Time : {totalTime:%M:%S}";
@@ -80,25 +165,6 @@
       "format-stopped" = "";
       # Commands to execute on events
       "on-click" = "mpc -q pause && mpc -q next && mpc -q start";
-    };
-    "hypr/workspaces" = {
-      "disable-scroll" = true;
-      "all-outputs" = false;
-      "format" = "{icon}";
-      # "format"= "< %g >";
-      "format_focused" = "< %g ● >";
-      "format-icons" = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        "6" = "";
-        "7" = "";
-        "8" = "";
-        "9" = "";
-        "10" = "";
-      };
     };
     "sway/workspaces" = {
       disable-scroll = true;
@@ -255,8 +321,23 @@ in {
       padding: 0.4rem;
     }
 
+    #workspaces button.empty {
+      color: @gray;
+      border-radius: 1rem;
+    }
+
+    #workspaces button.visible {
+      color: @yellow;
+      border-radius: 1rem;
+    }
+
     #workspaces button.active {
       color: @sky;
+      border-radius: 1rem;
+    }
+
+    #workspaces button.urgent{
+      color: @red;
       border-radius: 1rem;
     }
 
