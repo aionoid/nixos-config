@@ -44,8 +44,8 @@
     };
 
     emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
+      package = pkgs.twitter-color-emoji;
+      name = "Twitter Color Emoji";
     };
   };
 }
