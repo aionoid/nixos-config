@@ -57,9 +57,16 @@ in {
         dim_strength = 0.5;
         blur = {
           enabled = true;
-          size = 16;
+          passes = 3;
+          size = 6;
+          brightness = 1;
+          noise = 0.01;
+          # contrast = 1;
+          popups = true;
+          popups_ignorealpha = 0.6;
+          ignore_opacity = true;
+          new_optimizations = true;
         };
-        #screen_shader =
       };
 
       #-- Animations -------------------------------------------------
