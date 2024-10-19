@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{config, ...}: let
   modules = {
     #MODULES
     cava = {
@@ -109,22 +109,31 @@
         "urgent" = "󰬾";
       };
     };
-    # "hyprland/workspaces" = {
-    #   "format" = "{name}";
-    #   # "format" = "{name}: {icon}";
-    #   "format-icons" = {
-    #     "1" = "";
-    #     "2" = "";
-    #     "3" = "";
-    #     "4" = "";
-    #     "5" = "";
-    #     "active" = "";
-    #     "default" = "";
-    #   };
-    # "persistent-workspaces" = {
-    #   "*" = 5; # 5 workspaces by default on every monitor
-    #   "HDMI-A-1" = 3; # but only three on HDMI-A-1
-    # };
+    "temperature" = {
+      ## "thermal-zone"= 2;
+      ## "hwmon-path"= "/sys/class/hwmon/hwmon2/temp1_input";
+      ## "critical-threshold"= 80;
+      ## "format-critical"= "{temperatureC}°C ";
+      "format" = "{temperatureC}°C ";
+    };
+    "cpu" = with config.lib.stylix.scheme; {
+      "interval" = 1;
+      "format" = "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15} 󰍛 ";
+      "format-icons" = [
+        "<span color='#${base0B}'>▁</span>" ## green   #69ff94
+        "<span color='#${base0D}'>▂</span>" ## blue    #2aa9ff
+        "<span color='#${base06}'>▃</span>" ## white   #f8f8f2
+        "<span color='#${base06}'>▄</span>" ## white   #f8f8f2
+        "<span color='#${base0A}'>▅</span>" ## yellow  #ffffa5
+        "<span color='#${base0A}'>▆</span>" ## yellow  #ffffa5
+        "<span color='#${base09}'>▇</span>" ## orange  #ff9977
+        "<span color='#${base08}'>█</span>" ## red     #dd532e
+      ];
+    };
+    "memory" = {
+      "interval" = 30;
+      "format" = "{used:0.1f}G/{total:0.1f}G  ";
+    };
     "mpd" = {
       "tooltip" = true;
       "tooltip-format" = "{artist} - {album} - {title} - Total Time : {totalTime:%M:%S}";
@@ -166,6 +175,18 @@
       # Commands to execute on events
       "on-click" = "mpc -q pause && mpc -q next && mpc -q start";
     };
+    "network" = {
+      #"interface" = "wlp2s0";
+      "format" = "{ifname}";
+      "format-wifi" = " {essid} ({signalStrength}%)  ";
+      "format-ethernet" = " {ipaddr}/{cidr} 󰊗 ";
+      "format-disconnected" = ""; #An empty format will hide the module.
+      "tooltip-format" = "{ifname} via {gwaddr} 󰊗";
+      "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
+      "tooltip-format-ethernet" = "{ifname} ";
+      "tooltip-format-disconnected" = "Disconnected";
+      "max-length" = 50;
+    };
     "sway/workspaces" = {
       disable-scroll = true;
       sort-by-name = true;
@@ -190,8 +211,8 @@
     clock = {
       "timezone" = "Africa/Algiers";
       "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      "format-alt" = " {:%d/%m/%Y}";
-      "format" = " {:%H:%M}";
+      "format-alt" = " {:%d/%m/%Y}";
+      "format" = " {:%I:%M %p}";
     };
     backlight = {
       "device" = "intel_backlight";
@@ -217,6 +238,48 @@
       "on-click" = "wlogout &";
       "format" = "⏻";
     };
+    "hyprland/language" = {
+      "format" = " {} 󰌌";
+      "format-en" = "EN";
+      "format-ar" = "AR";
+      # "keyboard-name" = "at-translated-set-2-keyboard";
+    };
+    "keyboard-state" = {
+      "numlock" = false;
+      "capslock" = true;
+      "format" = " {icon} ";
+      "format-icons" = {
+        "locked" = " ";
+        "unlocked" = " ";
+      };
+    };
+    "hyprland/window" = {
+      "format" = "{class}";
+      "separate-outputs" = true;
+    };
+    "hyprland/submap" = {
+      "format" = "> {}";
+      "max-length" = 8;
+      "tooltip" = false;
+    };
+    "wlr/taskbar" = {
+      "format" = "{icon}";
+      "icon-size" = 14;
+      #"icon-theme"= "Numix-Circle";
+      "tooltip-format" = "{title}";
+      "on-click" = "activate";
+      "on-click-middle" = "close";
+      "ignore-list" = [
+        "Alacritty"
+      ];
+      "app_ids-mapping" = {
+        "firefoxdeveloperedition" = "firefox-developer-edition";
+      };
+      "rewrite" = {
+        "Firefox Web Browser" = "Firefox";
+        "Foot Server" = "Terminal";
+      };
+    };
   };
 in {
   programs.waybar.enable = true;
@@ -226,6 +289,7 @@ in {
       {
         layer = "top"; # Waybar at top layer
         position = "top"; # Waybar position (top|bottom|left|right)
+        height = 20;
         # "width"= 1280; # Waybar width
         # Choose the order of the modules
         output = [
@@ -233,8 +297,8 @@ in {
           "HDMI-A-1"
         ];
         modules-left = ["hyprland/workspaces"];
-        modules-center = ["mpd" "mpd#2" "mpd#3" "mpd#4" "cava"];
-        modules-right = ["pulseaudio" "clock" "tray" "custom/lock" "custom/power"];
+        modules-center = ["hyprland/window"];
+        modules-right = ["tray" "hyprland/language" "keyboard-state" "pulseaudio" "clock"]; #"custom/lock" "custom/power"
       }
       // modules;
 
@@ -242,174 +306,179 @@ in {
       {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 20;
         output = [
           "DP-2"
           #"HDMI-A-1"
         ];
-        modules-left = ["hyprland/workspaces" "hyprland/mode" "wlr/taskbar"];
+        modules-left = ["hyprland/workspaces"];
         modules-center = ["hyprland/window"];
-        modules-right = ["cpu" "memory" "network" "clock" "temperature"];
+        modules-right = ["tray" "hyprland/language" "keyboard-state" "pulseaudio" "clock"];
+      }
+      // modules;
 
-        # "hyprland/workspaces" = {
-        #   disable-scroll = true;
-        #   all-outputs = false;
-        # };
-        # "custom/hello-from-waybar" = {
-        #   format = "hello {}";
-        #   max-length = 40;
-        #   interval = "once";
-        #   exec = pkgs.writeShellScript "hello-from-waybar" ''
-        #     echo "from within waybar"
-        #   '';
-        # };
+    bottomBar =
+      {
+        layer = "top";
+        position = "bottom";
+        height = 20;
+        # output = [
+        #   "DP-2"
+        #   "HDMI-A-1"
+        # ];
+        modules-left = ["wlr/taskbar"];
+        modules-center = ["mpd" "mpd#2" "mpd#3" "mpd#4" "cava"];
+        modules-right = ["cpu" "memory" "network" "temperature"];
       }
       // modules;
   };
 
-  programs.waybar.style = ''
-        @define-color rosewater #f5e0dc;
-        @define-color flamingo #f2cdcd;
-        @define-color pink #f5c2e7;
-        @define-color mauve #cba6f7;
-        @define-color red #f38ba8;
-        @define-color maroon #eba0ac;
-        @define-color peach #fab387;
-        @define-color yellow #f9e2af;
-        @define-color green #a6e3a1;
-        @define-color teal #94e2d5;
-        @define-color sky #89dceb;
-        @define-color sapphire #74c7ec;
-        @define-color blue #89b4fa;
-        @define-color lavender #b4befe;
-        @define-color text #cdd6f4;
-        @define-color subtext1 #bac2de;
-        @define-color subtext0 #a6adc8;
-        @define-color overlay2 #9399b2;
-        @define-color overlay1 #7f849c;
-        @define-color overlay0 #6c7086;
-        @define-color surface2 #585b70;
-        @define-color surface1 #45475a;
-        @define-color surface0 #313244;
-        @define-color base #1e1e2e;
-        @define-color mantle #181825;
-        @define-color crust #11111b;
+  programs.waybar.style = with config.lib.stylix.scheme; ''
+            @define-color rosewater #${base06}; /*#f5e0dc;*/
+            @define-color flamingo #${base0F};  /*#f2cdcd;*/
+            @define-color pink #${base0F};      /*#f5c2e7;*/
+            @define-color mauve #${base0E};     /*#cba6f7;*/
+            @define-color red #${base08};       /*#f38ba8;*/
+            @define-color maroon #${base08};    /*#eba0ac;*/
+            @define-color peach #${base09};     /*#fab387;*/
+            @define-color yellow #${base0A};    /*#f9e2af;*/
+            @define-color green #${base0B};     /*#a6e3a1;*/
+            @define-color teal #${base0C};      /*#94e2d5;*/
+            @define-color sky #${base0C};       /*#89dceb;*/
+            @define-color sapphire #${base0D};  /*#74c7ec;*/
+            @define-color blue #${base0D};      /*#89b4fa;*/
+            @define-color lavender #${base07};  /*#b4befe;*/
+            @define-color text #${base05};      /*#cdd6f4;*/
+            @define-color subtext1 #${base04};  /*#bac2de;*/
+            @define-color subtext0 #${base04};  /*#a6adc8;*/
+            @define-color overlay2 #${base04};  /*#9399b2;*/
+            @define-color overlay1 #${base04};  /*#7f849c;*/
+            @define-color overlay0 #${base04};  /*#6c7086;*/
+            @define-color surface2 #${base04};  /*#585b70;*/
+            @define-color surface1 #${base03};  /*#45475a;*/
+            @define-color surface0 #${base02};  /*#313244;*/
+            @define-color base #${base00};      /*#1e1e2e;*/
+            @define-color mantle #${base01};    /*#181825;*/
+            @define-color crust #${base01};     /*#11111b;*/
 
 
-    * {
-      font-family: JetBrainsMono Nerd Font;
-      font-size: 17px;
-      min-height: 0;
+        * {
+          font-family: JetBrainsMono Nerd Font;
+          font-size: 17px;
+          min-height: 0;
+        }
+
+    window#waybar, tooltip {
+          /* background-image :linear-gradient(to bottom, #${base01}ff 0%, #${base0F}00 100% ); */
+        background-image: linear-gradient(to bottom, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},1),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0));
+        color: @base05;
     }
-
-    #waybar {
-      background: transparent;
-      color: @text;
-      margin: 5px 5px;
+    window#waybar.bottom {
+        background-image: linear-gradient(to top, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},1),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0));
+        color: @base05;
     }
+        #waybar {
+          background-image :linear-gradient(to bottom, #${base01} 0%, #${base0F} 100% ); /* transparent;*/
+          color: @text;
+          margin: 5px 5px;
+        }
 
-    #workspaces {
-      border-radius: 1rem;
-      margin: 5px;
-      background-color: @surface0;
-      margin-left: 1rem;
-    }
+         #workspaces {
+          /* border-radius: 1rem; */
+          /* background-color: @surface0; */
+          margin: 5px;
+          margin-left: 1rem;
+        }
 
-    #workspaces button {
-      color: @lavender;
-      border-radius: 1rem;
-      padding: 0.4rem;
-    }
+        #workspaces button {
+          color: @lavender;
+          border-radius: 1rem;
+          padding: 0.4rem;
+        }
 
-    #workspaces button.empty {
-      color: @gray;
-      border-radius: 1rem;
-    }
+        #workspaces button.empty {
+          color: @gray;
+          border-radius: 1rem;
+        }
 
-    #workspaces button.visible {
-      color: @yellow;
-      border-radius: 1rem;
-    }
+        #workspaces button.visible {
+          color: @yellow;
+          border-radius: 1rem;
+        }
 
-    #workspaces button.active {
-      color: @sky;
-      border-radius: 1rem;
-    }
+        #workspaces button.active {
+          color: @sky;
+          border-radius: 1rem;
+        }
 
-    #workspaces button.urgent{
-      color: @red;
-      border-radius: 1rem;
-    }
+        #workspaces button.urgent{
+          color: @red;
+          border-radius: 1rem;
+        }
 
-    #workspaces button:hover {
-      color: @sapphire;
-      border-radius: 1rem;
-    }
+        #workspaces button:hover {
+          color: @sapphire;
+          border-radius: 1rem;
+        }
 
-    #custom-music,
-    #tray,
-    #backlight,
-    #clock,
-    #battery,
-    #pulseaudio,
-    #custom-lock,
-    #custom-power {
-      background-color: @surface0;
-      padding: 0.5rem 1rem;
-      margin: 5px 0;
-    }
+        #custom-music,
+        #tray,
+        #backlight,
+        #cpu
+        #memory
+        #network
+        #temperature
+        #clock,
+        #battery,
+        #pulseaudio,
+        #custom-lock,
+        #custom-power {
+          /* background-color: @surface0; */
+          padding: 0.5rem 1rem;
+          margin: 5px 0;
+        }
 
-    #clock {
-      color: @blue;
-      border-radius: 0px 1rem 1rem 0px;
-      margin-right: 1rem;
-    }
+        #clock {
+          /* border-radius: 0px 1rem 1rem 0px; */
+          /* color: @blue; */
+          margin-right: 1rem;
+        }
 
-    #battery {
-      color: @green;
-    }
+        #battery {
+          color: @green;
+        }
 
-    #battery.charging {
-      color: @green;
-    }
+        #battery.charging {
+          color: @green;
+        }
 
-    #battery.warning:not(.charging) {
-      color: @red;
-    }
+        #battery.warning:not(.charging) {
+          color: @red;
+        }
 
-    #backlight {
-      color: @yellow;
-    }
+        #backlight {
+          color: @yellow;
+        }
 
-    #backlight, #battery {
-        border-radius: 0;
-    }
+        #backlight, #battery {
+            border-radius: 0;
+        }
 
-    #pulseaudio {
-      color: @maroon;
-      border-radius: 1rem 0px 0px 1rem;
-      margin-left: 1rem;
-    }
+        #pulseaudio {
+          /* border-radius: 1rem 0px 0px 1rem; */
+          /* color: @maroon; */
+          margin-left: 1rem;
+        }
 
-    #custom-music {
-      color: @mauve;
-      border-radius: 1rem;
-    }
+        #custom-lock {
+            /* border-radius: 1rem 0px 0px 1rem; */
+            color: @lavender;
+        }
 
-    #custom-lock {
-        border-radius: 1rem 0px 0px 1rem;
-        color: @lavender;
-    }
-
-    #custom-power {
-        margin-right: 1rem;
-        border-radius: 0px 1rem 1rem 0px;
-        color: @red;
-    }
-
-    #tray {
-      margin-right: 1rem;
-      border-radius: 1rem;
-    }
+        #custom-power {
+            /* border-radius: 0px 1rem 1rem 0px; */
+            margin-right: 1rem;
+            color: @red;
+        }
   '';
 }
