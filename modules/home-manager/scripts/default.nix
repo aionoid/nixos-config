@@ -11,5 +11,6 @@
     (writeShellScriptBin "rofi_screenshot" (builtins.readFile ./screenshot.sh))
     (writeShellScriptBin "rofi_volume" (builtins.readFile ./volume.sh))
     (writeShellScriptBin "colorpicker" (builtins.readFile ./colorpicker.sh))
+    (writeShellScriptBin "terminal" (builtins.readFile ./terminal.sh))
   ];
 }

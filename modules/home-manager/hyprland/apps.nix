@@ -3,7 +3,7 @@
     settings = {
       bind = let
         notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
-        term = "~/.config/hypr/scripts/terminal";
+        term = "terminal";
         # screenshot = "~/.config/hypr/scripts/screenshot        ";
         screenshot = "rofi_screenshot";
         lockscreen = "hyprlock";
