@@ -3,23 +3,25 @@
     settings = {
       bind = let
         notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
-        term = "~/.config/hypr/scripts/terminal          ";
-        screenshot = "~/.config/hypr/scripts/screenshot        ";
-        lockscreen = "hyprlock                                 ";
-        colorpicker = "~/.config/hypr/scripts/colorpicker       ";
+        term = "~/.config/hypr/scripts/terminal";
+        # screenshot = "~/.config/hypr/scripts/screenshot        ";
+        screenshot = "rofi_screenshot";
+        lockscreen = "hyprlock";
+        colorpicker = "colorpicker";
         files = "nautilus";
         editor = "nvim";
         browser = "firefox";
-        rofi_launcher = "~/.config/hypr/scripts/rofi_launcher   ";
-        rofi_runner = "~/.config/hypr/scripts/rofi_runner     ";
-        rofi_music = "~/.config/hypr/scripts/rofi_music      ";
-        rofi_network = "~/.config/hypr/scripts/rofi_network    ";
-        rofi_powermenu = "~/.config/hypr/scripts/rofi_powermenu  ";
-        rofi_screenshot = "~/.config/hypr/scripts/rofi_screenshot ";
-        background_swap = "~/.config/hypr/scripts/background          ";
+        rofi_launcher = "rofi_launcher";
+        rofi_runner = "rofi_apps";
+        # rofi_appasroot = "rofi_appasroot";
+        rofi_music = "rofi_music";
+        rofi_network = "rofi_network";
+        rofi_powermenu = "rofi_powermenu";
+        rofi_screenshot = "rofi_screenshot";
+        rofi_volume = "rofi_volume";
+        background_swap = "~/.config/hypr/scripts/background";
         waybar_themes = "~/.config/hypr/waybar/scripts/change-theme.sh";
         cheatsheet = "foot --app-id='foot-float' --config=\"$HOME/.config/hypr/foot/foot.ini\" -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
-        # volume = "~/.config/hypr/scripts/volume            ";
         # backlight = "~/.config/hypr/scripts/brightness        ";
         # wlogout = "~/.config/hypr/scripts/wlogout           ";
         # wofi_launcher = "wofi -I";
@@ -34,6 +36,7 @@
         "SUPER, L, changegroupactive, f"
 
         # # -- Terminal --
+        # "SUPER,       Return, exec, kitty   "
         "SUPER,       Return, exec, ${term}   "
         "SUPER_SHIFT, Return, exec, ${term} -f"
         "SUPER_ALT,   Return, exec, ${term} -s"
@@ -52,6 +55,7 @@
         "SUPER_SHIFT, N, exec, ${rofi_network}    "
         "SUPER, X,       exec, ${rofi_powermenu}  "
         "SUPER, A,       exec, ${rofi_screenshot} "
+        "SUPER, V,       exec, ${rofi_volume} "
         #
         # # -- Wofi --
         #  "SUPER, SUPER_L, exec, ${wofi_menu      }"
