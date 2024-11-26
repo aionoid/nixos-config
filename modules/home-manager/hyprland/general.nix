@@ -41,9 +41,9 @@ in {
       decoration = {
         rounding = hypr_rounding;
         #multisample_edges = true
-        active_opacity = 1.0;
-        inactive_opacity = 0.8;
-        fullscreen_opacity = 1.0;
+        active_opacity = 0.8;
+        inactive_opacity = 0.6;
+        fullscreen_opacity = 0.9;
         drop_shadow = true;
         shadow_range = 10;
         shadow_render_power = 3;

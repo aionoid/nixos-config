@@ -17,6 +17,7 @@ in {
     # google-fonts-reem-kufi
     # google-fonts-aref-ruqaa
     google-fonts
+    icomoon-feather
     # google-fonts.override
     # {fonts = ["reem-kufi" "aref-ruqaa"];}
   ];

@@ -25,6 +25,7 @@
   #   };
   # };
   hardware.graphics.enable = true;
+  # nix.package = pkgs.nixVersions.nix_2_18; # stable
   nix.settings.experimental-features = ["nix-command" "flakes"];
   system.autoUpgrade.channel = "https://nixos.org/channels/nixpkgs-unstable";
 
@@ -116,7 +117,15 @@
 
   environment.variables = {
     FLAKE = "/etc/nixos";
+    # GTK_DEBUG = "interactive";
   };
+
+  # dconf.settings = {
+  #   "org.gtk.Settings.Debug" = {
+  #     "enable-inspector-keybinding" = true;
+  #   };
+  # };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 

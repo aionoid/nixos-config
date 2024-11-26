@@ -7,6 +7,8 @@
     inputs.stylix.homeManagerModules.stylix
     inputs.nixvim.homeManagerModules.nixvim
     ./nixvim
+    ./shell
+    ./mpd.nix
     ./theme.nix
     ./scripts
     ./rofi

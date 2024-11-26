@@ -6,6 +6,7 @@
   stylix.enable = true;
   stylix.polarity = "dark";
   stylix.image = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
+  # stylix.image = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
   # stylix.image = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/vnc-d.png";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-pale.yaml";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
@@ -13,12 +14,10 @@
 
   stylix.opacity = {
     terminal = 0.9;
-    popups = 0.9;
-    desktop = 0.0;
-    applications = 0.9;
+    popups = 0.8;
+    desktop = 0.1;
+    applications = 1.0;
   };
-
-  # stylix.targets.waybar.enable = false;
 
   stylix.cursor = {
     package = pkgs.bibata-cursors;

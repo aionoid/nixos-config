@@ -2,23 +2,23 @@
   modules = {
     #MODULES
     cava = {
-      #        "cava_config"= "$XDG_CONFIG_HOME/cava/config";
-      "framerate" = 30;
-      "autosens" = 1;
-      "sensitivity" = 100;
+      "cava_config" = "$XDG_CONFIG_HOME/cava/config";
+      # "framerate" = 30;
+      # "autosens" = 1;
+      # # "sensitivity" = 80;
       "bars" = 14;
-      "lower_cutoff_freq" = 50;
-      "higher_cutoff_freq" = 10000;
-      "method" = "pulse";
-      "source" = "auto";
-      "stereo" = true;
-      "reverse" = false;
+      # "lower_cutoff_freq" = 50;
+      # "higher_cutoff_freq" = 10000;
+      # "method" = "pulse";
+      # "source" = "auto";
+      # "stereo" = true;
+      # "reverse" = false;
       "bar_delimiter" = 0;
-      "monstercat" = false;
-      "waves" = false;
-      "noise_reduction" = 0.77;
-      "input_delay" = 2;
-      "format-icons" = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+      # "monstercat" = false;
+      # "waves" = false;
+      # "noise_reduction" = 0.77;
+      # "input_delay" = 2;
+      "format-icons" = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"]; #"█"
       "actions" = {
         "on-click-right" = "mode";
       };
@@ -264,7 +264,7 @@
     };
     "wlr/taskbar" = {
       "format" = "{icon}";
-      "icon-size" = 14;
+      "icon-size" = 24;
       #"icon-theme"= "Numix-Circle";
       "tooltip-format" = "{title}";
       "on-click" = "activate";
@@ -326,159 +326,166 @@ in {
         #   "DP-2"
         #   "HDMI-A-1"
         # ];
-        modules-left = ["wlr/taskbar"];
-        modules-center = ["mpd" "mpd#2" "mpd#3" "mpd#4" "cava"];
+        modules-left = ["mpd" "mpd#2" "mpd#3" "mpd#4" "cava"];
+        modules-center = ["wlr/taskbar"];
         modules-right = ["cpu" "memory" "network" "temperature"];
       }
       // modules;
   };
 
-  programs.waybar.style = with config.lib.stylix.scheme; ''
-            @define-color rosewater #${base06}; /*#f5e0dc;*/
-            @define-color flamingo #${base0F};  /*#f2cdcd;*/
-            @define-color pink #${base0F};      /*#f5c2e7;*/
-            @define-color mauve #${base0E};     /*#cba6f7;*/
-            @define-color red #${base08};       /*#f38ba8;*/
-            @define-color maroon #${base08};    /*#eba0ac;*/
-            @define-color peach #${base09};     /*#fab387;*/
-            @define-color yellow #${base0A};    /*#f9e2af;*/
-            @define-color green #${base0B};     /*#a6e3a1;*/
-            @define-color teal #${base0C};      /*#94e2d5;*/
-            @define-color sky #${base0C};       /*#89dceb;*/
-            @define-color sapphire #${base0D};  /*#74c7ec;*/
-            @define-color blue #${base0D};      /*#89b4fa;*/
-            @define-color lavender #${base07};  /*#b4befe;*/
-            @define-color text #${base05};      /*#cdd6f4;*/
-            @define-color subtext1 #${base04};  /*#bac2de;*/
-            @define-color subtext0 #${base04};  /*#a6adc8;*/
-            @define-color overlay2 #${base04};  /*#9399b2;*/
-            @define-color overlay1 #${base04};  /*#7f849c;*/
-            @define-color overlay0 #${base04};  /*#6c7086;*/
-            @define-color surface2 #${base04};  /*#585b70;*/
-            @define-color surface1 #${base03};  /*#45475a;*/
-            @define-color surface0 #${base02};  /*#313244;*/
-            @define-color base #${base00};      /*#1e1e2e;*/
-            @define-color mantle #${base01};    /*#181825;*/
-            @define-color crust #${base01};     /*#11111b;*/
+  programs.waybar.style = with config.lib.stylix.scheme;
+  /*
+  css
+  */
+    ''
+                  @define-color rosewater #${base06}; /*#f5e0dc;*/
+                  @define-color flamingo #${base0F};  /*#f2cdcd;*/
+                  @define-color pink #${base0F};      /*#f5c2e7;*/
+                  @define-color mauve #${base0E};     /*#cba6f7;*/
+                  @define-color red #${base08};       /*#f38ba8;*/
+                  @define-color maroon #${base08};    /*#eba0ac;*/
+                  @define-color peach #${base09};     /*#fab387;*/
+                  @define-color yellow #${base0A};    /*#f9e2af;*/
+                  @define-color green #${base0B};     /*#a6e3a1;*/
+                  @define-color teal #${base0C};      /*#94e2d5;*/
+                  @define-color sky #${base0C};       /*#89dceb;*/
+                  @define-color sapphire #${base0D};  /*#74c7ec;*/
+                  @define-color blue #${base0D};      /*#89b4fa;*/
+                  @define-color lavender #${base07};  /*#b4befe;*/
+                  @define-color text #${base05};      /*#cdd6f4;*/
+                  @define-color subtext1 #${base04};  /*#bac2de;*/
+                  @define-color subtext0 #${base04};  /*#a6adc8;*/
+                  @define-color overlay2 #${base04};  /*#9399b2;*/
+                  @define-color overlay1 #${base04};  /*#7f849c;*/
+                  @define-color overlay0 #${base04};  /*#6c7086;*/
+                  @define-color surface2 #${base04};  /*#585b70;*/
+                  @define-color surface1 #${base03};  /*#45475a;*/
+                  @define-color surface0 #${base02};  /*#313244;*/
+                  @define-color base #${base00};      /*#1e1e2e;*/
+                  @define-color mantle #${base01};    /*#181825;*/
+                  @define-color crust #${base01};     /*#11111b;*/
 
 
-        * {
-          font-family: JetBrainsMono Nerd Font;
-          font-size: 17px;
-          min-height: 0;
-        }
+             * {
+               font-family: JetBrainsMono Nerd Font;
+               font-size: 17px;
+               min-height: 0;
+             }
 
-    window#waybar, tooltip {
-          /* background-image :linear-gradient(to bottom, #${base01}ff 0%, #${base0F}00 100% ); */
-        background-image: linear-gradient(to bottom, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},1),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0));
-        color: @base05;
-    }
-    window#waybar.bottom {
-        background-image: linear-gradient(to top, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},1),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0));
-        color: @base05;
-    }
-        #waybar {
-          background-image :linear-gradient(to bottom, #${base01} 0%, #${base0F} 100% ); /* transparent;*/
-          color: @text;
-          margin: 5px 5px;
-        }
+            window#waybar, tooltip {
+                  /* background-image :linear-gradient(to bottom, #${base01}ff 0%, #${base0F}00 100% ); */
+                background-image: linear-gradient(to bottom, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0.6),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0.2));
+            }
+            window#waybar.bottom {
+                background-image: linear-gradient(to top, rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0.4),rgba(${base00-rgb-r},${base00-rgb-r},${base00-rgb-r},0.4));
+            }
+       /*#waybar {*/
+       /*  background-image :linear-gradient(to bottom, #${base01} 0%, #${base0F} 100% );*/
+       /*  color: @text;*/
+       /*  margin: 5px 5px;*/
+       /*}*/
 
-         #workspaces {
-          /* border-radius: 1rem; */
-          /* background-color: @surface0; */
-          margin: 5px;
-          margin-left: 1rem;
-        }
+        #workspaces {
+         /* border-radius: 1rem; */
+         /* background-color: @surface0; */
+         margin: 5px;
+         margin-left: 1rem;
+       }
+      .modules-left #workspaces button.focused,
+      .modules-left #workspaces button.active {
+         border-bottom: 0px solid @base05;
+         color: @peach;
+         background-image :linear-gradient(to bottom, rgba(${base03-rgb-r},${base03-rgb-r},${base03-rgb-r},1),rgba(${base03-rgb-r},${base03-rgb-r},${base03-rgb-r},0));
+      }
 
-        #workspaces button {
-          color: @lavender;
-          border-radius: 1rem;
-          padding: 0.4rem;
-        }
+       #workspaces button {
+         color: @lavender;
+         border-radius: 0rem;
+         padding: 0.4rem;
+       }
 
-        #workspaces button.empty {
-          color: @gray;
-          border-radius: 1rem;
-        }
+       #workspaces button.empty {
+         color: @gray;
+         border-radius: 0rem;
+       }
 
-        #workspaces button.visible {
-          color: @yellow;
-          border-radius: 1rem;
-        }
+       #workspaces button.visible {
+         color: @green;
+         border-radius: 0rem;
+       }
 
-        #workspaces button.active {
-          color: @sky;
-          border-radius: 1rem;
-        }
+       #workspaces button.active {
+         border-radius: 0rem;
+       }
 
-        #workspaces button.urgent{
-          color: @red;
-          border-radius: 1rem;
-        }
+       #workspaces button.urgent{
+         color: @red;
+         border-radius: 0rem;
+       }
 
-        #workspaces button:hover {
-          color: @sapphire;
-          border-radius: 1rem;
-        }
+       #workspaces button:hover {
+         color: @sapphire;
+         border-radius: 0rem;
+       }
 
-        #custom-music,
-        #tray,
-        #backlight,
-        #cpu
-        #memory
-        #network
-        #temperature
-        #clock,
-        #battery,
-        #pulseaudio,
-        #custom-lock,
-        #custom-power {
-          /* background-color: @surface0; */
-          padding: 0.5rem 1rem;
-          margin: 5px 0;
-        }
+       #custom-music,
+       #tray,
+       #backlight,
+       #cpu
+       #memory
+       #network
+       #temperature
+       #clock,
+       #battery,
+       #pulseaudio,
+       #custom-lock,
+       #custom-power {
+         /* background-color: @surface0; */
+         padding: 0.5rem 1rem;
+         margin: 5px 0;
+       }
 
-        #clock {
-          /* border-radius: 0px 1rem 1rem 0px; */
-          /* color: @blue; */
-          margin-right: 1rem;
-        }
+       #clock {
+         /* border-radius: 0px 1rem 1rem 0px; */
+         /* color: @blue; */
+         margin-right: 1rem;
+       }
 
-        #battery {
-          color: @green;
-        }
+       #battery {
+         color: @green;
+       }
 
-        #battery.charging {
-          color: @green;
-        }
+       #battery.charging {
+         color: @green;
+       }
 
-        #battery.warning:not(.charging) {
-          color: @red;
-        }
+       #battery.warning:not(.charging) {
+         color: @red;
+       }
 
-        #backlight {
-          color: @yellow;
-        }
+       #backlight {
+         color: @yellow;
+       }
 
-        #backlight, #battery {
-            border-radius: 0;
-        }
+       #backlight, #battery {
+           border-radius: 0;
+       }
 
-        #pulseaudio {
-          /* border-radius: 1rem 0px 0px 1rem; */
-          /* color: @maroon; */
-          margin-left: 1rem;
-        }
+       #pulseaudio {
+         /* border-radius: 1rem 0px 0px 1rem; */
+         /* color: @maroon; */
+         margin-left: 1rem;
+       }
 
-        #custom-lock {
-            /* border-radius: 1rem 0px 0px 1rem; */
-            color: @lavender;
-        }
+       #custom-lock {
+           /* border-radius: 1rem 0px 0px 1rem; */
+           color: @lavender;
+       }
 
-        #custom-power {
-            /* border-radius: 0px 1rem 1rem 0px; */
-            margin-right: 1rem;
-            color: @red;
-        }
-  '';
+       #custom-power {
+           /* border-radius: 0px 1rem 1rem 0px; */
+           margin-right: 1rem;
+           color: @red;
+       }
+    '';
 }
