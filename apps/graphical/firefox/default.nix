@@ -4,6 +4,26 @@
   lib,
   ...
 }: {
+  home.file = {
+    ".mozilla/firefox/default/chrome" = {
+      source = ./chrome;
+      recursive = true;
+      executable = false;
+    };
+    ".mozilla/firefox/default/user.js" = {
+      text = builtins.readFile ./user.js;
+      executable = false;
+    };
+    ".mozilla/firefox/work/chrome" = {
+      source = ./chrome;
+      recursive = true;
+      executable = false;
+    };
+    ".mozilla/firefox/work/user.js" = {
+      text = builtins.readFile ./user.js;
+      executable = false;
+    };
+  };
   programs.firefox = {
     enable = true;
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
@@ -47,6 +67,7 @@
           sponsorblock
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
+          userchrome-toggle-extended
           (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
@@ -117,8 +138,8 @@
           ];
         };
 
-        userChrome = builtins.readFile ./userChrome.css;
-        userContent = builtins.readFile ./userContent.css;
+        # userChrome = builtins.readFile ./userChrome.css;
+        # userContent = builtins.readFile ./userContent.css;
       };
 
       work = {
@@ -135,6 +156,7 @@
           sponsorblock
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
+          userchrome-toggle-extended
           (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
@@ -172,8 +194,8 @@
           "full-screen-api.ignore-widgets" = false;
         };
 
-        userChrome = builtins.readFile ./userChrome.css;
-        userContent = builtins.readFile ./userContent.css;
+        # userChrome = builtins.readFile ./userChrome.css;
+        # userContent = builtins.readFile ./userContent.css;
       };
     };
   };

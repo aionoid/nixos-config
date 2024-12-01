@@ -11,6 +11,7 @@
         files = "nautilus";
         editor = "nvim";
         browser = "firefox";
+        #TODO: add rofi smiles shourtcut
         rofi_launcher = "rofi_launcher";
         rofi_runner = "rofi_apps";
         # rofi_appasroot = "rofi_appasroot";
@@ -21,7 +22,8 @@
         rofi_volume = "rofi_volume";
         background_swap = "~/.config/hypr/scripts/background";
         waybar_themes = "~/.config/hypr/waybar/scripts/change-theme.sh";
-        cheatsheet = "foot --app-id='foot-float' --config=\"$HOME/.config/hypr/foot/foot.ini\" -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
+        cheatsheet = "kitty --app-id='kitty-float' -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
+        # cheatsheet = "foot --app-id='foot-float' --config=\"$HOME/.config/hypr/foot/foot.ini\" -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
         # backlight = "~/.config/hypr/scripts/brightness        ";
         # wlogout = "~/.config/hypr/scripts/wlogout           ";
         # wofi_launcher = "wofi -I";

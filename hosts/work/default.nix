@@ -11,8 +11,13 @@
     ./hardware-configuration.nix
 
     ../global.nix
-    # ../gnome.nix
+    # desktop manager
     ../hyprland.nix
+    # greeter
+    ../greetd.nix
+    # ../sddm.nix
+    ## boot theme
+    ../plymouth.nix
   ];
 
   networking.hostName = "work";

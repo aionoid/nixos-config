@@ -72,6 +72,7 @@
       # #-- Window Rules -----------------------------------------------
       windowrule = [
         "float, foot-float"
+        "float, kitty-float"
         "float, yad|nm-connection-editor|pavucontrolk"
         "float, xfce-polkit|kvantummanager|qt5ct"
         "float, feh|Viewnior|Gpicview|Gimp|MPlayer"
@@ -83,6 +84,7 @@
         "center, Viewnior"
 
         "animation slide down,foot-full"
+        "animation slide down,kitty-full"
         "animation slide up,wlogout"
       ];
 
