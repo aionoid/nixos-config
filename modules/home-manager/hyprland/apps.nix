@@ -11,7 +11,7 @@
         files = "nautilus";
         editor = "nvim";
         browser = "firefox";
-        #TODO: add rofi smiles shourtcut
+        rofi_emoji = "rofi_emoji";
         rofi_launcher = "rofi_launcher";
         rofi_runner = "rofi_apps";
         # rofi_appasroot = "rofi_appasroot";
@@ -58,6 +58,7 @@
         "SUPER, X,       exec, ${rofi_powermenu}  "
         "SUPER, A,       exec, ${rofi_screenshot} "
         "SUPER, V,       exec, ${rofi_volume} "
+        "SUPER, e,       exec, ${rofi_emoji} "
         #
         # # -- Wofi --
         #  "SUPER, SUPER_L, exec, ${wofi_menu      }"

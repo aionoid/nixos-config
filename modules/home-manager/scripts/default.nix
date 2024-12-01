@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     (writeShellScriptBin "scriptChangeWallpaper" (builtins.readFile ./changeWallpaper.sh))
     (writeShellScriptBin "rofi_launcher" (builtins.readFile ./launchers.sh))
+    (writeShellScriptBin "rofi_emoji" (builtins.readFile ./emoji.sh))
     (writeShellScriptBin "rofi_apps" (builtins.readFile ./apps.sh))
     (writeShellScriptBin "rofi_appasroot" (builtins.readFile ./appasroot.sh))
     (writeShellScriptBin "rofi_music" (builtins.readFile ./mpd.sh))
