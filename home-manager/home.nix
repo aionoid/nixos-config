@@ -64,6 +64,7 @@
     t = "lsd --tree";
     llt = "lsd -la --tree";
     cat = "bat";
+    ta = "tmux attach";
   };
 
   home.sessionVariables = {
