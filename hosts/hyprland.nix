@@ -24,6 +24,7 @@
       nautilus
       gthumb
       loupe
+      evince
       # nemo-with-extensions
       # gnome-icon-theme
       # ENABLED IN STARTUP APPS

@@ -58,12 +58,36 @@
       label = [
         {
           monitor = "";
-          text = ''cmd[update:1000] echo "<b><big> $(date +"%H:%M:%S") </big></b>"'';
+          text = ''cmd[update:1000] echo "<b><big> $(date +"%H") </big></b>"'';
           # color = "rgb(198, 160, 246)";
           color = fontColor; # "rgb(${base09-rgb-r}, ${base09-rgb-g}, ${base09-rgb-b})";
-          font_size = "64";
+          font_size = "84";
+          font_family = "JetBrains Mono Nerd Font";
+          position = "0, 96";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "<b><big> $(date +"%M") </big></b>"'';
+          # text = ''cmd[update:1000] echo "<b><big> $(date +"%H:%M:%S") </big></b>"'';
+          # color = "rgb(198, 160, 246)";
+          color = fontColor; # "rgb(${base09-rgb-r}, ${base09-rgb-g}, ${base09-rgb-b})";
+          font_size = "84";
+          font_family = "JetBrains Mono Nerd Font ";
+          position = "0, 0";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "<b><span> $(date +"%S") </span></b>"'';
+          # text = ''cmd[update:1000] echo "<b><big> $(date +"%H:%M:%S") </big></b>"'';
+          # color = "rgb(198, 160, 246)";
+          color = fontColor; # "rgb(${base09-rgb-r}, ${base09-rgb-g}, ${base09-rgb-b})";
+          font_size = "44";
           font_family = "JetBrains Mono Nerd Font 10";
-          position = "0, 16";
+          position = "110, -20";
           halign = "center";
           valign = "center";
         }
@@ -76,7 +100,7 @@
           color = fontColor; # "rgb(${base09-rgb-r}, ${base09-rgb-g}, ${base09-rgb-b})";
           font_size = " 20";
           font_family = " JetBrains Mono Nerd Font 10";
-          position = " 0, 100";
+          position = " 0, 170";
           halign = " center";
           valign = " center";
         }
