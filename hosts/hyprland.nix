@@ -25,6 +25,7 @@
       gthumb
       loupe
       evince
+      file-roller
       # nemo-with-extensions
       # gnome-icon-theme
       # ENABLED IN STARTUP APPS
