@@ -90,6 +90,13 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable disks mount with Udisk
+  services.udisks2.enable = true;
+  # services.udisks2.mountOnMedia = true;
+
+  # Enable Gnome Disks
+  programs.gnome-disks.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;

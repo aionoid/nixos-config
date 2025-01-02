@@ -40,6 +40,11 @@
     gparted
   ];
 
+  # enable automount for new drives
+  services.udiskie.enable = true;
+  services.udiskie.automount = true;
+  services.udiskie.notify = true;
+
   # enable programs
   # TODO: move to own nix file for config
   programs.kitty.enable = true;
