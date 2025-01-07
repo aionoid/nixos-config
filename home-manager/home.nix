@@ -38,6 +38,10 @@
     alsa-utils
     usbutils
     gparted
+    # pdf
+    # editor
+    gedit
+    neovim-gtk
   ];
 
   # enable automount for new drives

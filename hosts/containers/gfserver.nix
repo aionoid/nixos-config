@@ -10,7 +10,7 @@ in {
   #
   # networking.hostName = lib.mkDefault "gfServer";
   # networking.useDHCP = false;
-  networking.firewall.allowedTCPPorts = [80 5432];
+  networking.firewall.allowedTCPPorts = [80 5432 6543 5560 7777 7654];
 
   services.postgresql = {
     enable = true;
