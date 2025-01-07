@@ -19,6 +19,8 @@
     # ../sddm.nix
     ## boot theme
     ../plymouth.nix
+    ## containers
+    ../containers
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users

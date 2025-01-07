@@ -7,5 +7,6 @@
     inputs.stylix.nixosModules.stylix
     ./googlefonts.nix
     ../theme.nix
+    ./gaming.nix
   ];
 }
