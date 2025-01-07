@@ -18,6 +18,8 @@
     # ../sddm.nix
     ## boot theme
     ../plymouth.nix
+    # containers
+    ../containers
   ];
 
   networking.hostName = "work";

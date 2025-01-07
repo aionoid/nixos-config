@@ -40,10 +40,16 @@ in {
     '';
   };
 
-  services.httpd = {
+  services.httpd = let
+    webapp = import ./gfwebpage_drv.nix {inherit pkgs;};
+  in {
     enable = true;
     enablePHP = true;
     phpPackage = pkgs.php;
+    virtualHosts.localhost = {
+      documentRoot = webapp.source-code;
+      # documentRoot = "/root/gf_server/_utils/web/";
+    };
   };
 
   environment.systemPackages = with pkgs; [
