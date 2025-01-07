@@ -10,7 +10,31 @@ in {
   #
   # networking.hostName = lib.mkDefault "gfServer";
   # networking.useDHCP = false;
-  networking.firewall.allowedTCPPorts = [80 5432 6543 5560 7777 7654];
+  networking.firewall.allowedTCPPorts = [
+    80
+    5432
+    6543
+    5560
+    7777
+    7654
+    ####
+    5517
+    5518
+    5527
+    5528
+    5597
+    5598
+    ####
+    10321
+    10322
+    10329
+    10010
+    10020
+    10090
+    20061
+    20062
+    20069
+  ];
 
   services.postgresql = {
     enable = true;
@@ -45,7 +69,7 @@ in {
   in {
     enable = true;
     enablePHP = true;
-    phpPackage = pkgs.php;
+    phpPackage = pkgs.php81;
     virtualHosts.localhost = {
       documentRoot = webapp.source-code;
       # documentRoot = "/root/gf_server/_utils/web/";
@@ -53,8 +77,9 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    php83
-    php83Extensions.pgsql
+    php81
+    php81Extensions.pgsql
+    killall
   ];
 
   system.stateVersion = "24.11";
