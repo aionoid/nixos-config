@@ -74,6 +74,10 @@
     llt = "lsd -la --tree";
     cat = "bat";
     ta = "tmux attach";
+    nxc-stop = "sudo nixos-container stop";
+    nxc-start = "sudo nixos-container start";
+    nxc-login = "sudo nixos-container root-login";
+    nxc-update = "sudo nixos-container update";
   };
 
   home.sessionVariables = {

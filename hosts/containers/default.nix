@@ -4,7 +4,8 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    beekeeper-studio
+    (writeShellScriptBin "adminer" "${pkgs.php}/bin/php -S 'localhost:8000' -t ${pkgs.adminer}/ &
+    xdg-open 'localhost:8000/adminer.php'")
   ];
   containers.gfServer = {
     timeoutStartSec = "5min";
@@ -24,6 +25,26 @@
       networking.hostName = lib.mkDefault "gfServer";
       networking.useDHCP = false;
       imports = [./gfserver.nix];
+    };
+  };
+  containers.dsoServer = {
+    timeoutStartSec = "5min";
+    privateNetwork = true;
+    hostAddress = "192.168.1.1";
+    localAddress = "192.168.1.55";
+    autoStart = false;
+    hostBridge = null;
+    bindMounts = {
+      "/root/dso_server/" = {
+        hostPath = "/home/ovo/Documents/dso_server/";
+        isReadOnly = false;
+      };
+    };
+    config = {
+      boot.isContainer = true;
+      networking.hostName = lib.mkDefault "dsoServer";
+      networking.useDHCP = false;
+      imports = [./dsoserver.nix];
     };
   };
 }
