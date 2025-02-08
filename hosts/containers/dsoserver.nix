@@ -39,6 +39,7 @@ in {
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_13;
+    # package = pkgs.postgresql;
     settings = {
       logging_collector = lib.mkForce "on";
       log_directory = lib.mkForce "pg_log";
@@ -76,6 +77,11 @@ in {
   #   };
   # };
   #
+  environment.shellAliases = {
+    server-watch = "watch 'ps aux | grep Server'";
+    server-ports = "watch 'ss -ltu4n'";
+  };
+
   environment.systemPackages = with pkgs; [
     # php81
     # php81Extensions.pgsql

@@ -113,6 +113,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  systemd.targets.hibernate.enable = false;
 
   environment.sessionVariables = {
     FLAKE = "/etc/nixos";
