@@ -4,7 +4,15 @@
   lib,
   ...
 }: let
-  db_pwd = "password";
+  game_name = "'Dragonmon Hunters'";
+  server_host = "'192.168.1.55'";
+  db_user = "'postgres'";
+  db_password = "'password'";
+
+  db_members = "'ds_member'";
+  db_account = "'ds_account'";
+  db_gateway = "'ds_gateway'";
+  # login_port = 6543;
 in {
   # boot.isContainer = true;
   #
@@ -48,7 +56,7 @@ in {
     };
     # for testing only
     initialScript = pkgs.writeText "init-sql-script" ''
-      alter user postgres with password '${db_pwd}';
+      alter user postgres with password '${db_password}';
     '';
 
     authentication = lib.mkForce ''
@@ -65,18 +73,28 @@ in {
     '';
   };
 
-  # services.httpd = let
-  #   webapp = import ./gfwebpage_drv.nix {inherit pkgs;};
-  # in {
-  #   enable = true;
-  #   enablePHP = true;
-  #   phpPackage = pkgs.php81;
-  #   virtualHosts.localhost = {
-  #     documentRoot = webapp.source-code;
-  #     # documentRoot = "/root/gf_server/_utils/web/";
-  #   };
-  # };
-  #
+  services.httpd = let
+    webapp = import ./gfwebpage_drv.nix {
+      inherit pkgs;
+      inherit game_name;
+      inherit server_host;
+      inherit db_user;
+      inherit db_password;
+      inherit db_members;
+      inherit db_account;
+      inherit db_gateway;
+      # inherit login_port;
+    };
+  in {
+    enable = true;
+    enablePHP = true;
+    phpPackage = pkgs.php81;
+    virtualHosts.localhost = {
+      documentRoot = webapp.source-code;
+      # documentRoot = "/root/gf_server/_utils/web/";
+    };
+  };
+
   environment.shellAliases = {
     server-watch = "watch 'ps aux | grep Server'";
     server-ports = "watch 'ss -ltu4n'";
