@@ -16,6 +16,10 @@ in {
   fonts.packages = with pkgs; [
     # google-fonts-reem-kufi
     # google-fonts-aref-ruqaa
+    noto-fonts
+    noto-fonts-cjk-serif
+    noto-fonts-lgc-plus
+    noto-fonts-cjk-sans
     google-fonts
     icomoon-feather
     # google-fonts.override

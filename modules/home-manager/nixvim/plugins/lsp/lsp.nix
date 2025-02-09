@@ -10,6 +10,7 @@
         servers = {
           html = {enable = true;};
           bashls = {enable = true;};
+          # sqlls = {enable = true;};
           lua_ls = {enable = true;};
           lsp_ai = {
             enable = true;
