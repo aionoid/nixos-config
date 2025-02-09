@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  programs.nixvim = {pkgs, ...}: {
+  programs.nixvim = {
     plugins = {
       lsp-lines = {enable = true;};
       lsp-format = {enable = true;};
@@ -9,6 +9,7 @@
         inlayHints = true;
         servers = {
           html = {enable = true;};
+          bashls = {enable = true;};
           lua_ls = {enable = true;};
           lsp_ai = {
             enable = true;

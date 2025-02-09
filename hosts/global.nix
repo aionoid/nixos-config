@@ -66,6 +66,12 @@
     nh
     # icon theme
     gnome-icon-theme
+    # ntfs tools
+    ntfs3g
+    dosfstools
+    ntfsprogs
+    #scrounge-ntfs
+    #ntfs2btrfs
   ];
 
   # Enable networking
@@ -101,6 +107,7 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

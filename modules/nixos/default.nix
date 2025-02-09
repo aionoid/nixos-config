@@ -6,7 +6,7 @@
   imports = [
     inputs.stylix.nixosModules.stylix
     ./googlefonts.nix
-    ../theme.nix
+    ./theme.nix
     ./gaming.nix
   ];
 }
