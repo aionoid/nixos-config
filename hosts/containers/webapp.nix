@@ -1,13 +1,3 @@
-# game_name = "Dragonmon Hunters";
-# server_host = "10.233.1.2";
-# db_user = "postgres";
-# db_password = "password";
-#
-# db_members = "gf_gs";
-# db_account = "gf_ls";
-# db_gateway = "gf_ms";
-#
-# login_port = 6543;
 {
   pkgs ? import <nixpkgs> {},
   game_name ? "'Dragonmon Hunters'",

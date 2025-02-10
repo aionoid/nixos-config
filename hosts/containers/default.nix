@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -16,7 +17,7 @@
     hostBridge = null;
     bindMounts = {
       "/root/gf_server/" = {
-        hostPath = "/home/ovo/Documents/gf_server/";
+        hostPath = "/home/${config.users.users.username.home}/Documents/gf_server/";
         isReadOnly = false;
       };
     };
@@ -36,7 +37,7 @@
     hostBridge = null;
     bindMounts = {
       "/root/dso_server/" = {
-        hostPath = "/home/ovo/Documents/dso_server/";
+        hostPath = "/home/${config.users.users.username.home}/Documents/dso_server/";
         isReadOnly = false;
       };
     };

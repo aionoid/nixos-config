@@ -1,4 +1,3 @@
-# use Beekeeper(free+OpenSource) for database manipulation
 {
   pkgs,
   lib,
@@ -47,14 +46,13 @@ in {
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_13;
-    # package = pkgs.postgresql;
     settings = {
       logging_collector = lib.mkForce "on";
       log_directory = lib.mkForce "pg_log";
       log_destination = lib.mkForce "csvlog";
       listen_addresses = lib.mkForce "*";
     };
-    # for testing only
+    # set postgres user password
     initialScript = pkgs.writeText "init-sql-script" ''
       alter user postgres with password '${db_password}';
     '';
@@ -74,7 +72,7 @@ in {
   };
 
   services.httpd = let
-    webapp = import ./gfwebpage_drv.nix {
+    webapp = import ./webapp.nix {
       inherit pkgs;
       inherit game_name;
       inherit server_host;
@@ -91,7 +89,6 @@ in {
     phpPackage = pkgs.php81;
     virtualHosts.localhost = {
       documentRoot = webapp.source-code;
-      # documentRoot = "/root/gf_server/_utils/web/";
     };
   };
 

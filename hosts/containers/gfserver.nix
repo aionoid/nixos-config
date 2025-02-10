@@ -1,10 +1,17 @@
-# use Beekeeper(free+OpenSource) for database manipulation
 {
   pkgs,
   lib,
   ...
 }: let
-  db_pwd = "password";
+  game_name = "'Grand Fantasia'";
+  server_host = "'10.233.1.2'";
+  db_user = "'postgres'";
+  db_password = "'password'";
+
+  db_members = "'gf_gs'";
+  db_account = "'gf_ls'";
+  db_gateway = "'gf_ms'";
+  # login_port = 6543;
 in {
   # boot.isContainer = true;
   #
@@ -45,9 +52,9 @@ in {
       log_destination = lib.mkForce "csvlog";
       listen_addresses = lib.mkForce "*";
     };
-    # for testing only
+    # set postgres user password
     initialScript = pkgs.writeText "init-sql-script" ''
-      alter user postgres with password '${db_pwd}';
+      alter user postgres with password '${db_password}';
     '';
 
     authentication = lib.mkForce ''
@@ -65,21 +72,36 @@ in {
   };
 
   services.httpd = let
-    webapp = import ./gfwebpage_drv.nix {inherit pkgs;};
+    webapp = import ./webapp.nix {
+      inherit pkgs;
+      inherit game_name;
+      inherit server_host;
+      inherit db_user;
+      inherit db_password;
+      inherit db_members;
+      inherit db_account;
+      inherit db_gateway;
+      # inherit login_port;
+    };
   in {
     enable = true;
     enablePHP = true;
     phpPackage = pkgs.php81;
     virtualHosts.localhost = {
       documentRoot = webapp.source-code;
-      # documentRoot = "/root/gf_server/_utils/web/";
     };
   };
 
+  environment.shellAliases = {
+    server-watch = "watch 'ps aux | grep Server'";
+    server-ports = "watch 'ss -ltu4n'";
+  };
+
   environment.systemPackages = with pkgs; [
-    php81
-    php81Extensions.pgsql
+    # php81
+    # php81Extensions.pgsql
     killall
+    perl
   ];
 
   system.stateVersion = "24.11";
