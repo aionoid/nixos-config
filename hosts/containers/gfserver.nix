@@ -1,10 +1,10 @@
 {...}: {
   imports = [./base_server.nix];
 
-  gameserver.server = {
+  gameserver.gfServer = {
     enable = true;
     gameTitle = "Grand Fantasia";
-    serverName = "gfServer";
+    # serverName = "gfServer";
     serverFiles = "/home/ovo/Documents/gf_server/";
     hostAddress = "10.233.1.1";
     serverAddress = "10.233.1.2";
