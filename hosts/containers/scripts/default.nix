@@ -7,7 +7,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; let
-    sbackup = pkgs.writers.writeBashBin "sbackup_db" ''
+    gsbackup = pkgs.writers.writeBashBin "gsbackup_db" ''
       export LC_ALL=C
 
       B="[40;36m"
@@ -43,7 +43,7 @@
 
     '';
 
-    srestore = pkgs.writers.writeBashBin "srestore_db" ''
+    gsrestore = pkgs.writers.writeBashBin "gsrestore_db" ''
       export LC_ALL=C
 
       B="[40;36m"
@@ -82,37 +82,56 @@
 
       echo "Restoring ${db_members} backup"
       psql -U postgres -c "DROP DATABASE ${db_members};"
-      psql -U postgres -c "create database ${db_members} encoding 'UTF8' template template0;"
-       psql -U postgres -d ${db_members} -f /root/gf_server/backup/$folder_name/${db_members}.sql
+      psql -U postgres -c "create database ${db_members} encoding 'SQL_ASCII' template template0;"
+       psql -U postgres -d ${db_members} -f /root/server/backup/$folder_name/${db_members}.sql
 
       echo "Restoring ${db_gateway} backup"
       psql -U postgres -c "DROP DATABASE ${db_gateway};"
-      psql -U postgres -c "create database ${db_gateway} encoding 'UTF8' template template0;"
-       psql -U postgres -d ${db_gateway} -f /root/gf_server/backup/$folder_name/${db_gateway}.sql
+      psql -U postgres -c "create database ${db_gateway} encoding 'SQL_ASCII' template template0;"
+       psql -U postgres -d ${db_gateway} -f /root/server/backup/$folder_name/${db_gateway}.sql
 
       echo "Restoring ${db_account} backup"
       psql -U postgres -c "DROP DATABASE ${db_account};"
-      psql -U postgres -c "create database ${db_account} encoding 'UTF8' template template0;"
-       psql -U postgres -d ${db_account} -f /root/gf_server/backup/$folder_name/${db_account}.sql
+      psql -U postgres -c "create database ${db_account} encoding 'SQL_ASCII' template template0;"
+       psql -U postgres -d ${db_account} -f /root/server/backup/$folder_name/${db_account}.sql
 
        chmod -R 777 /root
 
        echo "$B BACKUP RESTORATION DONE! > $folder_name $W"
 
     '';
-    srestart = pkgs.writers.writeBashBin "srestart" ''
+    gsrestart = pkgs.writers.writeBashBin "gsrestart" ''
       export LC_ALL=C
 
       sstop
       sleep 2
       sstart
     '';
+    gsstatus = pkgs.writers.writeBashBin "gsstatus" ''
+      export LC_ALL=C
+
+      freemem=$(free -m | grep "Mem:" | awk '{print $4}')
+      echo "${B} SERVER STATUS: ${Y}Memory Available: ${freemem} MB ${W}"
+    '';
+    gshelp = pkgs.writers.writeBashBin "gshelp" ''
+      export LC_ALL=C
+      echo "Game Server 'gs' commands to use"
+      echo "gsstart - Start Sever"
+      echo "gsstop - Stop Server"
+      echo "gsrestart - Restart Server"
+      echo "gsstatus - Show Server Memory Usage"
+      echo "gsbackup - Create DB backup '${db_members}, ${db_account}, ${db_gateway} '"
+      echo "gsrestore - Restore Backup  |create a backup in a folder like <folder name ex: backup_2025_01_17_02_55_10>"
+      echo "gsclear - Clear Server Logs"
+    '';
   in [
-    (writeShellScriptBin "sstart" (builtins.readFile ./start.sh))
-    (writeShellScriptBin "sstop" (builtins.readFile ./stop.sh))
-    (writeShellScriptBin "sclear" (builtins.readFile ./clear.sh))
-    sbackup
-    srestore
-    srestart
+    (writeShellScriptBin "gsstart" (builtins.readFile ./start.sh))
+    (writeShellScriptBin "gsstop" (builtins.readFile ./stop.sh))
+    (writeShellScriptBin "gsclear" (builtins.readFile ./clear.sh))
+    gsbackup
+    gsrestore
+    gsrestart
+    gsstatus
+    gshelp
   ];
 }
