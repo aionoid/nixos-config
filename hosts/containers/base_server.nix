@@ -94,7 +94,14 @@ in {
         config = lib.mkMerge [
           {
             imports = [
-              ./scripts
+              (import ./scripts
+                {
+                  inherit pkgs;
+                  db_account = serverCfg.dbAccountDBName;
+                  db_gateway = serverCfg.dbGatewayDBName;
+                  db_members = serverCfg.dbMembersDBName;
+                  db_password = serverCfg.dbPassword;
+                })
             ];
             boot.isContainer = true;
             networking.hostName = lib.mkDefault name;
