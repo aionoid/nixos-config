@@ -78,6 +78,7 @@
     nxc-start = "sudo nixos-container start";
     nxc-login = "sudo nixos-container root-login";
     nxc-update = "sudo nixos-container update";
+    n = "nvim .";
   };
 
   home.sessionVariables = {

@@ -5,6 +5,17 @@
   ...
 }: let
   cfg = config.gameserver;
+  # Define the type for the inner attribute set
+  patchType = lib.types.attrsOf (lib.types.listOf lib.types.str);
+
+  # Define the top-level option
+  patchOption = lib.mkOption {
+    type = lib.types.attrsOf patchType;
+    default = {};
+    description = ''
+      A set of servers, where each server has `local` and `global` lists of strings.
+    '';
+  };
 in {
   ## OPTIONS
   options.gameserver = lib.mkOption {
@@ -49,6 +60,12 @@ in {
             default = "postgres";
             description = "database username to use";
           };
+          dbEncoding = lib.mkOption {
+            type = lib.types.str;
+            default = "SQL_ASCII";
+            description = "database encoding to use,ex: UTF8, SQL_ASCII";
+          };
+          patchInfo = patchOption;
           dbPassword = lib.mkOption {
             type = lib.types.str;
             default = "password";
@@ -101,6 +118,9 @@ in {
                   db_gateway = serverCfg.dbGatewayDBName;
                   db_members = serverCfg.dbMembersDBName;
                   db_password = serverCfg.dbPassword;
+                  db_encoding = serverCfg.dbEncoding;
+                  server_address = serverCfg.serverAddress;
+                  patch_info = serverCfg.patchInfo;
                 })
             ];
             boot.isContainer = true;

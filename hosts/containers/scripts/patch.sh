@@ -55,10 +55,13 @@ ip_to_hex_local() {
 
 # Main script
 main() {
+    # INFO: servers input and use builtins.toJSON in the nix script
+    # local servers="{\"WorldServer\":{\"global\":[\"0x3E2C27\"]},\"ZoneServer\":{\"global\":[\"0x14D1FA\",\"0x152007\"],\"local\":[\"0x16AE07\"]}}"
     local ip="$1"
-    # local servers="$2"
-    # TODO: change back to input and use builtins.toJSON in the nix script
-    local servers="{\"WorldServer\":{\"global\":[\"0x3E2C27\"]},\"ZoneServer\":{\"global\":[\"0x14D1FA\",\"0x152007\"],\"local\":[\"0x16AE07\"]}}"
+    local servers="$2"
+    local bin_patched="/root/server/_files/bin_patched"
+    local bin_folder="/root/server/_files/bin"
+    mkdir -p $bin_patched
 
     clear
     # Convert the first three octets of the IP to hex
@@ -74,18 +77,20 @@ main() {
     ip_bytes=$(echo "$hex_ip" | sed 's/\(..\)/\\\x\1/g')
     ip_local_bytes=$(echo "$hex_ip_local" | sed 's/\(..\)/\\\x\1/g')
 
-    ##################3
+    ##################
     # Iterate over the servers and their offset types (local/global)
     for server in $(echo "$servers" | jq -r 'keys[]'); do
-        echo "Patching $server..."
+        echo "Coping file $server to $bin_patched folder ..."
+        cp -f "${bin_folder}/${server}" "${bin_patched}/${server}"
 
+        echo "Patching $server..."
         # Patch local offsets
         local local_offsets
         local_offsets=$(echo "$servers" | jq -r ".$server.local[]?")
         for offset in $local_offsets; do
             echo "  Patching LOCAL  IP offset $offset with $hex_ip_local..."
             # echo -n "$hex_local" | xxd -r -p | dd of="$server" bs=1 seek="$((offset))" conv=notrunc
-            echo -en "$ip_bytes" | dd of="${server}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_local_bytes} conv=notrunc >/dev/null 2>&1
+            echo -en "$ip_bytes" | dd of="${bin_patched}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_local_bytes} conv=notrunc >/dev/null 2>&1
         done
 
         # Patch global offsets
@@ -94,7 +99,7 @@ main() {
         for offset in $global_offsets; do
             echo "  Patching GLOBAL IP offset $offset with $hex_ip..."
             # echo -n "$hex_global" | xxd -r -p | dd of="$server" bs=1 seek="$((offset))" conv=notrunc
-            echo -en "$ip_bytes" | dd of="${server}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_bytes} conv=notrunc >/dev/null 2>&1
+            echo -en "$ip_bytes" | dd of="${bin_patched}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_bytes} conv=notrunc >/dev/null 2>&1
         done
     done
     #

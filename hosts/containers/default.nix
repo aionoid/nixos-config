@@ -37,6 +37,19 @@
       webapp = {
         enable = true;
       };
+      patchInfo = {
+        LoginServer = {
+          local = ["14D1FA"];
+          global = ["152007"];
+        };
+        WorldServer = {
+          local = ["14D1FA"];
+          global = ["152007"];
+        };
+        ZoneServer = {
+          global = ["4AEA27"];
+        };
+      };
     };
   };
 }

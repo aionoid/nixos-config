@@ -4,6 +4,9 @@
   db_members,
   db_gateway,
   db_account,
+  db_encoding,
+  server_address,
+  patch_info,
   ...
 }: {
   environment.systemPackages = with pkgs; let
@@ -82,17 +85,17 @@
 
       echo "Restoring ${db_members} backup"
       psql -U postgres -c "DROP DATABASE ${db_members};"
-      psql -U postgres -c "create database ${db_members} encoding 'SQL_ASCII' template template0;"
+      psql -U postgres -c "create database ${db_members} encoding '${db_encoding}' template template0;"
        psql -U postgres -d ${db_members} -f /root/server/backup/$folder_name/${db_members}.sql
 
       echo "Restoring ${db_gateway} backup"
       psql -U postgres -c "DROP DATABASE ${db_gateway};"
-      psql -U postgres -c "create database ${db_gateway} encoding 'SQL_ASCII' template template0;"
+      psql -U postgres -c "create database ${db_gateway} encoding '${db_encoding}' template template0;"
        psql -U postgres -d ${db_gateway} -f /root/server/backup/$folder_name/${db_gateway}.sql
 
       echo "Restoring ${db_account} backup"
       psql -U postgres -c "DROP DATABASE ${db_account};"
-      psql -U postgres -c "create database ${db_account} encoding 'SQL_ASCII' template template0;"
+      psql -U postgres -c "create database ${db_account} encoding '${db_encoding}' template template0;"
        psql -U postgres -d ${db_account} -f /root/server/backup/$folder_name/${db_account}.sql
 
        chmod -R 777 /root
@@ -124,14 +127,21 @@
       echo "gsrestore - Restore Backup  |create a backup in a folder like <folder name ex: backup_2025_01_17_02_55_10>"
       echo "gsclear - Clear Server Logs"
     '';
+    gspatch = pkgs.writers.writeBashBin "gspatch" ''
+      export LC_ALL=C
+      in_patch ${server_address} ${patch_info}
+
+    '';
   in [
     (writeShellScriptBin "gsstart" (builtins.readFile ./start.sh))
     (writeShellScriptBin "gsstop" (builtins.readFile ./stop.sh))
     (writeShellScriptBin "gsclear" (builtins.readFile ./clear.sh))
-    gsbackup
+    (writeShellScriptBin "in_patch" (builtins.readFile ./patch.sh))
     gsrestore
     gsrestart
+    gsbackup
     gsstatus
+    gspatch
     gshelp
   ];
 }
