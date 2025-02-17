@@ -114,7 +114,7 @@
       export LC_ALL=C
 
       freemem=$(free -m | grep "Mem:" | awk '{print $4}')
-      echo "${B} SERVER STATUS: ${Y}Memory Available: ${freemem} MB ${W}"
+      echo "$B SERVER STATUS: $Y Memory Available: $freemem MB $W"
     '';
     gshelp = pkgs.writers.writeBashBin "gshelp" ''
       export LC_ALL=C

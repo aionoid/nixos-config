@@ -13,7 +13,7 @@
     type = lib.types.attrsOf patchType;
     default = {};
     description = ''
-      A set of servers, where each server has `local` and `global` lists of strings.
+      A set of servers, where each server has `local` and `global` lists of offsets.
     '';
   };
 in {

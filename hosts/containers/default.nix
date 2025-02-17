@@ -22,6 +22,7 @@
       webapp = {
         enable = true;
       };
+      patchInfo = {};
     };
 
     gfServer = {
@@ -48,6 +49,15 @@
         };
         ZoneServer = {
           global = ["4AEA27"];
+        };
+        TicketServer = {
+          global = ["11B74B"];
+        };
+        MissionServer = {
+          global = ["4AEA27"];
+        };
+        GatewayServer = {
+          global = ["16AE07"];
         };
       };
     };
