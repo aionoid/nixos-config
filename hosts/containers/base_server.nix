@@ -186,6 +186,7 @@ in {
             };
 
             environment.systemPackages = with pkgs; [
+              jq
               killall
               perl
             ];
