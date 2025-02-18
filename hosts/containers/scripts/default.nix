@@ -129,7 +129,7 @@
     '';
     gspatch = pkgs.writers.writeBashBin "gspatch" ''
       export LC_ALL=C
-      in_patch ${server_address} ${builtins.toJSON patch_info}
+      in_patch "${server_address}" '${builtins.toJSON patch_info}'
 
     '';
   in [

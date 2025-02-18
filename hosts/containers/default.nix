@@ -58,17 +58,17 @@
           global = ["152007"];
         };
         WorldServer = {
-          local = ["14D1FA"];
-          global = ["152007"];
+          local = ["45EC2C"];
+          global = ["4BE759"];
         };
         ZoneServer = {
-          global = ["4AEA27"];
+          global = ["9EE22D"];
         };
         TicketServer = {
           global = ["11B74B"];
         };
         MissionServer = {
-          global = ["4AEA27"];
+          global = ["57F66D"];
         };
         GatewayServer = {
           global = ["16AE07"];

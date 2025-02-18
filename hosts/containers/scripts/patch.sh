@@ -90,7 +90,7 @@ main() {
         for offset in $local_offsets; do
             echo "  Patching LOCAL  IP offset $offset with $hex_ip_local..."
             # echo -n "$hex_local" | xxd -r -p | dd of="$server" bs=1 seek="$((offset))" conv=notrunc
-            echo -en "$ip_bytes" | dd of="${bin_patched}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_local_bytes} conv=notrunc >/dev/null 2>&1
+            echo -en "$ip_local_bytes" | dd of="${bin_patched}/${server}" bs=1 seek=$((0x$offset)) count=${#ip_local_bytes} conv=notrunc >/dev/null 2>&1
         done
 
         # Patch global offsets
