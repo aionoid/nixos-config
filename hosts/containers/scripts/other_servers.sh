@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the server files
-servers=("GatewayServer" "TicketServer" "LoginServer")
+servers=("GatewayServer" "TicketServer" "LoginServer" "MissionServer")
 server_root="/root/server"
 server_files="$server_root/_files"
 
