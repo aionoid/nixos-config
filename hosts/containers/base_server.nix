@@ -122,6 +122,15 @@ in {
                   server_address = serverCfg.serverAddress;
                   patch_info = serverCfg.patchInfo;
                 })
+              #FIXME: import to create setup.ini and config.ini files
+              # (import ./files
+              #   {
+              #     inherit pkgs;
+              #     db_account = serverCfg.dbAccountDBName;
+              #     db_members = serverCfg.dbMembersDBName;
+              #     db_password = serverCfg.dbPassword;
+              #     server_address = serverCfg.serverAddress;
+              #   })
             ];
             boot.isContainer = true;
             networking.hostName = lib.mkDefault name;

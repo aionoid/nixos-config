@@ -1,0 +1,77 @@
+{
+  pkgs,
+  db_password,
+  db_members,
+  db_account,
+  server_address,
+  ...
+}:
+pkgs.writeTextFile {
+  name = "setup.ini";
+  text = ''
+    [Common]
+    GameDBIP=${server_address}
+    GameDB=${db_members}
+    GameDBUser=postgres
+    GameDBPassword=${db_password}
+    Language=X
+    Locate=US
+    LogFile=Test.log
+    AccountDBIP=${server_address}
+    AccountDBName=${db_account}
+    AccountDBUser=postgres
+    AccountDBPW=${db_password}
+    TicketServerIP=${server_address}
+    TicketServerPort=7777
+    BillingGatewayIP=${server_address}
+    BillingGatewayPort=5560
+    PingAlive=0
+    FBMsgUpdate=1
+    Battlefield=1
+    FamilyBattle=1
+    CrossWorldID=1090
+    TerritoryWorldID=1090
+    ColosseumWorldID=1090
+    GreedyIslandWorldID=1090
+    BattleRoyaleWorldID=1090
+    MaintenanceDate=-1
+    RankAward=1
+    NAT=1
+    AchievementGroupCheck=0
+    MemoryCheck=0
+    MemoryCheckTime=120
+    MemoryCheckSavingTime=300
+    MaxCharacterNumber=9
+    LuckyStarOpen=1
+    IsleWorldID=1090
+    BotServer=1
+    XTrap=0
+    BillingGatewayPaymentIP=${server_address}
+    BillingGatewayPaymentPort=5560
+    BillingGatewayWorldIP=${server_address}
+    BillingGatewayWorldPort=5560
+    FightZoneWroldID=1090
+
+    [MissionServer]
+    ReserveDeletedCharDays=30
+    DBAgentSavePeriod=20
+    MissionServerLogLevel=3
+    MissionServerAssert=0
+    GoldRange=10000.50000.100000.200000.500000.1000000.2000000.3000000.10000000.100000000
+    RecordGoldvalue=1000000
+    PlayerRoomWorldID=1090
+    CheckPetToEgg=1
+    ItemMallWeekUpdate=3
+
+    [WorldServer]
+    LoadServerStatus=1
+    WorldServerLogLevel=3
+    WorldServerAssert=0
+    FarmWorldID=1090
+    PlayerRoomWorldID=1090
+
+    [ZoneServer]
+    HeartBeat=1
+    PlayerRoomWorldID=1090
+  '';
+}
