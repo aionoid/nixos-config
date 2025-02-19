@@ -124,7 +124,7 @@
       echo "gsrestart - Restart Server"
       echo "gsstatus - Show Server Memory Usage"
       echo "gsbackup - Create DB backup '${db_members}, ${db_account}, ${db_gateway} '"
-      echo "gsrestore - Restore Backup  |create a backup in a folder like <folder name ex: backup_2025_01_17_02_55_10>"
+      echo "gsrestore - Restore Backup  |create a backup in a folder like <folder name ex: backup_2025_03_04_12_45_00>"
       echo "gsclear - Clear Server Logs"
     '';
     gspatch = pkgs.writers.writeBashBin "gspatch" ''
@@ -132,13 +132,55 @@
       in_patch "${server_address}" '${builtins.toJSON patch_info}'
 
     '';
+    gsinstall = pkgs.writers.writeBashBin "gsinstall" ''
+      #1. create folders
+      cp_servers
+      cp_world_zone 2
+      gateway_server_setup="[Common]
+      AccountDBIP=${server_address}
+      AccountDBName=${db_gateway}
+      AccountDBUser=postgres
+      AccountDBPW=${db_password}
+      BillingGatewayPort=5560
+      HttpServerPort=7878
+      "
+      echo "$gateway_server_setup" > "/root/server/GatewayServer/setup.ini"             # Write the content to the file
+      login_server_setup ="[LoginServer]
+      LoginServerPort=6543"
+      echo "$login_server_setup" > "/root/server/LoginServer/setup.ini"             # Write the content to the file
+      ticket_server_setup = "TicketServerIP=127.0.0.1
+      TicketServerPort=7777"
+      echo "$ticket_server_setup" > "/root/server/TicketServer/setup.ini"             # Write the content to the file
+
+      # Define the content to be written to each file
+      content="# Cross World ID
+      CrossWorldID=__CrossWorldID__
+      # Territory World ID
+      TerritoryWorldID=__TerritoryWorldID__
+      # Colosseum World ID
+      ColosseumWorldID=__ColosseumWorldID__
+      "
+      # Loop to create files config00.ini to config09.ini
+      for i in {0..9}; do
+          filename=$(printf "config%02d.ini" "$i")  # Format the filename with leading zero
+          echo "$content" > "/root/server/$filename"             # Write the content to the file
+          echo "Created $filename"
+      done
+      echo "created config0N.ini files successfully!"
+      #2. copy bin/bin_patched files to there folders
+      #3. create config files in bins folders
+      #4. edit config.ini and setup.ini files
+    '';
   in [
     (writeShellScriptBin "gsstart" (builtins.readFile ./start.sh))
     (writeShellScriptBin "gsstop" (builtins.readFile ./stop.sh))
     (writeShellScriptBin "gsclear" (builtins.readFile ./clear.sh))
     (writeShellScriptBin "in_patch" (builtins.readFile ./patch.sh))
+    (writeShellScriptBin "cp_servers" (builtins.readFile ./other_servers.sh))
+    (writeShellScriptBin "cp_world_zone" (builtins.readFile ./world_zone.sh))
     gsrestore
     gsrestart
+    gsinstall
     gsbackup
     gsstatus
     gspatch
