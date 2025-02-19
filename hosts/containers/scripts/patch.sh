@@ -59,7 +59,7 @@ main() {
     # local servers="{\"WorldServer\":{\"global\":[\"0x3E2C27\"]},\"ZoneServer\":{\"global\":[\"0x14D1FA\",\"0x152007\"],\"local\":[\"0x16AE07\"]}}"
     local ip="$1"
     local servers="$2"
-    local bin_patched="/root/server/_files/bin_patched"
+    local bin_patched="/root/server/_files/patched"
     local bin_folder="/root/server/_files/bin"
     mkdir -p $bin_patched
 

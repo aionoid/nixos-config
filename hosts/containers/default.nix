@@ -75,5 +75,21 @@
         };
       };
     };
+
+    arServer = {
+      enable = true;
+      gameTitle = "Astral Realm";
+      # serverName = "dsoServer";
+      serverFiles = "/home/ovo/Documents/ar_server/";
+      hostAddress = "192.168.1.1";
+      serverAddress = "192.168.1.20";
+      # dbAccountDBName = "ds_account";
+      # dbMembersDBName = "ds_member";
+      # dbGatewayDBName = "ds_gateway";
+      webapp = {
+        enable = true;
+      };
+      patchInfo = {};
+    };
   };
 }

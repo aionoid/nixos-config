@@ -17,26 +17,28 @@ number=$1
 
 # Define the server files
 servers=("WorldServer" "ZoneServer")
+server_root="/root/server"
+server_files="$server_root/_files"
 
 # Loop through each server file
 for server in "${servers[@]}"; do
     # Create folders and files for numbers 1 to the input number
     for i in $(seq 1 "$number"); do
-        destination_folder="${server}10${i}/"
+        destination_folder="$server_root/${server}10${i}/"
         destination_file="${server}10${i}"
 
         # Create the destination folder if it doesn't exist
         mkdir -p "$destination_folder"
 
         # Check if the file exists in the "patched" folder
-        if [ -f "patched/${server}" ]; then
-            echo "Copying ${server} from patched/ to ${destination_folder}"
-            cp "patched/${server}" "${destination_folder}${destination_file}"
+        if [ -f "$server_files/patched/${server}" ]; then
+            echo "Copying ${server} from $server_files/patched/ to ${destination_folder}"
+            cp "$server_files/patched/${server}" "${destination_folder}${destination_file}"
         else
             # If not in patched/, check and copy from bin/
-            if [ -f "bin/${server}" ]; then
-                echo "Copying ${server} from bin/ to ${destination_folder}"
-                cp "bin/${server}" "${destination_folder}${destination_file}"
+            if [ -f "$server_files/bin/${server}" ]; then
+                echo "Copying ${server} from $server_files/bin/ to ${destination_folder}"
+                cp "$server_files/bin/${server}" "${destination_folder}${destination_file}"
             else
                 echo "Error: ${server} not found in patched/ or bin/"
             fi
@@ -64,23 +66,23 @@ CGIKey=0KjaM85BjfqjA"
     done
 
     # Always create folder and file for number 9
-    destination_folder="${server}109/"
+    destination_folder="$server_root/${server}109/"
     destination_file="${server}109"
 
     # Create the destination folder if it doesn't exist
     mkdir -p "$destination_folder"
 
     # Check if the file exists in the "patched" folder
-    if [ -f "patched/${server}" ]; then
-        echo "Copying ${server} from patched/ to ${destination_folder}"
-        cp "patched/${server}" "${destination_folder}${destination_file}"
+    if [ -f "$server_files/patched/${server}" ]; then
+        echo "Copying ${server} from $server_files/patched/ to ${destination_folder}"
+        cp "$server_files/patched/${server}" "${destination_folder}${destination_file}"
     else
         # If not in patched/, check and copy from bin/
-        if [ -f "bin/${server}" ]; then
-            echo "Copying ${server} from bin/ to ${destination_folder}"
-            cp "bin/${server}" "${destination_folder}${destination_file}"
+        if [ -f "$server_files/bin/${server}" ]; then
+            echo "Copying ${server} from $server_files/bin/ to ${destination_folder}"
+            cp "$server_files/bin/${server}" "${destination_folder}${destination_file}"
         else
-            echo "Error: ${server} not found in patched/ or bin/"
+            echo "Error: ${server} not found in $server_files/patched/ or $server_files/bin/"
         fi
     fi
 
