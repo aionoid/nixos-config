@@ -57,8 +57,8 @@ WorldServerID=10${world_server_id}"
 ZoneServerID=10${zone_server_id}
 ZoneServerLogLevel=2
 ZoneServerAssert=0
-GMToolPort=10320
-CGIPort=20060
+GMToolPort=1032$i
+CGIPort=2006$i
 CGIKey=0KjaM85BjfqjA"
             echo "$setup_ini_content" > "${destination_folder}setup.ini"
             echo "Created ${destination_folder}setup.ini"
@@ -97,8 +97,8 @@ WorldServerID=1090"
 ZoneServerID=1091
 ZoneServerLogLevel=2
 ZoneServerAssert=0
-GMToolPort=10920
-CGIPort=20960
+GMToolPort=10329
+CGIPort=20069
 CGIKey=0KjaM85BjfqjA"
         echo "$setup_ini_content" > "${destination_folder}setup.ini"
         echo "Created ${destination_folder}setup.ini"
