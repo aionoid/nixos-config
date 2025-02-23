@@ -50,6 +50,11 @@ in {
             default = "10.233.1.2";
             description = "Game server(container) ip address";
           };
+          numberOfChannels = lib.mkOption {
+            type = lib.types.str;
+            default = "2";
+            description = "how many channels to make of WorldServer/ZoneServer from 1-8";
+          };
           serverFiles = lib.mkOption {
             type = lib.types.str;
             default = "/home/servers/server";
@@ -118,9 +123,11 @@ in {
                   db_gateway = serverCfg.dbGatewayDBName;
                   db_members = serverCfg.dbMembersDBName;
                   db_password = serverCfg.dbPassword;
+                  db_username = serverCfg.dbUserName;
                   db_encoding = serverCfg.dbEncoding;
                   server_address = serverCfg.serverAddress;
                   patch_info = serverCfg.patchInfo;
+                  number_of_ch = serverCfg.numberOfChannels;
                 })
               #FIXME: import to create setup.ini and config.ini files
               # (import ./files

@@ -6,11 +6,14 @@ server_address="$1"
 db_password="$2"
 db_members="$3"
 db_account="$4"
+db_gateway="$5"
+db_username="$6"
 
+#TODO:CHANGE ME LATER db_account in place of db_gateway
 gateway_server_setup="[Common]
 AccountDBIP=${server_address}
-AccountDBName=${db_account}
-AccountDBUser=postgres
+AccountDBName=${db_gateway}
+AccountDBUser=${db_username}
 AccountDBPW=${db_password}
 BillingGatewayPort=5560
 HttpServerPort=7878
@@ -200,14 +203,14 @@ setup_ini="
 [Common]
 GameDBIP=${server_address}
 GameDB=${db_members}
-GameDBUser=postgres
+GameDBUser=${db_username}
 GameDBPassword=${db_password}
 Language=X
 Locate=US
 LogFile=Test.log
 AccountDBIP=${server_address}
 AccountDBName=${db_account}
-AccountDBUser=postgres
+AccountDBUser=${db_username}
 AccountDBPW=${db_password}
 TicketServerIP=${server_address}
 TicketServerPort=7777

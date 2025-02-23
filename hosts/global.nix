@@ -105,6 +105,7 @@
   programs.gnome-disks.enable = true;
 
   # Enable sound with pipewire.
+  # services.pulseaudio.enable = false; #INFO: on new version
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   security.polkit.enable = true;

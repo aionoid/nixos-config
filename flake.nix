@@ -27,8 +27,8 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    ags.url = "github:Aylur/ags";
+    # hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    # ags.url = "github:Aylur/ags";
     # matugen.url = "github:InioX/matugen?ref=v2.2.0";
     # nix-gaming.url = "github:fufexan/nix-gaming";
     # microfetch.url = "github:NotAShelf/microfetch";
@@ -50,6 +50,7 @@
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland-plugins = {
@@ -62,7 +63,7 @@
       inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
     };
     #gBar
-    gBar.url = "github:scorpion-26/gBar";
+    # gBar.url = "github:scorpion-26/gBar";
   };
 
   outputs = {
@@ -90,7 +91,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        inputs.hyprpanel.overlay
+        # inputs.hyprpanel.overlay
       ];
     };
     forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -100,7 +101,7 @@
           inherit system;
           config.allowUnfree = true;
           overlays = [
-            inputs.hyprpanel.overlay
+            # inputs.hyprpanel.overlay
           ];
         }
     );

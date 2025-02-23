@@ -1,5 +1,6 @@
 {
   pkgs,
+  db_username,
   db_password,
   db_members,
   db_gateway,
@@ -7,6 +8,7 @@
   db_encoding,
   server_address,
   patch_info,
+  number_of_ch,
   ...
 }: {
   environment.systemPackages = with pkgs; let
@@ -58,8 +60,8 @@
 
        echo "$P RESTORING BACKUP!$W"
 
-       if [ -z "$2" ]; then
-         echo "Please Use: restore <folder name ex: backup_2025_01_01_08_55_10>"
+       if [ -z "$1" ]; then
+         echo "Please Use: gsrestore_db <folder name ex: backup_2025_01_01_08_55_10>"
          exit 1
        fi
 
@@ -68,7 +70,7 @@
          exit 1
        fi
 
-       if [ "$(find /root/server/backup/"$2" -name "${db_members}.sql" -o -name "${db_gateway}.sql" -o -name "${db_account}.sql" | wc -l)" -ne 3 ]; then
+       if [ "$(find /root/server/backup/"$1" -name "${db_members}.sql" -o -name "${db_gateway}.sql" -o -name "${db_account}.sql" | wc -l)" -ne 3 ]; then
          echo "Some Backup Files '${db_members}.sql, ${db_gateway}.sql, ${db_account}.sql' Not Found!"
          exit 1
        fi
@@ -81,34 +83,34 @@
 
       # service postgresql restart
 
-       folder_name=$2
+       folder_name=$1
 
       echo "Restoring ${db_members} backup"
       psql -U postgres -c "DROP DATABASE ${db_members};"
       psql -U postgres -c "create database ${db_members} encoding '${db_encoding}' template template0;"
-       psql -U postgres -d ${db_members} -f /root/server/backup/$folder_name/${db_members}.sql
+      psql -U postgres -d ${db_members} -f /root/server/backup/$folder_name/${db_members}.sql
 
       echo "Restoring ${db_gateway} backup"
       psql -U postgres -c "DROP DATABASE ${db_gateway};"
       psql -U postgres -c "create database ${db_gateway} encoding '${db_encoding}' template template0;"
-       psql -U postgres -d ${db_gateway} -f /root/server/backup/$folder_name/${db_gateway}.sql
+      psql -U postgres -d ${db_gateway} -f /root/server/backup/$folder_name/${db_gateway}.sql
 
       echo "Restoring ${db_account} backup"
       psql -U postgres -c "DROP DATABASE ${db_account};"
       psql -U postgres -c "create database ${db_account} encoding '${db_encoding}' template template0;"
-       psql -U postgres -d ${db_account} -f /root/server/backup/$folder_name/${db_account}.sql
+      psql -U postgres -d ${db_account} -f /root/server/backup/$folder_name/${db_account}.sql
 
-       chmod -R 777 /root
+      chmod -R 777 /root
 
-       echo "$B BACKUP RESTORATION DONE! > $folder_name $W"
+      echo "$B BACKUP RESTORATION DONE! > $folder_name $W"
 
     '';
     gsrestart = pkgs.writers.writeBashBin "gsrestart" ''
       export LC_ALL=C
 
-      sstop
+      gsstop
       sleep 2
-      sstart
+      gsstart
     '';
     gsstatus = pkgs.writers.writeBashBin "gsstatus" ''
       export LC_ALL=C
@@ -140,18 +142,26 @@
       gspatch
       cp_servers
       # TODO: make world and zone server number as input
-      cp_world_zone 2
+      cp_world_zone ${number_of_ch}
       mk_server_ini_files
       # cp -r "/root/server/_files/Data" "/root/server/"
       rsync -arxz /root/server/_files/Data/ /root/server/Data/
     '';
     mk_server_ini_files = pkgs.writers.writeBashBin "mk_server_ini_files" ''
       export LC_ALL=C
-      mk_ini_files "${server_address}" "${db_password}" "${db_members}" "${db_account}"
+      mk_ini_files "${server_address}" "${db_password}" "${db_members}" "${db_account}" "${db_gateway}" "${db_username}"
+    '';
+    gsstart = pkgs.writers.writeBashBin "gsstart" ''
+      export LC_ALL=C
+      in_start ${number_of_ch}
+    '';
+    gsstop = pkgs.writers.writeBashBin "gsstop" ''
+      export LC_ALL=C
+      in_stop ${number_of_ch}
     '';
   in [
-    (writeShellScriptBin "gsstart" (builtins.readFile ./start.sh))
-    (writeShellScriptBin "gsstop" (builtins.readFile ./stop.sh))
+    (writeShellScriptBin "in_start" (builtins.readFile ./start.sh))
+    (writeShellScriptBin "in_stop" (builtins.readFile ./stop.sh))
     (writeShellScriptBin "gsclear" (builtins.readFile ./clear.sh))
     (writeShellScriptBin "in_patch" (builtins.readFile ./patch.sh))
     (writeShellScriptBin "cp_servers" (builtins.readFile ./other_servers.sh))
@@ -164,6 +174,8 @@
     gsbackup
     gsstatus
     gspatch
+    gsstart
+    gsstop
     gshelp
   ];
 }
