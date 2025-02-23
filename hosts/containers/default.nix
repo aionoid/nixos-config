@@ -132,7 +132,9 @@
       pkgs,
       lib,
       ...
-    }: {
+    }: let
+      cfg = config.services.postgresql;
+    in {
       boot.isContainer = true;
       networking.hostName = lib.mkDefault "postgres9";
       networking.useDHCP = false;
@@ -144,8 +146,8 @@
         package = postgresql_9;
 
         settings = lib.mkForce {
-          hba_file = "${pkgs.writeText "pg_hba.conf" config.services.postgresql.authentication}";
-          ident_file = "${pkgs.writeText "pg_ident.conf" config.services.postgresql.identMap}";
+          hba_file = "${pkgs.writeText "pg_hba.conf" cfg.authentication}";
+          ident_file = "${pkgs.writeText "pg_ident.conf" cfg.identMap}";
           # jit = 'off'
           listen_addresses = "*";
           log_destination = "csvlog";

@@ -142,32 +142,43 @@ in {
             boot.isContainer = true;
             networking.hostName = lib.mkDefault name;
             networking.useDHCP = false;
-            networking.firewall.allowedTCPPorts = [
-              80
-              5432
-              6543
-              5560
-              7777
-              7654
-              ####
-              5517
-              5518
-              5527
-              5528
-              5597
-              5598
-              ####
-              10321
-              10322
-              10329
-              10010
-              10020
-              10090
-              20061
-              20062
-              20069
-            ];
+            networking.firewall.allowedTCPPorts = let
+              # Convert numberOfChannels to an integer
+              numberOfChannels = lib.toInt serverCfg.numberOfChannels;
 
+              # Function to generate dynamic ports
+              generatePorts = i: [
+                (20060 + i) # 2006$i
+                (10000 + (i * 10)) # 100$i0
+                (10320 + i) # 1032$i
+                (5507 + (i * 10)) # 55$i7
+                (5508 + (i * 10)) # 55$i8
+              ];
+
+              # Generate all ports for channels 1 to numberOfChannels
+              dynamicPorts = lib.concatMap generatePorts (lib.range 1 numberOfChannels);
+
+              # Static ports (unchanged)
+              staticPorts = [
+                80
+                5432
+                5560
+                6543
+                7654
+                7777
+                ####
+                5597
+                5598
+                ####
+                10329
+                10090
+                20069
+              ];
+
+              # Combine static and dynamic ports
+              allPorts = staticPorts ++ dynamicPorts;
+            in
+              allPorts;
             services.postgresql = {
               enable = true;
               package = pkgs.postgresql_13;
