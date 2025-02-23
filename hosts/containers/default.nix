@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  nixpkgs2111,
+  ...
+}: {
   imports = [
     ./base_server.nix
   ];
@@ -7,6 +12,7 @@
     (writeShellScriptBin "adminer" "${pkgs.php}/bin/php -S 'localhost:8000' -t ${pkgs.adminer}/ &
     xdg-open 'localhost:8000/adminer.php'")
     (writers.writeBashBin "findIp" ''
+      LC_ALL=C
 
       # bin_folder="$1"
       output_lines="$1"
@@ -86,10 +92,89 @@
       # dbAccountDBName = "ds_account";
       # dbMembersDBName = "ds_member";
       # dbGatewayDBName = "ds_gateway";
+      numberOfChannels = "3";
       webapp = {
         enable = true;
       };
       patchInfo = {};
+    };
+  };
+  ## TODO: COMMENT AFTER DONE CONVERTING FROM POSTGRES_9
+
+  containers.postgres9 = let
+    system = "x86_64-linux";
+    oldPkgs = import (builtins.fetchTarball {
+      # url = "https://github.com/NixOS/nixpkgs/archive/cb3f4892e93588e951b3ac27be1a01f71e5579b0.tar.gz"; # nixos-24.05
+      # sha256 = "sha256:0aiw15hkpisjapi62z47h2l4fpf298h5x27wlcwj0fqk9in27jrr";
+      # url = "https://github.com/NixOS/nixpkgs/archive/fadaef5aedb6b35681248f8c6096083b2efeb284.tar.gz";# nixos-unstable
+      # sha256 = "sha256:1if9fmx0zpx243jgp7vzkh6r5ai7ym8v7779yyq3x14bnqvax4fh";
+      url = "https://github.com/NixOS/nixpkgs/archive/refs/tags/21.11.tar.gz";
+      sha256 = "sha256:162dywda2dvfj1248afxc45kcrg83appjd0nmdb541hl7rnncf02";
+    }) {inherit system;};
+    postgresql_9 = oldPkgs.postgresql_9_6.overrideAttrs (oldAttrs: {
+      withoutJIT = oldPkgs.postgresql_9_6;
+    });
+  in {
+    timeoutStartSec = "5min";
+    privateNetwork = true;
+    hostAddress = "192.168.2.1";
+    localAddress = "192.168.2.44";
+    autoStart = false;
+    hostBridge = null;
+    bindMounts = {
+      "/root/server/" = {
+        hostPath = "/home/ovo/Documents/ar_server";
+        isReadOnly = false;
+      };
+    };
+    config = {
+      config,
+      pkgs,
+      lib,
+      ...
+    }: {
+      boot.isContainer = true;
+      networking.hostName = lib.mkDefault "postgres9";
+      networking.useDHCP = false;
+      networking.firewall.allowedTCPPorts = [
+        5432
+      ];
+      services.postgresql = {
+        enable = true;
+        package = postgresql_9;
+
+        settings = lib.mkForce {
+          hba_file = "${pkgs.writeText "pg_hba.conf" config.services.postgresql.authentication}";
+          ident_file = "${pkgs.writeText "pg_ident.conf" config.services.postgresql.identMap}";
+          # jit = 'off'
+          listen_addresses = "*";
+          log_destination = "csvlog";
+          log_directory = "pg_log";
+          log_line_prefix = "[%p] ";
+          logging_collector = "on";
+          port = 5432;
+        };
+
+        # set postgres user password
+        initialScript = pkgs.writeText "init-sql-script" ''
+          alter user postgres with password 'password';
+        '';
+
+        authentication = lib.mkForce ''
+          # Generated file; do not edit!
+          # TYPE  DATABASE        USER            ADDRESS                 METHOD
+          local   all             all                                     trust
+          host    all             all             0.0.0.0/0               md5
+          host    all             all               ::/0                  md5
+          # Allow replication connections from localhost, by a user with the
+          # replication privilege.
+          local   replication     all                                     trust
+          host    replication     all             0.0.0.0/0               md5
+          host    replication     all             ::0/0                   md5
+        '';
+      };
+
+      system.stateVersion = "21.11";
     };
   };
 }
