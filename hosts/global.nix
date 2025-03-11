@@ -72,6 +72,8 @@
     ntfsprogs
     #scrounge-ntfs
     #ntfs2btrfs
+    #MTP fs
+    jmtpfs
   ];
 
   # Enable networking
@@ -100,6 +102,9 @@
   # Enable disks mount with Udisk
   services.udisks2.enable = true;
   # services.udisks2.mountOnMedia = true;
+
+  # enable MTP devices
+  services.gvfs.enable = true;
 
   # Enable Gnome Disks
   programs.gnome-disks.enable = true;
