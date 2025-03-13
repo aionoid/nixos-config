@@ -38,8 +38,8 @@
     monospace = {
       # package = pkgs.nerdfonts.override {fonts = ["Hermit"];};
       # name = "Hermit Nerd Font Mono";
-      package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-      # package = pkgs.nerd-fonts.jetbrains-mono; #INFO: on new version
+      # package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+      package = pkgs.nerd-fonts.jetbrains-mono; #INFO: on new version
       name = "JetBrainsMono Nerd Font Mono";
     };
 

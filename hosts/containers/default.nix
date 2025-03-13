@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  nixpkgs2111,
+  inputs,
   ...
 }: {
   imports = [
@@ -103,18 +103,32 @@
 
   containers.postgres9 = let
     system = "x86_64-linux";
-    oldPkgs = import (builtins.fetchTarball {
-      # url = "https://github.com/NixOS/nixpkgs/archive/cb3f4892e93588e951b3ac27be1a01f71e5579b0.tar.gz"; # nixos-24.05
-      # sha256 = "sha256:0aiw15hkpisjapi62z47h2l4fpf298h5x27wlcwj0fqk9in27jrr";
-      # url = "https://github.com/NixOS/nixpkgs/archive/fadaef5aedb6b35681248f8c6096083b2efeb284.tar.gz";# nixos-unstable
-      # sha256 = "sha256:1if9fmx0zpx243jgp7vzkh6r5ai7ym8v7779yyq3x14bnqvax4fh";
-      url = "https://github.com/NixOS/nixpkgs/archive/refs/tags/21.11.tar.gz";
-      sha256 = "sha256:162dywda2dvfj1248afxc45kcrg83appjd0nmdb541hl7rnncf02";
-    }) {inherit system;};
-    postgresql_9 = oldPkgs.postgresql_9_6.overrideAttrs (oldAttrs: {
-      withoutJIT = oldPkgs.postgresql_9_6;
-    });
+    config = {};
+    overlays = [
+      (final: prev: {
+        postgresql_9_6 = prev.postgresql_9_6.overrideAttrs (oldAttrs: {
+          withoutJIT = prev.postgresql_9_6;
+        });
+      })
+    ];
+    oldPkgs =
+      import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/cb3f4892e93588e951b3ac27be1a01f71e5579b0.tar.gz"; # nixos-24.05
+        sha256 = "sha256:0aiw15hkpisjapi62z47h2l4fpf298h5x27wlcwj0fqk9in27jrr";
+        # url = "https://github.com/NixOS/nixpkgs/archive/fadaef5aedb6b35681248f8c6096083b2efeb284.tar.gz";# nixos-unstable
+        # sha256 = "sha256:1if9fmx0zpx243jgp7vzkh6r5ai7ym8v7779yyq3x14bnqvax4fh";
+        # url = "https://github.com/NixOS/nixpkgs/archive/refs/tags/21.11.tar.gz";
+        # sha256 = "sha256:162dywda2dvfj1248afxc45kcrg83appjd0nmdb541hl7rnncf02";
+      }) {
+        inherit system;
+        inherit overlays;
+        inherit config;
+      };
+    # postgresql_9 = oldPkgs.postgresql_9_6.overrideAttrs (oldAttrs: {
+    #   withoutJIT = oldPkgs.postgresql_9_6
+    # });
   in {
+    nixpkgs = inputs.nixpkgs-containers.outPath;
     timeoutStartSec = "5min";
     privateNetwork = true;
     hostAddress = "192.168.2.1";
@@ -143,12 +157,12 @@
       ];
       services.postgresql = {
         enable = true;
-        package = postgresql_9;
+        package = oldPkgs.postgresql_9_6;
 
         settings = lib.mkForce {
           hba_file = "${pkgs.writeText "pg_hba.conf" cfg.authentication}";
           ident_file = "${pkgs.writeText "pg_ident.conf" cfg.identMap}";
-          # jit = 'off'
+          # jit = 'off';
           listen_addresses = "*";
           log_destination = "csvlog";
           log_directory = "pg_log";
