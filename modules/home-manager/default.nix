@@ -16,7 +16,7 @@
     ./hyprland.nix
     ./waybar.nix
     ./mako.nix
-    ./ags.nix
+    # ./ags.nix
     ./ranger.nix
     ./hypridle.nix
     ./hyprlock.nix
