@@ -116,7 +116,7 @@
       ## "format-critical"= "{temperatureC}°C ";
       "format" = "{temperatureC}°C ";
     };
-    "cpu" = with config.lib.stylix.scheme; {
+    "cpu" = with config.lib.stylix.colors; {
       "interval" = 1;
       "format" = "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15} 󰍛 ";
       "format-icons" = [
@@ -333,7 +333,7 @@ in {
       // modules;
   };
 
-  programs.waybar.style = with config.lib.stylix.scheme;
+  programs.waybar.style = with config.lib.stylix.colors;
   /*
   css
   */

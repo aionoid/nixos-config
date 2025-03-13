@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  programs.hyprlock = with config.lib.stylix.scheme; let
+  programs.hyprlock = with config.lib.stylix.colors; let
     fontColor = "rgb(${base0B-rgb-r}, ${base0B-rgb-g}, ${base0B-rgb-b})";
     outColor = fontColor;
     backColor = "rgb(${base01-rgb-r}, ${base01-rgb-g}, ${base01-rgb-b})";

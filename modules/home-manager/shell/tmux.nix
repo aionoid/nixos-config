@@ -109,51 +109,51 @@
       #THEME
       {
         plugin = tmuxPlugins.catppuccin;
-        extraConfig =
-          /*
-          tmux
-          */
+        extraConfig = with config.lib.stylix.colors;
+        /*
+        tmux
+        */
           ''
 
-            # set -ogp @thm_bg "#${config.lib.stylix.scheme.base00}"          # base00 base
-            # set -ogp @thm_surface_1 "#${config.lib.stylix.scheme.base03}"   # base03 surface1
-            # set -ogp @thm_fg "#${config.lib.stylix.scheme.base05}"          # base05 text
-            # set -ogp @thm_mauve "#${config.lib.stylix.scheme.base0E}"       # base0E mauve
-            # set -ogp @thm_crust "#${config.lib.stylix.scheme.base0F}"       # base -?
+            # set -ogp @thm_bg "#${base00}"          # base00 base
+            # set -ogp @thm_surface_1 "#${base03}"   # base03 surface1
+            # set -ogp @thm_fg "#${base05}"          # base05 text
+            # set -ogp @thm_mauve "#${base0E}"       # base0E mauve
+            # set -ogp @thm_crust "#${base0F}"       # base -?
 
             set -Ugq @thm_bg
             set -Ugq @thm_fg
-            set -ogq @thm_bg "#${config.lib.stylix.scheme.base08}"
-            set -ogq @thm_fg "#${config.lib.stylix.scheme.base08}"
+            set -ogq @thm_bg "#${base08}"
+            set -ogq @thm_fg "#${base08}"
 
             # Colors
-            set -ogq @thm_rosewater "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_flamingo "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_rosewater "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_pink "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_mauve "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_red "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_maroon "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_peach "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_yellow "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_green "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_teal "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_sky "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_sapphire "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_blue "#${config.lib.stylix.scheme.base00}"
-            set -ogq @thm_lavender "#${config.lib.stylix.scheme.base00}"
+            set -ogq @thm_rosewater "#${base00}"
+            set -ogq @thm_flamingo "#${base00}"
+            set -ogq @thm_rosewater "#${base00}"
+            set -ogq @thm_pink "#${base00}"
+            set -ogq @thm_mauve "#${base00}"
+            set -ogq @thm_red "#${base00}"
+            set -ogq @thm_maroon "#${base00}"
+            set -ogq @thm_peach "#${base00}"
+            set -ogq @thm_yellow "#${base00}"
+            set -ogq @thm_green "#${base00}"
+            set -ogq @thm_teal "#${base00}"
+            set -ogq @thm_sky "#${base00}"
+            set -ogq @thm_sapphire "#${base00}"
+            set -ogq @thm_blue "#${base00}"
+            set -ogq @thm_lavender "#${base00}"
 
             # Surfaces and overlays
-            set -ogq @thm_subtext_1 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_subtext_0 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_overlay_2 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_overlay_1 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_overlay_0 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_surface_2 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_surface_1 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_surface_0 "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_mantle "#${config.lib.stylix.scheme.base03}"
-            set -ogq @thm_crust "#${config.lib.stylix.scheme.base03}"
+            set -ogq @thm_subtext_1 "#${base03}"
+            set -ogq @thm_subtext_0 "#${base03}"
+            set -ogq @thm_overlay_2 "#${base03}"
+            set -ogq @thm_overlay_1 "#${base03}"
+            set -ogq @thm_overlay_0 "#${base03}"
+            set -ogq @thm_surface_2 "#${base03}"
+            set -ogq @thm_surface_1 "#${base03}"
+            set -ogq @thm_surface_0 "#${base03}"
+            set -ogq @thm_mantle "#${base03}"
+            set -ogq @thm_crust "#${base03}"
 
 
             # set -g @catppuccin_window_status_style "rounded"

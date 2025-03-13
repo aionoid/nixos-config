@@ -26,7 +26,7 @@
     };
     ".config/rofi/shared/colors.rasi" = {
       # text = builtins.readFile ./shared/colors.rasi;
-      text = with config.lib.stylix.scheme;
+      text = with config.lib.stylix.colors;
       /*
       css
       */
