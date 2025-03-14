@@ -6,6 +6,7 @@
   imports = [
     inputs.stylix.homeManagerModules.stylix
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.hyprland.homeManagerModules.default
     ./nixvim
     ./shell
     ./mpd.nix
