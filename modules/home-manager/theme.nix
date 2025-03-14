@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  stylix,
   ...
 }: {
   imports = [
@@ -22,6 +23,14 @@
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
+  };
+
+  stylix.targets.firefox = {
+    enable = true;
+    profileNames = [
+      "default"
+      "work"
+    ];
   };
 
   # qt = {

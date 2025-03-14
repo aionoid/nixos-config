@@ -1,19 +1,10 @@
 {
   description = "MY nix config";
 
-  # nixConfig = {
-  #   extra-substituters = ["https://hyprland.cachix.org"];
-  #   extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  # };
-
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
@@ -28,25 +19,15 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
-    # hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    # ags.url = "github:Aylur/ags";
-    # matugen.url = "github:InioX/matugen?ref=v2.2.0";
-    # nix-gaming.url = "github:fufexan/nix-gaming";
-    # microfetch.url = "github:NotAShelf/microfetch";
-
     # auto ricing
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    #TODO: user nixvim direct config
-    # nixvim like lazyvim profile
-    # nixvim.url = "github:dc-tec/nixvim";
+    # nixvim
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     # hyprland
-    # hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -63,8 +44,6 @@
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
     };
-    #gBar
-    # gBar.url = "github:scorpion-26/gBar";
   };
 
   outputs = {
@@ -96,16 +75,16 @@
       ];
     };
     forAllSystems = nixpkgs.lib.genAttrs systems;
-    pkgsFor = nixpkgs.lib.genAttrs (import systems) (
-      system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          overlays = [
-            # inputs.hyprpanel.overlay
-          ];
-        }
-    );
+    # pkgsFor = nixpkgs.lib.genAttrs (import systems) (
+    #   system:
+    #     import nixpkgs {
+    #       inherit system;
+    #       config.allowUnfree = true;
+    #       overlays = [
+    #         # inputs.hyprpanel.overlay
+    #       ];
+    #     }
+    # );
   in {
     # inherit lib;
     # Your custom packages
@@ -127,24 +106,16 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      # FIXME replace with your hostname
-      # your-hostname = nixpkgs.lib.nixosSystem {
-      # # Main desktop
-      #   specialArgs = {inherit inputs outputs;};
-      #   modules = [
-      #     # > Our main nixos configuration file <
-      #     ./nixos/configuration.nix
-      #   ];
-      #   };
+      # HOME Desktop
       home = nixpkgs.lib.nixosSystem {
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
-          inherit inputs outputs pkgs;
+          inherit inputs outputs;
         };
       };
-      # Secondary desktop
+      # WORK Desktop
       work = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/work self.nixosModules ./cachix.nix];
+        modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {
           inherit inputs outputs;
         };
@@ -154,38 +125,26 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # FIXME replace with your username@hostname
-      # "your-username@your-hostname" = home-manager.lib.homeManagerConfiguration {
-      #   pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-      #   extraSpecialArgs = {inherit inputs outputs;};
-      #   modules = [
-      #     # > Our main home-manager configuration file <
-      #     ./home-manager/home.nix
-      #   ];
-      # };
-
+      # HOME Desktop
       "ovo@home" = home-manager.lib.homeManagerConfiguration {
         modules = [
           ./home-manager/ovo.nix
           ./home-manager/home.nix
           self.homeManagerModules
         ];
-        # pkgs = pkgsFor.x86_64-linux;
-        # pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs outputs;
         };
       };
 
-      # Main desktop
+      # WORK desktop
       "antiroot@work" = home-manager.lib.homeManagerConfiguration {
         modules = [
           ./home-manager/antiroot.nix
           ./home-manager/home.nix
           self.homeManagerModules
         ];
-        # pkgs = pkgsFor.x86_64-linux;
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {
           inherit inputs outputs;

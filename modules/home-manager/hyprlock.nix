@@ -1,5 +1,5 @@
 {
-  pkgs,
+  lib,
   config,
   ...
 }: {
@@ -11,7 +11,7 @@
   in {
     enable = true;
     settings = {
-      background = [
+      background = lib.mkDefault [
         {
           # monitor =
           # path = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/vnc-d.png"; # only png supported for now;
@@ -27,7 +27,7 @@
           vibrancy_darkness = 0.0;
         }
       ];
-      input-field = [
+      input-field = lib.mkDefault [
         {
           #monitor =
           size = " 250, 50";

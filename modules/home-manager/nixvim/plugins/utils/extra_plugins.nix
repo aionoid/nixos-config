@@ -1,7 +1,7 @@
 {...}: {
   programs.nixvim = {pkgs, ...}: {
     plugins.web-devicons.enable = true;
-    plugins.nvim-colorizer.enable = true;
+    plugins.colorizer.enable = true;
     # plugins.mini.enable = true;
     # extraPlugins = with pkgs.vimPlugins; [
     #   nvim-web-devicons

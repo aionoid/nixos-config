@@ -57,7 +57,7 @@
         name = "ovo";
         isDefault = true;
 
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
           # bitwarden
           darkreader
@@ -146,7 +146,7 @@
         id = 1;
         name = "antiroot";
 
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
           # bitwarden
           darkreader
