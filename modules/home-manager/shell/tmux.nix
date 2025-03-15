@@ -121,39 +121,40 @@
             # set -ogp @thm_mauve "#${base0E}"       # base0E mauve
             # set -ogp @thm_crust "#${base0F}"       # base -?
 
-            set -Ugq @thm_bg
-            set -Ugq @thm_fg
-            set -ogq @thm_bg "#${base08}"
-            set -ogq @thm_fg "#${base08}"
-
-            # Colors
-            set -ogq @thm_rosewater "#${base00}"
-            set -ogq @thm_flamingo "#${base00}"
-            set -ogq @thm_rosewater "#${base00}"
-            set -ogq @thm_pink "#${base00}"
-            set -ogq @thm_mauve "#${base00}"
-            set -ogq @thm_red "#${base00}"
-            set -ogq @thm_maroon "#${base00}"
-            set -ogq @thm_peach "#${base00}"
-            set -ogq @thm_yellow "#${base00}"
-            set -ogq @thm_green "#${base00}"
-            set -ogq @thm_teal "#${base00}"
-            set -ogq @thm_sky "#${base00}"
-            set -ogq @thm_sapphire "#${base00}"
-            set -ogq @thm_blue "#${base00}"
-            set -ogq @thm_lavender "#${base00}"
-
-            # Surfaces and overlays
-            set -ogq @thm_subtext_1 "#${base03}"
-            set -ogq @thm_subtext_0 "#${base03}"
-            set -ogq @thm_overlay_2 "#${base03}"
-            set -ogq @thm_overlay_1 "#${base03}"
-            set -ogq @thm_overlay_0 "#${base03}"
-            set -ogq @thm_surface_2 "#${base03}"
-            set -ogq @thm_surface_1 "#${base03}"
-            set -ogq @thm_surface_0 "#${base03}"
-            set -ogq @thm_mantle "#${base03}"
-            set -ogq @thm_crust "#${base03}"
+            #TODO: Override catppuccin theme colors
+            # set -Ugq @thm_bg
+            # set -Ugq @thm_fg
+            # set -ogq @thm_bg "#${base08}"
+            # set -ogq @thm_fg "#${base08}"
+            #
+            # # Colors
+            # set -ogq @thm_rosewater "#${base00}"
+            # set -ogq @thm_flamingo "#${base00}"
+            # set -ogq @thm_rosewater "#${base00}"
+            # set -ogq @thm_pink "#${base00}"
+            # set -ogq @thm_mauve "#${base00}"
+            # set -ogq @thm_red "#${base00}"
+            # set -ogq @thm_maroon "#${base00}"
+            # set -ogq @thm_peach "#${base00}"
+            # set -ogq @thm_yellow "#${base00}"
+            # set -ogq @thm_green "#${base00}"
+            # set -ogq @thm_teal "#${base00}"
+            # set -ogq @thm_sky "#${base00}"
+            # set -ogq @thm_sapphire "#${base00}"
+            # set -ogq @thm_blue "#${base00}"
+            # set -ogq @thm_lavender "#${base00}"
+            #
+            # # Surfaces and overlays
+            # set -ogq @thm_subtext_1 "#${base03}"
+            # set -ogq @thm_subtext_0 "#${base03}"
+            # set -ogq @thm_overlay_2 "#${base03}"
+            # set -ogq @thm_overlay_1 "#${base03}"
+            # set -ogq @thm_overlay_0 "#${base03}"
+            # set -ogq @thm_surface_2 "#${base03}"
+            # set -ogq @thm_surface_1 "#${base03}"
+            # set -ogq @thm_surface_0 "#${base03}"
+            # set -ogq @thm_mantle "#${base03}"
+            # set -ogq @thm_crust "#${base03}"
 
 
             # set -g @catppuccin_window_status_style "rounded"
@@ -164,24 +165,34 @@
             #
             # set -g @catppuccin_window_current_fill "number"
             # set -g @catppuccin_window_current_text "#W"
+            set -g @catppuccin_flavor "mocha"
+            set -g @catppuccin_window_status_style "rounded"
 
-            set -g @catppuccin_window_left_separator  " "
-            set -g @catppuccin_window_right_separator ""
-            set -g @catppuccin_status_left_separator  " "
-            set -g @catppuccin_status_right_separator ""
-            set -g @catppuccin_status_fill "icon"
-            set -g @catppuccin_status_connect_separator "no"
+            # Make the status line pretty and add some modules
+            set -g status-right-length 100
+            set -g status-left-length 100
+            set -g status-left ""
+            set -g status-right "#{E:@catppuccin_status_application}"
+            set -agF status-right "#{E:@catppuccin_status_cpu}"
+            set -ag status-right "#{E:@catppuccin_status_session}"
+            set -ag status-right "#{E:@catppuccin_status_uptime}"
+            # set -agF status-right "#{E:@catppuccin_status_battery}"
+            # set -g  status-right "#{E:@catppuccin_status_directory}"
+            set -ag status-right "#{E:@catppuccin_status_user}"
+            set -ag status-right "#{E:@catppuccin_status_host}"
 
-            set -g @catppuccin_directory_text "#{pane_current_path}"
+            # set -g @catppuccin_window_left_separator  " "
+            # set -g @catppuccin_window_right_separator ""
+            # set -g @catppuccin_status_left_separator  " "
+            # set -g @catppuccin_status_right_separator ""
+            # set -g @catppuccin_status_fill "icon"
+            # set -g @catppuccin_status_connect_separator "no"
+            #
+            # set -g @catppuccin_directory_text "#{pane_current_path}"
 
             # Run catppuccin plugin manually or through tpm
             # ...
 
-            set -g status-left ""
-            set -g  status-right "#{E:@catppuccin_status_directory}"
-            set -ag status-right "#{E:@catppuccin_status_user}"
-            set -ag status-right "#{E:@catppuccin_status_host}"
-            set -ag status-right "#{E:@catppuccin_status_session}"
           '';
       }
       # tmuxPlugins.catppuccin
@@ -191,6 +202,7 @@
       # tmuxPlugins.dracula
       # tmuxPlugins.tokyo-night-tmux
       # tmuxPlugins.power-theme
+      tmuxPlugins.cpu
       {
         plugin = tmuxPlugins.tmux-floax;
         extraConfig = ''
