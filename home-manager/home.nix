@@ -40,6 +40,7 @@
     gparted
     # pdf
     # editor
+    sysstat
     gedit
     neovim-gtk
   ];

@@ -90,7 +90,7 @@
 
     plugins = with pkgs; [
       tmuxPlugins.yank
-      # tmuxPlugins.cpu
+      tmuxPlugins.cpu
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
@@ -122,49 +122,50 @@
             # set -ogp @thm_crust "#${base0F}"       # base -?
 
             #TODO: Override catppuccin theme colors
-            # set -Ugq @thm_bg
-            # set -Ugq @thm_fg
-            # set -ogq @thm_bg "#${base08}"
-            # set -ogq @thm_fg "#${base08}"
-            #
-            # # Colors
-            # set -ogq @thm_rosewater "#${base00}"
-            # set -ogq @thm_flamingo "#${base00}"
-            # set -ogq @thm_rosewater "#${base00}"
-            # set -ogq @thm_pink "#${base00}"
-            # set -ogq @thm_mauve "#${base00}"
-            # set -ogq @thm_red "#${base00}"
-            # set -ogq @thm_maroon "#${base00}"
-            # set -ogq @thm_peach "#${base00}"
-            # set -ogq @thm_yellow "#${base00}"
-            # set -ogq @thm_green "#${base00}"
-            # set -ogq @thm_teal "#${base00}"
-            # set -ogq @thm_sky "#${base00}"
-            # set -ogq @thm_sapphire "#${base00}"
-            # set -ogq @thm_blue "#${base00}"
-            # set -ogq @thm_lavender "#${base00}"
-            #
-            # # Surfaces and overlays
-            # set -ogq @thm_subtext_1 "#${base03}"
-            # set -ogq @thm_subtext_0 "#${base03}"
-            # set -ogq @thm_overlay_2 "#${base03}"
-            # set -ogq @thm_overlay_1 "#${base03}"
-            # set -ogq @thm_overlay_0 "#${base03}"
-            # set -ogq @thm_surface_2 "#${base03}"
-            # set -ogq @thm_surface_1 "#${base03}"
-            # set -ogq @thm_surface_0 "#${base03}"
-            # set -ogq @thm_mantle "#${base03}"
-            # set -ogq @thm_crust "#${base03}"
+            set -Ugq @thm_bg
+            set -Ugq @thm_fg
+            set -ogq @thm_bg "#${base00}"
+            set -ogq @thm_fg "#${base05}"
+
+            # Colors
+            set -ogq @thm_rosewater "#${base06}"
+            set -ogq @thm_flamingo "#${base0F}"
+            set -ogq @thm_rosewater "#${base06}"
+            set -ogq @thm_pink "#${base0E}"
+            set -ogq @thm_mauve "#${base0E}"
+            set -ogq @thm_red "#${base08}"
+            set -ogq @thm_maroon "#${base08}"
+            set -ogq @thm_peach "#${base09}"
+            set -ogq @thm_yellow "#${base0A}"
+            set -ogq @thm_green "#${base0B}"
+            set -ogq @thm_teal "#${base0C}"
+            set -ogq @thm_sky "#${base0C}"
+            set -ogq @thm_sapphire "#${base0D}"
+            set -ogq @thm_blue "#${base0D}"
+            set -ogq @thm_lavender "#${base07}"
+
+            # Surfaces and overlays
+            set -ogq @thm_subtext_1 "#${base05}"
+            set -ogq @thm_subtext_0 "#${base05}"
+            set -ogq @thm_overlay_2 "#${base04}"
+            set -ogq @thm_overlay_1 "#${base03}"
+            set -ogq @thm_overlay_0 "#${base02}"
+            set -ogq @thm_surface_2 "#${base04}"
+            set -ogq @thm_surface_1 "#${base03}"
+            set -ogq @thm_surface_0 "#${base02}"
+            set -ogq @thm_mantle "#${base01}"
+            set -ogq @thm_crust "#${base00}"
 
 
-            # set -g @catppuccin_window_status_style "rounded"
-            # set -g @catppuccin_window_number_position "right"
-            #
-            # set -g @catppuccin_window_default_fill "number"
-            # set -g @catppuccin_window_default_text "#W"
-            #
-            # set -g @catppuccin_window_current_fill "number"
-            # set -g @catppuccin_window_current_text "#W"
+            set -g @catppuccin_window_status_style "rounded"
+            set -g @catppuccin_window_number_position "right"
+
+            set -g @catppuccin_window_default_fill "number"
+            set -g @catppuccin_window_default_text "#W"
+
+            set -g @catppuccin_window_current_fill "number"
+            set -g @catppuccin_window_current_text "#W"
+
             set -g @catppuccin_flavor "mocha"
             set -g @catppuccin_window_status_style "rounded"
 
@@ -202,7 +203,6 @@
       # tmuxPlugins.dracula
       # tmuxPlugins.tokyo-night-tmux
       # tmuxPlugins.power-theme
-      tmuxPlugins.cpu
       {
         plugin = tmuxPlugins.tmux-floax;
         extraConfig = ''
