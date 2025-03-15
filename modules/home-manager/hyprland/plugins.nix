@@ -5,7 +5,7 @@
 }: {
   wayland.windowManager.hyprland = {
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+      # inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       # inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
     ];

@@ -44,17 +44,19 @@ in {
         active_opacity = 0.9;
         inactive_opacity = 0.6;
         fullscreen_opacity = 1.0;
-        drop_shadow = true;
-        shadow_range = 10;
-        shadow_render_power = 3;
         # :FIX: stylix theme :mkDefault
 
-        # "col.shadow" = active_shadow_col;
-        "col.shadow_inactive" = inactive_shadow_col;
-        # shadow_offset = [0, 0]
-        shadow_scale = 1.0;
         dim_inactive = false;
         dim_strength = 0.5;
+        shadow = {
+          enabled = true;
+          range = 10;
+          render_power = 3;
+          # color = active_shadow_col;
+          color_inactive = inactive_shadow_col;
+          # offset = "[0, 0]";
+          scale = 1.0;
+        };
         blur = {
           enabled = true;
           passes = 3;

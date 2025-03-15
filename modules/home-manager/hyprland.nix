@@ -56,15 +56,12 @@
         preserve_split = false;
         special_scale_factor = 0.8;
         split_width_multiplier = 1.0;
-        no_gaps_when_only = false;
         use_active_for_splits = true;
       };
       # #-- Layout : Master --------------------------
       master = {
         special_scale_factor = 0.8;
-        # new_is_master = true     ;
         new_on_top = false;
-        no_gaps_when_only = false;
         orientation = "left";
         inherit_fullscreen = true;
       };
