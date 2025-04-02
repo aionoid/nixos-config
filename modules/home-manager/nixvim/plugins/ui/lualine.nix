@@ -12,7 +12,8 @@
           disabledFiletypes = {
             statusline = ["startup" "alpha"];
           };
-          theme = "catppuccin";
+          #INFO: set theme for lua line?
+          # theme = "catppuccin";
         };
         sections = {
           lualine_a = [
