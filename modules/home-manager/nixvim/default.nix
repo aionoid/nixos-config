@@ -12,6 +12,7 @@
     # Completion
     ./plugins/cmp/cmp.nix
     #./plugins/cmp/cmp-copilot.nix
+    ./plugins/cmp/cmp-codecompanion.nix
     ./plugins/cmp/lspkind.nix
     ./plugins/cmp/autopairs.nix
     ./plugins/cmp/schemastore.nix
@@ -48,7 +49,8 @@
     ./plugins/utils/whichkey.nix
     ./plugins/utils/extra_plugins.nix
     ./plugins/utils/mini.nix
-    ./plugins/utils/markdown-preview.nix
+    # ./plugins/utils/markdown-preview.nix
+    ./plugins/utils/markview.nix
     ./plugins/utils/obsidian.nix
     ./plugins/utils/toggleterm.nix
   ];
