@@ -2,7 +2,7 @@
   programs.nixvim = {
     colorschemes = {
       gruvbox = {
-        enable = true;
+        enable = false;
       };
       base16 = {
         enable = false;

@@ -7,37 +7,32 @@
           preview = {
             enable = true;
             icon_provider = "devicons";
-            filetypes = ["markdown" "codecompanion" "CodeCompanion"];
-            ignore_buftypes = [];
-
+            filetypes = ["markdown" "codecompanion"];
+            ignore_buftypes = ["nofile"];
+            # modes = true;
+            linewise_hybrid_mode = true;
             hybrid_modes = [
               "i"
               "r"
             ];
             modes = [
+              "no"
               "n"
-              "x"
+              "t"
+              "c"
             ];
           };
         };
       };
     };
 
-    # plugins.telescope.keymaps = {
-    #     "<leader>m" = {
-    #       action = "buffers";
-    #       options = {
-    #         desc = "+buffer";
-    #       };
-    #     };
-    # };
     keymaps = [
       {
         mode = "n";
         key = "<leader>m";
         action = " ";
         options = {
-          desc = "Markdown";
+          desc = "Markdown <?>";
         };
       }
       {
