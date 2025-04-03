@@ -9,5 +9,7 @@
     ./googlefonts.nix
     ./theme.nix
     ./gaming.nix
+    ./ollama.nix
+    # ./open-webui.nix
   ];
 }
