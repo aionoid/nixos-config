@@ -41,11 +41,11 @@
       require("codecompanion").setup({
        strategies = {
                    chat = {
-                     adapter = "deepseek8b",
+                     adapter = "gemma3",
                      -- adapter = "domo",
                    },
                    inline = {
-                     adapter = "deepseek8b",
+                     adapter = "gemma3",
                      -- adapter = "domo",
                    },
                  },
@@ -61,6 +61,16 @@
                  schema = {
                    model = {
                      default = "deepseek-r1:8b",
+                   },
+                 },
+               })
+             end,
+             gemma3= function()
+               return require("codecompanion.adapters").extend("ollama", {
+                 name = "gemma3", -- Give this adapter a different name to differentiate it from the default ollama adapter
+                 schema = {
+                   model = {
+                     default = "gemma3:4b",
                    },
                  },
                })
