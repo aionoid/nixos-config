@@ -56,6 +56,7 @@
 
   environment.systemPackages = with pkgs; [
     git
+    wget
     nodePackages.gitmoji-cli
     home-manager
     # inputs.nixvim.packages.x86_64-linux.default
