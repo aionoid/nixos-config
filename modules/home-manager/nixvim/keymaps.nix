@@ -224,6 +224,48 @@
       }
       {
         mode = "n";
+        key = "<leader><tab>";
+        action = "";
+        options = {desc = "Tabs <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>w";
+        action = "";
+        options = {desc = "Windows <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>u";
+        action = "";
+        options = {desc = "UI <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>s";
+        action = "";
+        options = {desc = "Search <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>g";
+        action = "";
+        options = {desc = "Git <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>f";
+        action = "";
+        options = {desc = "Find <?>";};
+      }
+      {
+        mode = "n";
+        key = "<leader>c";
+        action = "";
+        options = {desc = "Diagnostics <?>";};
+      }
+      {
+        mode = "n";
         key = "<leader>cd";
         action = "vim.diagnostic.open_float";
         options = {desc = "Line Diagnostics";};
@@ -263,6 +305,12 @@
         key = "[w";
         action = "diagnostic_goto(false 'WARN')";
         options = {desc = "Prev Warning";};
+      }
+      {
+        mode = "n";
+        key = "<leader>q";
+        action = " ";
+        options = {desc = "Quit <?>";};
       }
       {
         mode = "n";

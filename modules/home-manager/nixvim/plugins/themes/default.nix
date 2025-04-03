@@ -1,6 +1,13 @@
 {...}: {
   programs.nixvim = {
     colorschemes = {
+      gruvbox = {
+        enable = false;
+      };
+      base16 = {
+        enable = false;
+        colorscheme = "gruvbox-dark-medium";
+      };
       catppuccin = {
         enable = false;
         settings = {
