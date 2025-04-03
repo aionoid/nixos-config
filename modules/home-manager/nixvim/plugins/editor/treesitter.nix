@@ -9,6 +9,12 @@
       folding = false;
       nixvimInjections = true;
       grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+      languageRegister = {
+        markdown = [
+          "codecompanion"
+          "vimwiki"
+        ];
+      };
     };
 
     plugins.treesitter-textobjects = {
