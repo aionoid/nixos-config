@@ -68,21 +68,21 @@
 
       # #-- Window Rules -----------------------------------------------
       windowrule = [
-        "float, foot-float"
-        "float, kitty-float"
-        "float, yad|nm-connection-editor|pavucontrolk"
-        "float, xfce-polkit|kvantummanager|qt5ct"
-        "float, feh|Viewnior|Gpicview|Gimp|MPlayer"
-        "float, VirtualBox Manager|qemu|Qemu-system-x86_64"
+        "float, class:foot-float"
+        "float, class:kitty-float"
+        "float, class:yad|nm-connection-editor|pavucontrolk"
+        "float, class:xfce-polkit|kvantummanager|qt5ct"
+        "float, class:feh|Viewnior|Gpicview|Gimp|MPlayer"
+        "float, class:VirtualBox Manager|qemu|Qemu-system-x86_64"
         "float, title:File Operation Progress"
         "float, title:Confirm to replace files"
 
-        "size 60% 64%, Viewnior"
-        "center, Viewnior"
+        "size 60% 64%, class:Viewnior"
+        "center, class:Viewnior"
 
-        "animation slide down,foot-full"
-        "animation slide down,kitty-full"
-        "animation slide up,wlogout"
+        "animation slide down,class:foot-full"
+        "animation slide down,class:kitty-full"
+        "animation slide up,class:wlogout"
       ];
 
       bindl = let
