@@ -55,13 +55,11 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    nixvim,
-    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
     # lib = nixpkgs.lib // home-manager.lib;
+    lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
     # Supported systems for your flake packages, shell, etc.
     systems = [
       "aarch64-linux"
@@ -80,8 +78,8 @@
         # inputs.hyprpanel.overlay
       ];
     };
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-    # pkgsFor = nixpkgs.lib.genAttrs (import systems) (
+    forAllSystems = lib.genAttrs systems;
+    # pkgsFor = lib.genAttrs (import systems) (
     #   system:
     #     import nixpkgs {
     #       inherit system;
@@ -113,16 +111,18 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       # HOME Desktop
-      home = nixpkgs.lib.nixosSystem {
+      home = lib.nixosSystem {
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
+          isHome = true; # to make if statment
           inherit inputs outputs;
         };
       };
       # WORK Desktop
-      work = nixpkgs.lib.nixosSystem {
+      work = lib.nixosSystem {
         modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {
+          isHome = false;
           inherit inputs outputs;
         };
       };
@@ -132,7 +132,7 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       # HOME Desktop
-      "ovo@home" = home-manager.lib.homeManagerConfiguration {
+      "ovo@home" = lib.homeManagerConfiguration {
         modules = [
           ./home-manager/ovo.nix
           ./home-manager/home.nix
@@ -145,13 +145,13 @@
       };
 
       # WORK desktop
-      "antiroot@work" = home-manager.lib.homeManagerConfiguration {
+      "antiroot@work" = lib.homeManagerConfiguration {
         modules = [
           ./home-manager/antiroot.nix
           ./home-manager/home.nix
           self.homeManagerModules
         ];
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        inherit pkgs;
         extraSpecialArgs = {
           inherit inputs outputs;
         };

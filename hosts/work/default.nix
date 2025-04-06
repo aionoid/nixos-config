@@ -29,7 +29,7 @@
   users.users.antiroot = {
     isNormalUser = true;
     description = "antiroot";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "ollama"];
     useDefaultShell = true;
     # packages = with pkgs; [ ];
   };
