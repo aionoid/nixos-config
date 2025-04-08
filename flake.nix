@@ -7,6 +7,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    # Flake Utils
+    flake-utils.url = "github:numtide/flake-utils";
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -75,8 +77,25 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        # inputs.hyprpanel.overlay
+        (final: prev: {
+          pythonPackagesExtensions =
+            prev.pythonPackagesExtensions
+            ++ [
+              (
+                python-final: python-prev: {
+                  onnxruntime = python-prev.onnxruntime.overridePythonAttrs (
+                    oldAttrs: {
+                      buildInputs = nixpkgs.lib.lists.remove pkgs.onnxruntime oldAttrs.buildInputs;
+                    }
+                  );
+                }
+              )
+            ];
+        })
+        # overlays = [
       ];
+      #   # inputs.hyprpanel.overlay
+      # ];
     };
     forAllSystems = lib.genAttrs systems;
     # pkgsFor = lib.genAttrs (import systems) (
@@ -115,7 +134,7 @@
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
           isHome = true; # to make if statment
-          inherit inputs outputs;
+          inherit inputs outputs pkgs;
         };
       };
       # WORK Desktop
@@ -123,7 +142,7 @@
         modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {
           isHome = false;
-          inherit inputs outputs;
+          inherit inputs outputs pkgs;
         };
       };
     };
