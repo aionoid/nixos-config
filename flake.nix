@@ -45,24 +45,23 @@
 
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+      inputs.hyprland.follows = "hyprland";
     };
 
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+      inputs.hyprland.follows = "hyprland";
     };
   };
 
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    # lib = nixpkgs.lib // home-manager.lib;
-    lib = inputs.nixpkgs.lib // inputs.home-manager.lib;
-    # Supported systems for your flake packages, shell, etc.
+    lib = nixpkgs.lib // home-manager.lib;
     systems = [
       "aarch64-linux"
       "i686-linux"
@@ -70,107 +69,106 @@
       "aarch64-darwin"
       "x86_64-darwin"
     ];
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    system = "x86_64-linux"; # change to whatever your system should be.
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-        (final: prev: {
-          pythonPackagesExtensions =
-            prev.pythonPackagesExtensions
-            ++ [
-              (
-                python-final: python-prev: {
-                  onnxruntime = python-prev.onnxruntime.overridePythonAttrs (
-                    oldAttrs: {
-                      buildInputs = nixpkgs.lib.lists.remove pkgs.onnxruntime oldAttrs.buildInputs;
-                    }
-                  );
-                }
-              )
-            ];
-        })
-        # overlays = [
-      ];
-      #   # inputs.hyprpanel.overlay
-      # ];
-    };
-    forAllSystems = lib.genAttrs systems;
-    # pkgsFor = lib.genAttrs (import systems) (
-    #   system:
-    #     import nixpkgs {
-    #       inherit system;
-    #       config.allowUnfree = true;
-    #       overlays = [
-    #         # inputs.hyprpanel.overlay
-    #       ];
-    #     }
-    # );
-  in {
-    # inherit lib;
-    # Your custom packages
-    # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    # Your custom packages and modifications, exported as overlays
+    # Common configuration for all systems
+    commonPkgsConfig = {
+      allowUnfree = true;
+    };
+
+    # Common configuration for all systems
+    homePkgsConfig =
+      commonPkgsConfig
+      // {
+        cudaSupport = true;
+      };
+
+    # Python overlay (moved to a separate variable for clarity)
+    pythonOverlay = final: prev: {
+      pythonPackagesExtensions =
+        prev.pythonPackagesExtensions
+        ++ [
+          (python-final: python-prev: {
+            onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
+              buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
+            });
+          })
+        ];
+    };
+
+    #TODO: refactore this >>
+    # Base package import function
+    basePkgs = system:
+      import nixpkgs {
+        inherit system;
+        config = commonPkgsConfig;
+      };
+
+    # System-specific package sets
+    pkgsFor = system:
+      import nixpkgs {
+        inherit system;
+        overlays = [pythonOverlay];
+        config = commonPkgsConfig;
+      };
+    #<< to this
+
+    # Home-specific package set with the overlay
+    homePkgs = pkgsFor "x86_64-linux"; # Adjust system as needed
+  in {
+    packages = lib.genAttrs systems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    formatter = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
     overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
     nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      # HOME Desktop
       home = lib.nixosSystem {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = homePkgsConfig;
+          overlays = [pythonOverlay];
+        };
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
-          isHome = true; # to make if statment
-          inherit inputs outputs pkgs;
+          isHome = true;
+          inherit inputs outputs;
         };
       };
-      # WORK Desktop
       work = lib.nixosSystem {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = commonPkgsConfig;
+          overlays = [];
+        };
         modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {
           isHome = false;
-          inherit inputs outputs pkgs;
+          inherit inputs outputs;
         };
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # HOME Desktop
       "ovo@home" = lib.homeManagerConfiguration {
+        pkgs = homePkgs; # Use the home-specific package set
         modules = [
           ./home-manager/ovo.nix
           ./home-manager/home.nix
           self.homeManagerModules
         ];
-        inherit pkgs;
         extraSpecialArgs = {
           inherit inputs outputs;
         };
       };
 
-      # WORK desktop
       "antiroot@work" = lib.homeManagerConfiguration {
+        pkgs = pkgsFor "x86_64-linux"; # Work system without the overlay
         modules = [
           ./home-manager/antiroot.nix
           ./home-manager/home.nix
           self.homeManagerModules
         ];
-        inherit pkgs;
         extraSpecialArgs = {
           inherit inputs outputs;
         };

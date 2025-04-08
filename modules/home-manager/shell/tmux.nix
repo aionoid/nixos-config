@@ -86,6 +86,9 @@
         # -- open panes in current dir -------------------------------------------------
         bind '"' split-window -v -c "#{pane_current_path}"
         bind % split-window -h -c "#{pane_current_path}"
+
+        # renumber when window is closed
+        set -g renumber-window on
       '';
 
     plugins = with pkgs; [
@@ -156,20 +159,50 @@
             set -ogq @thm_mantle "#${base01}"
             set -ogq @thm_crust "#${base00}"
 
-
-            set -g @catppuccin_window_status_style "rounded"
-            set -g @catppuccin_window_number_position "right"
-
-            set -g @catppuccin_window_default_fill "number"
-            set -g @catppuccin_window_default_text "#W"
-
-            set -g @catppuccin_window_current_fill "number"
-            set -g @catppuccin_window_current_text "#W"
-
             set -g @catppuccin_flavor "mocha"
-            set -g @catppuccin_window_status_style "rounded"
+            # Window
+            set -g @catppuccin_window_status_style "slanted"
+            # set -ogp @catppuccin_window_left_separator " █"
+            # set -ogp @catppuccin_window_middle_separator "██"
+            # set -ogp @catppuccin_window_right_separator "█ "
+
+            set -g window-status-separator ""
+
+            ## Window global/default configuration
+            set -g @catppuccin_window_status "icon"
+            set -g @catppuccin_window_default_fill "number"
+            set -g @catppuccin_window_number_position "left"
+
+            ## Window current configuration
+            # set -g @catppuccin_window_current_text "#{window_name}"
+            # set -g @catppuccin_window_text " #{=.../-10:pane_current_path} #F"
+            set -g @catppuccin_window_text " #{=/-10/...:pane_title} #F"
+            set -g @catppuccin_window_number "#I"
+            set -g @catppuccin_window_current_text " #W #F"
+            set -g @catppuccin_window_current_number "#I"
+            set -g @catppuccin_window_current_fill "all"
+            # set -g @catppuccin_window_current_middle_separator "#[reverse] 󰿟 #[noreverse]"
+
+            set -g @catppuccin_status_connect_separator "yes"
+            #
+            # set -g @catppuccin_directory_text "#{pane_current_path}"
+
+            # old config
+            # set -g @catppuccin_window_status_style "rounded"
+            # set -g @catppuccin_window_number_position "right"
+            #
+            # set -g @catppuccin_window_default_fill "number"
+            # set -g @catppuccin_window_default_text "#W"
+            #
+            # set -g @catppuccin_window_current_fill "number"
+            # set -g @catppuccin_window_current_text "#W"
+            #
+            # set -g @catppuccin_window_status_style "rounded"
 
             # Make the status line pretty and add some modules
+            # set -g allow-rename off
+            # set -g status-position top
+            # set -g status-interval 5
             set -g status-right-length 100
             set -g status-left-length 100
             set -g status-left ""
