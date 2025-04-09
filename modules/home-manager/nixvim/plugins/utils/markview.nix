@@ -6,14 +6,19 @@
         settings = {
           preview = {
             enable = true;
+            enable_hybrid_mode = true;
             icon_provider = "devicons";
             filetypes = ["markdown" "codecompanion"];
             ignore_buftypes = ["nofile"];
             # modes = true;
             linewise_hybrid_mode = true;
+            splitview_winopts = {
+              # split: Split direction: "left", "right", "above", "below".
+              split = "above";
+            };
             hybrid_modes = [
-              "i"
-              "r"
+              "n"
+              "v"
             ];
             modes = [
               "no"
