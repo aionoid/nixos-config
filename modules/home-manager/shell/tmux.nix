@@ -89,6 +89,9 @@
 
         # renumber when window is closed
         set -g renumber-window on
+
+        set-option -sg escape-time 10
+        set-option -g focus-events on
       '';
 
     plugins = with pkgs; [
