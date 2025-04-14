@@ -217,6 +217,7 @@
             # set -g  status-right "#{E:@catppuccin_status_directory}"
             set -ag status-right "#{E:@catppuccin_status_user}"
             set -ag status-right "#{E:@catppuccin_status_host}"
+            set -ag status-right "#{E:tmux_mode_indicator}"
 
             # set -g @catppuccin_window_left_separator  " "
             # set -g @catppuccin_window_right_separator ""
@@ -239,6 +240,7 @@
       # tmuxPlugins.dracula
       # tmuxPlugins.tokyo-night-tmux
       # tmuxPlugins.power-theme
+      tmuxPlugins.mode-indicator
       {
         plugin = tmuxPlugins.tmux-floax;
         extraConfig = ''

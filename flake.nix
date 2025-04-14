@@ -126,7 +126,10 @@
       home = lib.nixosSystem {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
-          config = homePkgsConfig;
+          config = {
+            cudaSupport = true;
+            allowUnfree = true;
+          };
           overlays = [pythonOverlay];
         };
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
