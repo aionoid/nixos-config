@@ -20,6 +20,8 @@
     ../plymouth.nix
     # containers
     ../containers
+    # printers
+    ../printing.nix
   ];
 
   networking.hostName = "work";
