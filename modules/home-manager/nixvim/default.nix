@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     # General Configuration
     ./settings.nix
@@ -12,7 +12,8 @@
     # Completion
     ./plugins/cmp/cmp.nix
     #./plugins/cmp/cmp-copilot.nix
-    ./plugins/cmp/cmp-codecompanion.nix
+    # ./plugins/cmp/cmp-codecompanion.nix
+    ./plugins/cmp/cmp-avante.nix
     ./plugins/cmp/lspkind.nix
     ./plugins/cmp/autopairs.nix
     ./plugins/cmp/schemastore.nix
@@ -56,4 +57,9 @@
     ./plugins/utils/toggleterm.nix
   ];
   programs.nixvim.enable = true;
+
+  home.packages = with pkgs; [
+    ripgrep
+    fd
+  ];
 }
