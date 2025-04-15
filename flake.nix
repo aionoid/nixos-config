@@ -6,6 +6,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
+    # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.obsidian-nvim.follows = "obsidian-nvim";
+    };
 
     # Flake Utils
     flake-utils.url = "github:numtide/flake-utils";

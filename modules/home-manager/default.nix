@@ -5,9 +5,11 @@
   # my-module = import ./my-module.nix;
   imports = [
     inputs.stylix.homeManagerModules.stylix
-    inputs.nixvim.homeManagerModules.nixvim
+    # inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
-    ./nixvim
+    inputs.nvf.homeManagerModules.default
+    # ./nixvim
+    ./nvf
     ./shell
     ./mpd.nix
     ./theme.nix
