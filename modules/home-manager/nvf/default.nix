@@ -143,8 +143,55 @@
 
       autopairs.nvim-autopairs.enable = true;
 
-      autocomplete.nvim-cmp.enable = true;
-      snippets.luasnip.enable = true;
+      autocomplete.nvim-cmp = {
+        enable = true;
+        sourcePlugins = [
+          "cmp-buffer"
+          "cmp-luasnip"
+          "cmp-nvim-lsp"
+          "cmp-path"
+          "cmp-treesitter"
+          "codecompanion-nvim"
+        ];
+        sources = {
+          buffer = "[Buffer]";
+          nvim-cmp = "[Nvim_lsp]";
+          path = "[Path]";
+        };
+      };
+
+      snippets.luasnip = {
+        enable = true;
+        setupOpts = {
+          kind_icons = {
+            Text = "󰊄";
+            Method = " ";
+            Function = "󰡱 ";
+            Constructor = " ";
+            Field = " ";
+            Variable = "󱀍 ";
+            Class = " ";
+            Interface = " ";
+            Module = "󰕳 ";
+            Property = " ";
+            Unit = " ";
+            Value = " ";
+            Enum = " ";
+            Keyword = " ";
+            Snippet = " ";
+            Color = " ";
+            File = "";
+            Reference = " ";
+            Folder = " ";
+            EnumMember = " ";
+            Constant = " ";
+            Struct = " ";
+            Event = " ";
+            Operator = " ";
+            TypeParameter = " ";
+          };
+        };
+      };
 
       filetree = {
         neo-tree = {
