@@ -61,6 +61,7 @@
         # Languages that will be supported in default and maximal configurations.
         nix.enable = true;
         markdown.enable = true;
+        yaml.enable = true;
 
         # Languages that are enabled in the maximal configuration.
         bash.enable = false; #isMaximal;
