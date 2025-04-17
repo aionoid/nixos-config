@@ -4,6 +4,12 @@
   ...
 }: {
   home.packages = with pkgs; [
+    lazygit
+    # ghostscript # for pdf render used by Snacks.image
+    # tectonic # or pdflatex to render LaTeX for Snacks.image
+    # mermaid-cli # to render Mermaid diagrams for Snacks.image
+    # sqlite # for Snacks.picker
+    # python3Packages.pylatexenc # pylatexenc for render-markdown
     tree-sitter
     ripgrep
     fd
@@ -60,7 +66,16 @@
 
         # Languages that will be supported in default and maximal configurations.
         nix.enable = true;
-        markdown.enable = true;
+        markdown = {
+          enable = true;
+          extensions.render-markdown-nvim = {
+            enable = true;
+            setupOpts = {
+              file_types = ["markdown" "codecompanion"];
+              completions = {lsp = {enabled = true;};};
+            };
+          };
+        };
         yaml.enable = true;
 
         # Languages that are enabled in the maximal configuration.
@@ -146,17 +161,19 @@
       autocomplete.nvim-cmp = {
         enable = true;
         sourcePlugins = [
-          "cmp-buffer"
-          "cmp-luasnip"
-          "cmp-nvim-lsp"
-          "cmp-path"
-          "cmp-treesitter"
-          "codecompanion-nvim"
+          # "cmp-buffer"
+          # "cmp-luasnip"
+          # "cmp-nvim-lsp"
+          # "cmp-path"
+          # "cmp-treesitter"
+          # "codecompanion-nvim"
+          "render-markdown-nvim"
         ];
         sources = {
           buffer = "[Buffer]";
           nvim-cmp = "[Nvim_lsp]";
           path = "[Path]";
+          render-markdown-nvim = "[render-markdown]";
         };
       };
 
@@ -270,6 +287,7 @@
       };
 
       utility = {
+        snacks-nvim.enable = true;
         ccc.enable = false;
         vim-wakatime.enable = false;
         diffview-nvim.enable = true;
