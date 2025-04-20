@@ -75,6 +75,7 @@
     llt = "lsd -la --tree";
     cat = "bat";
     ta = "tmux attach";
+    tn = "tmux new";
     nxc-stop = "sudo nixos-container stop";
     nxc-start = "sudo nixos-container start";
     nxc-login = "sudo nixos-container root-login";
