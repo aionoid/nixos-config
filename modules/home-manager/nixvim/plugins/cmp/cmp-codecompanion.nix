@@ -37,74 +37,63 @@
       }
     ];
 
-    extraConfigLua = ''
-      require("codecompanion").setup({
-       strategies = {
-                   chat = {
-                     adapter = "qwen_coder",
-                     -- adapter = "domo",
+    extraConfigLua =
+      /*
+      lua
+      */
+      ''
+        require("codecompanion").setup({
+         opts = {
+           log_level = "DEBUG", -- TRACE|DEBUG|ERROR|INFO
+         },
+         strategies = {
+                     chat = {
+                       adapter = "qwen_coder",
+                     },
+                     inline = {
+                       adapter = "qwen_coder",
+                     },
                    },
-                   inline = {
-                     adapter = "qwen_coder",
-                     -- adapter = "domo",
-                   },
-                 },
-       display = {
-        action_palette = {
-          provider = "telescope",
+         display = {
+          action_palette = {
+            provider = "telescope",
+            },
           },
-        },
-       adapters = {
-             deepseek = function()
-               return require("codecompanion.adapters").extend("ollama", {
-                 name = "deepseek-r1u-8b", -- Give this adapter a different name to differentiate it from the default ollama adapter
-                 schema = {
-                   model = {
-                     default = "deepseek-r1u:8b",
+         adapters = {
+               deepseek = function()
+                 return require("codecompanion.adapters").extend("ollama", {
+                   name = "deepseek-r1u-8b", -- Give this adapter a different name to differentiate it from the default ollama adapter
+                   schema = {
+                     model = {
+                       default = "deepseek-r1u:8b",
+                     },
                    },
-                 },
-               })
-             end,
-             gemma3= function()
-               return require("codecompanion.adapters").extend("ollama", {
-                 name = "gemma3u-4b", -- Give this adapter a different name to differentiate it from the default ollama adapter
-                 schema = {
-                   model = {
-                     default = "gemma3u:4b",
+                 })
+               end,
+               gemma3= function()
+                 return require("codecompanion.adapters").extend("ollama", {
+                   name = "gemma3u-4b",
+                   schema = {
+                     model = {
+                       default = "gemma3u:4b",
+                     },
                    },
-                 },
-               })
-             end,
-             qwen_coder= function()
-               return require("codecompanion.adapters").extend("ollama", {
-                 name = "qwen2.5u-coder-7b", -- Give this adapter a different name to differentiate it from the default ollama adapter
-                 schema = {
-                   model = {
-                     default = "qwen2.5u-coder:7b",
+                 })
+               end,
+               qwen_coder= function()
+                 return require("codecompanion.adapters").extend("ollama", {
+                   name = "QwenCoder",
+                   schema = {
+                     model = {
+                       default = "qwen2.5u-coder:7b",
+                     },
                    },
-                 },
-               })
-             end,
-             domo = function()
-               return require("codecompanion.adapters").extend("ollama", {
-                 name = "",
-                 schema = {
-                   model = {
-                     default = "DOMO:DS14B6Q",
-                   },
-                   -- num_ctx = {
-                   --   default = 16384,
-                   -- },
-                   -- num_predict = {
-                   --   default = -1,
-                   -- },
-                 },
-               })
-             end,
-           },
-      })
-      vim.cmd([[cab cc CodeCompanion]])
-    '';
+                 })
+               end,
+             },
+        })
+        vim.cmd([[cab cc CodeCompanion]])
+      '';
   };
 }
 #SED_WORK
