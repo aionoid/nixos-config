@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     lazygit
     # ghostscript # for pdf render used by Snacks.image
@@ -20,7 +16,8 @@
     ./keymaps.nix
     ./theme.nix
     ./mini.nix
-    ./codecompanion.nix
+    # ./codecompanion.nix
+    ./avante.nix
   ];
 
   programs.nvf = {
@@ -71,7 +68,7 @@
           extensions.render-markdown-nvim = {
             enable = true;
             setupOpts = {
-              file_types = ["markdown" "codecompanion"];
+              # file_types = ["markdown" "codecompanion"];
               completions = {lsp = {enabled = true;};};
             };
           };
@@ -142,19 +139,8 @@
       statusline = {
         lualine = {
           enable = true;
-          theme = lib.mkForce "gruvbox";
-          # theme = lib.mkForce "catppuccin";
         };
       };
-
-      # theme = {
-      #   enable = true;
-      #   name = lib.mkForce "gruvbox";
-      #   style = "dark";
-      #   # name = lib.mkForce "catppuccin";
-      #   # style = "mocha";
-      #   transparent = false;
-      # };
 
       autopairs.nvim-autopairs.enable = true;
 
@@ -345,14 +331,7 @@
         fastaction.enable = true;
       };
 
-      # assistant = {
-      #   chatgpt.enable = false;
-      #   copilot = {
-      #     enable = false;
-      #     cmp.enable = false; #isMaximal;
-      #   };
-      #   codecompanion-nvim.enable = false;
-      # };
+      lazy.plugins.render-markdown-nvim.ft = ["marksman" "markdown"];
 
       session = {
         nvim-session-manager.enable = false;

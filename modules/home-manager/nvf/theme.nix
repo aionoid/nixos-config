@@ -4,6 +4,7 @@
   ...
 }: {
   programs.nvf.settings.vim = {
+    statusline.lualine.theme = lib.mkForce "catppuccin";
     theme = {
       enable = true;
       #FIXME: set base16 them for following system stylix
@@ -26,10 +27,10 @@
       #   inherit base0E; # "#d3869b";
       #   inherit base0F; # "#d65d0e";
       # };
-      name = lib.mkForce "gruvbox";
-      style = "dark";
-      # name = lib.mkForce "catppuccin";
-      # style = "mocha";
+      # name = lib.mkForce "gruvbox";
+      # style = "dark";
+      name = lib.mkForce "catppuccin";
+      style = "mocha";
       transparent = false;
     };
   };
