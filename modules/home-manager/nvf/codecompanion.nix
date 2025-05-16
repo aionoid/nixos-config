@@ -1,5 +1,6 @@
 {lib, ...}: {
   programs.nvf.settings.vim = {
+    lazy.plugins.render-markdown-nvim.ft = ["codecompanion"];
     assistant.codecompanion-nvim = {
       enable = true;
       setupOpts = {
