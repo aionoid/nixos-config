@@ -68,7 +68,7 @@
           extensions.render-markdown-nvim = {
             enable = true;
             setupOpts = {
-              # file_types = ["markdown" "codecompanion"];
+              file_types = ["markdown" "marksman" "codecompanion"];
               completions = {lsp = {enabled = true;};};
             };
           };
@@ -76,10 +76,10 @@
         yaml.enable = true;
 
         # Languages that are enabled in the maximal configuration.
-        bash.enable = false; #isMaximal;
+        bash.enable = true; #isMaximal;
         clang.enable = false; #isMaximal;
-        css.enable = false; #isMaximal;
-        html.enable = false; #isMaximal;
+        css.enable = true; #isMaximal;
+        html.enable = true; #isMaximal;
         sql.enable = false; #isMaximal;
         java.enable = false; #isMaximal;
         kotlin.enable = false; #isMaximal;
