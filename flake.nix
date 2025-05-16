@@ -8,7 +8,8 @@
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
     # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
     nvf = {
-      url = "github:notashelf/nvf";
+      # url = "github:notashelf/nvf";
+      url = "github:aionoid/nvf-avante-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.obsidian-nvim.follows = "obsidian-nvim";
     };
@@ -88,14 +89,27 @@
         cudaSupport = true;
       };
 
-    # Python overlay (moved to a separate variable for clarity)
+    # Python overlay (moved to a separate variable for clarity) FIX for onnxruntime
+    # TODO: use "https://github.com/NixOS/nixpkgs/pull/382920"
     pythonOverlay = final: prev: {
       pythonPackagesExtensions =
         prev.pythonPackagesExtensions
         ++ [
           (python-final: python-prev: {
-            onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
-              buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
+            # onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
+            #   buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
+            # });
+            rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (oldAttrs: {
+              disabledTests =
+                [
+                  # Needs Internet access
+                  "test_long_img"
+                ]
+                ++ lib.optionals onnxruntime.cudaSupport [
+                  # segfault when built with cuda support but GPU is not availaible in build environment
+                  "test_ort_cuda_warning"
+                  "test_ort_dml_warning"
+                ];
             });
           })
         ];
@@ -113,7 +127,8 @@
     pkgsFor = system:
       import nixpkgs {
         inherit system;
-        overlays = [pythonOverlay];
+        # overlays = [pythonOverlay]; # FIX onnxruntime error for cuda
+        overlays = [];
         config = commonPkgsConfig;
       };
     #<< to this
