@@ -43,6 +43,10 @@
     sysstat
     gedit
     neovim-gtk
+    # download helper
+    vdhcoapp
+    # youtube downloader
+    yt-dlp
   ];
 
   # enable automount for new drives
