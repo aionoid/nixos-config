@@ -105,7 +105,7 @@
                   # Needs Internet access
                   "test_long_img"
                 ]
-                ++ lib.optionals onnxruntime.cudaSupport [
+                ++ lib.optionals python-prev.onnxruntime.cudaSupport [
                   # segfault when built with cuda support but GPU is not availaible in build environment
                   "test_ort_cuda_warning"
                   "test_ort_dml_warning"
@@ -142,6 +142,15 @@
     overlays = import ./overlays {inherit inputs;};
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
+    # Add empty homeManagerModules if ./modules/home-manager doesn't exist
+    # homeManagerModules =
+    #   if builtins.pathExists ./modules/home-manager
+    #   then import ./modules/home-manager {inherit inputs;}
+    #   else {};
+    # homeManagerModules = {
+    #   imports = [./modules/home-manager];
+    #   _module.args = {inherit inputs outputs;};
+    # };
 
     nixosConfigurations = {
       home = lib.nixosSystem {

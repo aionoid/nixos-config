@@ -73,10 +73,10 @@
 
   home.shellAliases = {
     l = "lsd -l";
-    ll = "lsd -la";
-    lt = "lsd -l --tree";
+    # ll = "lsd -la";
+    # lt = "lsd -l --tree";
     t = "lsd --tree";
-    llt = "lsd -la --tree";
+    # llt = "lsd -la --tree";
     cat = "bat";
     ta = "tmux attach";
     tn = "tmux new";

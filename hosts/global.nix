@@ -127,7 +127,7 @@
   systemd.targets.hibernate.enable = false;
 
   environment.sessionVariables = {
-    FLAKE = "/etc/nixos";
+    NH_FLAKE = "/etc/nixos";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
@@ -136,7 +136,7 @@
   };
 
   environment.variables = {
-    FLAKE = "/etc/nixos";
+    NH_FLAKE = "/etc/nixos";
     # GTK_DEBUG = "interactive";
   };
 

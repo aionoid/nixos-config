@@ -13,7 +13,7 @@
   };
   programs.zsh = {
     enable = true;
-    initExtra =
+    initContent =
       /*
       bash
       */
@@ -102,11 +102,11 @@
     #   ];
     # };
     shellAliases = {
-      l = "lsd -l";
-      ll = "lsd -la";
-      lt = "lsd -l --tree";
-      t = "lsd --tree";
-      llt = "lsd -la --tree";
+      # l = "lsd -l";
+      # ll = "lsd -la";
+      # lt = "lsd -l --tree";
+      # t = "lsd --tree";
+      # llt = "lsd -la --tree";
       cat = "bat";
     };
   };

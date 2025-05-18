@@ -4,7 +4,9 @@
   # List your module files here
   # my-module = import ./my-module.nix;
   imports = [
-    inputs.stylix.homeManagerModules.stylix
+    # inputs.stylix.homeManagerModules.stylix
+    # inputs.stylix.homeManagerModules.default
+    inputs.stylix.homeModules.stylix
     # inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
     inputs.nvf.homeManagerModules.default
