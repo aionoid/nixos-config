@@ -34,6 +34,9 @@
           transform = 0;
           #output =
         };
+        tablet = {
+          output = "HDMI-A-1";
+        };
       };
     };
   };
