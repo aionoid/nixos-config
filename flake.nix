@@ -140,8 +140,8 @@
     formatter = lib.genAttrs systems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    nixosModules = import ./modules/nixos {inherit inputs;};
+    homeManagerModules = import ./modules/home-manager {inherit inputs;};
     # Add empty homeManagerModules if ./modules/home-manager doesn't exist
     # homeManagerModules =
     #   if builtins.pathExists ./modules/home-manager
