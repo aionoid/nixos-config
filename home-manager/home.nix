@@ -63,8 +63,6 @@
   programs.cava.enable = true;
   programs.foot.enable = true;
   programs.btop.enable = true;
-  programs.thefuck.enable = true;
-  programs.thefuck.enableZshIntegration = true;
 
   xsession.enable = true;
   xsession.numlock.enable = true;
