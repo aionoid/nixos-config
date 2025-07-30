@@ -21,6 +21,8 @@
     ../plymouth.nix
     ## containers
     ../containers
+    ## rgb controle
+    ../openrgb.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
