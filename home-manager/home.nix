@@ -28,82 +28,86 @@
   systemd.user.startServices = "sd-switch";
   xdg.userDirs.enable = true;
 
-  home.packages = with pkgs; [
-    fastfetch
-    vlc
-    qbittorrent
-    inkscape
-    gimp
-    icomoon-feather
-    alsa-utils
-    usbutils
-    gparted
-    # pdf
-    # editor
-    sysstat
-    gedit
-    neovim-gtk
-    # download helper
-    vdhcoapp
-    # youtube downloader
-    yt-dlp
-  ];
+  home = {
+    packages = with pkgs; [
+      fastfetch
+      vlc
+      qbittorrent
+      inkscape
+      gimp
+      icomoon-feather
+      alsa-utils
+      usbutils
+      gparted
+      # pdf
+      # editor
+      sysstat
+      gedit
+      neovim-gtk
+      # download helper
+      vdhcoapp
+      # youtube downloader
+      yt-dlp
+    ];
 
+    shellAliases = {
+      l = "lsd -l";
+      # ll = "lsd -la";
+      # lt = "lsd -l --tree";
+      t = "lsd --tree";
+      # llt = "lsd -la --tree";
+      cat = "bat";
+      ta = "tmux attach";
+      tn = "tmux new";
+      nxc-stop = "sudo nixos-container stop";
+      nxc-start = "sudo nixos-container start";
+      nxc-login = "sudo nixos-container root-login";
+      nxc-update = "sudo nixos-container update";
+      n = "nvim .";
+    };
+
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+
+      # QT_STYLE_OVERRIDE = "adwaita-dark";
+      # QT_STYLE_OVERRIDE = "adwaita";
+
+      EDITOR = "nvim";
+
+      # GTK_IM_MODULE = "fcitx";
+      # QT_IM_MODULE = "fcitx";
+      # SDL_IM_MODULE = "fcitx";
+      # XMODIFIERS = "@im=fcitx";
+    };
+  };
   # enable automount for new drives
-  services.udiskie.enable = true;
-  services.udiskie.automount = true;
-  services.udiskie.notify = true;
+  services.udiskie = {
+    enable = true;
+    automount = true;
+    notify = true;
+  };
 
   # enable programs
-  # TODO: move to own nix file for config
-  programs.kitty.enable = true;
-  programs.bat.enable = true;
-  programs.lsd.enable = true;
+  programs = {
+    kitty.enable = true;
+    bat.enable = true;
+    lsd.enable = true;
 
-  programs.cava.enable = true;
-  programs.foot.enable = true;
-  programs.btop.enable = true;
+    cava.enable = true;
+    foot.enable = true;
+    btop.enable = true;
+
+    git = {
+      enable = true;
+      userName = "Farouk Brown";
+      userEmail = "aionoid.xd@gmail.com";
+    };
+  };
 
   xsession.enable = true;
   xsession.numlock.enable = true;
 
   fonts.fontconfig.enable = true;
-
-  home.shellAliases = {
-    l = "lsd -l";
-    # ll = "lsd -la";
-    # lt = "lsd -l --tree";
-    t = "lsd --tree";
-    # llt = "lsd -la --tree";
-    cat = "bat";
-    ta = "tmux attach";
-    tn = "tmux new";
-    nxc-stop = "sudo nixos-container stop";
-    nxc-start = "sudo nixos-container start";
-    nxc-login = "sudo nixos-container root-login";
-    nxc-update = "sudo nixos-container update";
-    n = "nvim .";
-  };
-
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-
-    # QT_STYLE_OVERRIDE = "adwaita-dark";
-    # QT_STYLE_OVERRIDE = "adwaita";
-
-    EDITOR = "nvim";
-
-    # GTK_IM_MODULE = "fcitx";
-    # QT_IM_MODULE = "fcitx";
-    # SDL_IM_MODULE = "fcitx";
-    # XMODIFIERS = "@im=fcitx";
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Farouk Brown";
-    userEmail = "aionoid.xd@gmail.com";
-  };
 
   home.stateVersion = "24.11";
 

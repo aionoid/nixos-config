@@ -1,31 +1,7 @@
-{
-  inputs,
-  pkgs,
-  outputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    #   # inputs.stylix.nixosModules.stylix
-    #   # # use as modeule ?
-    #   # ../modules/nixos/theme.nix
-    #
-    #   # inputs.home-manager.nixosModules.home-manager
-    #   # {
-    #   #   home-manager.useGlobalPkgs = true;
-    #   #   home-manager.useUserPackages = true;
-    #   #   # home-manager.users.antiroot = import ./home.nix;
-    #   # }
   ];
-  # home-manager = {
-  #   extraSpecialArgs = {inherit inputs outputs;};
-  #   users = {
-  #     # Import your home-manager configuration
-  #     antiroot = import [../home-manager/home.nix ../home-manager/antiroot.nix];
-  #     ovo = import [../home-manager/home.nix ../home-manager/ovo.nix];
-  #   };
-  # };
   hardware.graphics.enable = true;
-  # nix.package = pkgs.nixVersions.nix_2_18; # stable
   nix.settings.experimental-features = ["nix-command" "flakes"];
   system.autoUpgrade.channel = "https://nixos.org/channels/nixpkgs-unstable";
 
@@ -45,9 +21,9 @@
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
   boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -57,28 +33,43 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-    nodePackages.gitmoji-cli
-    home-manager
-    # inputs.nixvim.packages.x86_64-linux.default
-    # (inputs.nixvim.packages.x86_64-linux.default.override {
-    #   plugins.nvim-colorizer.enable = true;
-    # })
-    #setting FLAKE=/etc/nixos/ config for nh
-    nh
-    # icon theme
-    gnome-icon-theme
-    # ntfs tools
-    ntfs3g
-    dosfstools
-    ntfsprogs
-    #scrounge-ntfs
-    #ntfs2btrfs
-    #MTP fs
-    jmtpfs
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      wget
+      nodePackages.gitmoji-cli
+      home-manager
+      # inputs.nixvim.packages.x86_64-linux.default
+      # (inputs.nixvim.packages.x86_64-linux.default.override {
+      #   plugins.nvim-colorizer.enable = true;
+      # })
+      #setting FLAKE=/etc/nixos/ config for nh
+      nh
+      # icon theme
+      gnome-icon-theme
+      # ntfs tools
+      ntfs3g
+      dosfstools
+      ntfsprogs
+      #scrounge-ntfs
+      #ntfs2btrfs
+      #MTP fs
+      jmtpfs
+    ];
+    sessionVariables = {
+      NH_FLAKE = "/etc/nixos";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+      # QT_QPA_PLATFORMTHEME = "qt5ct";
+    };
+
+    variables = {
+      NH_FLAKE = "/etc/nixos";
+      # GTK_DEBUG = "interactive";
+    };
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -102,14 +93,16 @@
     LC_TIME = "en_US.UTF-8";
   };
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    printing.enable = true;
 
-  # Enable disks mount with Udisk
-  services.udisks2.enable = true;
-  # services.udisks2.mountOnMedia = true;
+    # Enable disks mount with Udisk
+    udisks2.enable = true;
+    # services.udisks2.mountOnMedia = true;
 
-  # enable MTP devices
-  services.gvfs.enable = true;
+    # enable MTP devices
+    gvfs.enable = true;
+  };
 
   # Enable Gnome Disks
   programs.gnome-disks.enable = true;
@@ -132,20 +125,6 @@
     #media-session.enable = true;
   };
   systemd.targets.hibernate.enable = false;
-
-  environment.sessionVariables = {
-    NH_FLAKE = "/etc/nixos";
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_STATE_HOME = "$HOME/.local/state";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
-
-  environment.variables = {
-    NH_FLAKE = "/etc/nixos";
-    # GTK_DEBUG = "interactive";
-  };
 
   # dconf.settings = {
   #   "org.gtk.Settings.Debug" = {
