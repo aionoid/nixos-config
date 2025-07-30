@@ -7,10 +7,10 @@
           setupOpts = {
             provider = "ollama";
             # for v0.0.24^
-            ollama = {
-              model = "qwen2.5-coder-ins-unc:nvim";
-            };
-            vendors = {
+            providers = {
+              ollama = {
+                model = "qwen2.5-coder-ins-unc:nvim";
+              };
               ollama_qwen_7b_q6 = {
                 __inherited_from = "ollama";
                 model = "qwen2.5u-coder:7b";
