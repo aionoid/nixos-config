@@ -38,6 +38,12 @@
     zsh.enable = true;
   };
 
+  # enable AppImage support
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
