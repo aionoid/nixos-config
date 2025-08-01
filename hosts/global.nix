@@ -102,6 +102,9 @@
 
     # enable MTP devices
     gvfs.enable = true;
+
+    # GPU Info/Controle/Monitor temp,fan,OC
+    lact.enable = true;
   };
 
   # Enable Gnome Disks
