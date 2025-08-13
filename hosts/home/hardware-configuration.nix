@@ -30,25 +30,31 @@
     "/mnt/DISK01" = {
       device = "/dev/disk/by-uuid/4482FC6082FC583E";
       fsType = "ntfs3";
-      options = ["fmask=0000" "dmask=0000"];
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
     };
 
     "/mnt/DISK02" = {
       device = "/dev/disk/by-uuid/0DD5BB1D58CC498D";
       fsType = "ntfs3";
-      options = ["fmask=0000" "dmask=0000"];
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
     };
 
-    # fileSystems."/mnt/DISK03" = {
-    #   device = "/dev/disk/by-uuid/10039AFF0DD845A8";
-    #   fsType = "ntfs3";
-    #   options = ["fmask=0000" "dmask=0000"];
-    # };
+    "/mnt/DISK03" = {
+      device = "/dev/disk/by-uuid/10039AFF0DD845A8";
+      fsType = "ntfs3";
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
+    };
 
     "/mnt/FAST" = {
       device = "/dev/disk/by-uuid/AC02035102031FC6";
       fsType = "ntfs3";
-      options = ["fmask=0000" "dmask=0000"];
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
+    };
+
+    "/mnt/FAST2T" = {
+      device = "/dev/disk/by-uuid/D464621E64620398";
+      fsType = "ntfs3";
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
     };
   };
 

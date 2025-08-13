@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -12,35 +11,39 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-
-  boot.initrd.supportedFilesystems = ["ntfs"];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/005cba31-59c3-432c-867d-1e27f93668dd";
-    fsType = "ext4";
+  boot = {
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
+      initrd.kernelModules = [];
+      supportedFilesystems = ["ntfs"];
+    };
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/80C9-8A3D";
-    fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
-  };
-  #fileSystems."/boot" =
-  # { device = "/dev/disk/by-uuid/A0FA-7776";
-  #   fsType = "vfat";
-  #   options = [ "fmask=0077" "dmask=0077" ];
-  # };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/005cba31-59c3-432c-867d-1e27f93668dd";
+      fsType = "ext4";
+    };
 
-  fileSystems."/mnt/DISK" = {
-    device = "/dev/disk/by-uuid/30D0BB39D0BB03DE";
-    fsType = "ntfs3";
-    options = ["fmask=0000" "dmask=0000"];
-  };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/80C9-8A3D";
+      fsType = "vfat";
+      options = ["fmask=0077" "dmask=0077" "nofail" "x-systemd.automount"];
+    };
+    #fileSystems."/boot" =
+    # { device = "/dev/disk/by-uuid/A0FA-7776";
+    #   fsType = "vfat";
+    #   options = [ "fmask=0077" "dmask=0077" ];
+    # };
 
+    "/mnt/DISK" = {
+      device = "/dev/disk/by-uuid/30D0BB39D0BB03DE";
+      fsType = "ntfs3";
+      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
+    };
+  };
   swapDevices = [
     {device = "/dev/disk/by-uuid/135cc4c9-f95d-4a7b-bc7b-4be98d2b5c40";}
   ];

@@ -83,7 +83,7 @@
         sql.enable = false; #isMaximal;
         java.enable = false; #isMaximal;
         kotlin.enable = false; #isMaximal;
-        ts.enable = false; #isMaximal;
+        ts.enable = true; #isMaximal;
         go.enable = false; #isMaximal;
         lua.enable = true; #isMaximal;
         zig.enable = false; #isMaximal;
