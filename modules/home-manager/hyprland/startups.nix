@@ -11,6 +11,8 @@
       "swww-daemon"
       "nm-applet"
       "scriptChangeWallpaper ~/Pictures/wallpaper"
+      # "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
+      "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
     ];
   };
 }

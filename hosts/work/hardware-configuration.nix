@@ -30,7 +30,7 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/80C9-8A3D";
       fsType = "vfat";
-      options = ["fmask=0077" "dmask=0077" "nofail" "x-systemd.automount"];
+      options = ["fmask=0077" "dmask=0077"];
     };
     #fileSystems."/boot" =
     # { device = "/dev/disk/by-uuid/A0FA-7776";
@@ -40,8 +40,15 @@
 
     "/mnt/DISK" = {
       device = "/dev/disk/by-uuid/30D0BB39D0BB03DE";
-      fsType = "ntfs3";
-      options = ["fmask=0000" "dmask=0000" "nofail" "x-systemd.automount"];
+      options = [
+        "nofail"
+        "defaults"
+        "noauto"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=5m"
+        "x-systemd.device-timeout=1s"
+        "x-systemd.mount-timeout=1s"
+      ];
     };
   };
   swapDevices = [
