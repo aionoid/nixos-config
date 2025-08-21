@@ -14,7 +14,7 @@
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-      initrd.kernelModules = [];
+      kernelModules = [];
       supportedFilesystems = ["ntfs"];
     };
     kernelModules = ["kvm-intel"];
@@ -43,7 +43,6 @@
       options = [
         "nofail"
         "defaults"
-        "noauto"
         "x-systemd.automount"
         "x-systemd.idle-timeout=5m"
         "x-systemd.device-timeout=1s"

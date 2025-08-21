@@ -23,7 +23,7 @@
     # printers
     ../printing.nix
     # samba + win print
-    ../samba.nix
+    # ../samba.nix
   ];
 
   networking.hostName = "work";
