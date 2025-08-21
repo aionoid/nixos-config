@@ -20,6 +20,11 @@
     binfmt = true;
   };
 
+  # enable nix-ld
+  programs.nix-ld = {
+    enable = true;
+  };
+
   # Bootloader.
   boot = {
     loader.systemd-boot.enable = true;
@@ -37,6 +42,7 @@
     systemPackages = with pkgs; [
       git
       wget
+      uv # python package manger in Rust
       nodePackages.gitmoji-cli
       home-manager
       # inputs.nixvim.packages.x86_64-linux.default
