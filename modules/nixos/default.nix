@@ -5,6 +5,7 @@
   # my-module = import ./my-module.nix;
   imports = [
     inputs.stylix.nixosModules.stylix
+    inputs.disko.nixosModules.disko
     inputs.hyprland.nixosModules.default
     ./googlefonts.nix
     ./theme.nix

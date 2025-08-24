@@ -9,6 +9,7 @@
 
     ./hardware-configuration.nix
     ./nvidia.nix
+    ./disko-config.nix
 
     ../global.nix
     # desktop manager

@@ -29,6 +29,12 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
+    # disko
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # auto ricing
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
