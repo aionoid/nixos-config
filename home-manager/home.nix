@@ -2,6 +2,7 @@
 {
   outputs,
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -104,6 +105,14 @@
     };
   };
 
+  # home.sessionVariables = {
+  #   PATH = "$PATH:${config.home.homeDirectory}/.foo/bar";
+  # };
+
+  home.sessionPath = [
+    "~/.local/bin"
+    "${config.home.homeDirectory}/.local/bin"
+  ];
   xsession.enable = true;
   xsession.numlock.enable = true;
 
