@@ -68,7 +68,7 @@
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
           userchrome-toggle-extended
-          (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
+          #(enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
         ];
@@ -157,7 +157,7 @@
           i-dont-care-about-cookies
           adaptive-tab-bar-colour
           userchrome-toggle-extended
-          (enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
+          #(enhancer-for-youtube.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (youtube-recommended-videos.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
           (languagetool.overrideAttrs (o: {meta = o.meta // {license = lib.licenses.mit;};}))
         ];
