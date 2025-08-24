@@ -13,7 +13,7 @@
     #INFO: need folder permission to work: chmod 777 -R
     models =
       if isHome
-      then "/mnt/FAST/ollama/models"
+      then "/data/ollama/models"
       else "/mnt/DISK/ollama/models";
   };
 }
