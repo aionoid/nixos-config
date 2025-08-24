@@ -27,8 +27,11 @@
 
   # Bootloader.
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot/efi";
+    };
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.linuxKernel.packages.linux_zen;
@@ -41,14 +44,11 @@
   environment = {
     systemPackages = with pkgs; [
       git
+      kitty
       wget
       uv # python package manger in Rust
       nodePackages.gitmoji-cli
       home-manager
-      # inputs.nixvim.packages.x86_64-linux.default
-      # (inputs.nixvim.packages.x86_64-linux.default.override {
-      #   plugins.nvim-colorizer.enable = true;
-      # })
       #setting FLAKE=/etc/nixos/ config for nh
       nh
       # icon theme
