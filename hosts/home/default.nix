@@ -24,6 +24,7 @@
     ../containers
     ## rgb controle
     ../openrgb.nix
+    ../waydroid.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
