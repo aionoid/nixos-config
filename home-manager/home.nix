@@ -44,11 +44,13 @@
       # editor
       sysstat
       gedit
-      neovim-gtk
+      #neovim-gtk
       # download helper
       vdhcoapp
       # youtube downloader
       yt-dlp
+      uv # python package manger in Rust
+      nodejs # for npx and npm
     ];
 
     shellAliases = {
