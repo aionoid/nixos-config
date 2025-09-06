@@ -44,6 +44,7 @@
       font-awesome
       hyprpicker
       hyprcursor
+      hyprprop
       nwg-launchers
       most
       pavucontrol
