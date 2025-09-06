@@ -20,6 +20,7 @@
     };
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
+    blacklistedKernelModules = ["rt2x00usb" "rt2x00lib"]; # "rt2800usb"
   };
   swapDevices = [
     {
@@ -43,6 +44,16 @@
   #
   # # Required for Btrfs swapfile
   # boot.specialFileSystems."/swapfile".options = ["nodiratime" "noatime" "noauto" "nofail" "discard"];
+  networking.networkmanager.wifi.powersave = false;
+  boot.extraModprobeConfig = ''
+    options iwlwifi 11n_disable=8
+    options iwlwifi swcrypto=1
+    options iwlwifi power_save=0
+    options iwlwifi power_level=5
+    options iwlwifi bt_coex_active=0
+
+    options iwlmvm power_scheme=1
+  '';
 
   hardware.bluetooth.enable = true;
   networking.useDHCP = lib.mkDefault true;
