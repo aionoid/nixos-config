@@ -2,7 +2,7 @@
   disko.devices = {
     disk.main = {
       type = "disk";
-      device = lib.mkDefault "/dev/nvme1n1";
+      device = lib.mkDefault "/dev/nvme0n1";
       content = {
         type = "gpt";
         partitions = {
