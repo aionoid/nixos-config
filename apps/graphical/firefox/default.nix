@@ -136,7 +136,7 @@
 
         search = {
           force = true;
-          default = "Yandex"; # Set your default search engine here
+          default = "Google"; # Set your default search engine here
           order = [
             "Yandex"
             "NixOS packages"
