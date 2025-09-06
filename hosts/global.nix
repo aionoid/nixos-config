@@ -33,7 +33,8 @@
       efi.efiSysMountPoint = "/boot/efi";
     };
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+    # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     binfmt.emulatedSystems = [
       "aarch64-linux"
