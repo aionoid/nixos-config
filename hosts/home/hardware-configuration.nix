@@ -28,22 +28,6 @@
       size = 8 * 1024; # Creates an 8GB swap file
     }
   ];
-  # swapDevices = [
-  #   {
-  #     device = "/swapfile";
-  #     size = 8192; # 8GB in MB
-  #   }
-  # ];
-  # # Swapfile configuration (not handled by Disko directly)
-  # swapDevices = [
-  #   {
-  #     device = "/swapfile";
-  #     size = 8192;
-  #   }
-  # ];
-  #
-  # # Required for Btrfs swapfile
-  # boot.specialFileSystems."/swapfile".options = ["nodiratime" "noatime" "noauto" "nofail" "discard"];
   networking.networkmanager.wifi.powersave = false;
   boot.extraModprobeConfig = ''
     options iwlwifi 11n_disable=8
