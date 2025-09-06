@@ -131,11 +131,153 @@
               title = "github";
               url = "https://www.github.com/";
             }
-            {
-              title = "chatgpt";
-              url = "https://chatgpt.com/";
-            }
           ];
+        };
+
+        search = {
+          force = true;
+          default = "Yandex"; # Set your default search engine here
+          order = [
+            "Yandex"
+            "NixOS packages"
+            "NixOS options"
+            "Home Manager - Options Search"
+            "GitHub"
+            "Searchix Combined"
+            "Noogle"
+            "MyNixOS"
+            "ComicK"
+            "SearXNG"
+            "YouTube"
+          ];
+          engines = {
+            "Yandex" = {
+              urls = [
+                {
+                  template = "https://yandex.com/search/?text={searchTerms}&from=os&clid=1836587";
+                }
+              ];
+              keyword = "@yd";
+              definedAliases = ["@yd"];
+              suggestionsURL = "https://suggest.yandex.com/suggest-ff.cgi?part={searchTerms}&uil=en&v=3&sn=5&lr=20828&yu=1454733301756039542";
+            };
+
+            "NixOS packages" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              keyword = "@np";
+              definedAliases = ["@np"];
+            };
+
+            "NixOS options" = {
+              urls = [
+                {
+                  template = "https://search.nixos.org/options";
+                  params = [
+                    {
+                      name = "type";
+                      value = "options";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              keyword = "@no";
+              definedAliases = ["@no"];
+            };
+
+            "Home Manager - Options Search" = {
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com/?query={searchTerms}";
+                }
+              ];
+              keyword = "@nh";
+              definedAliases = ["@nh"];
+            };
+
+            "GitHub" = {
+              urls = [
+                {
+                  template = "https://github.com/search?q={searchTerms}";
+                }
+              ];
+              keyword = "@gh";
+              definedAliases = ["@gh"];
+            };
+
+            "Searchix Combined" = {
+              urls = [
+                {
+                  template = "https://searchix.ovh/?q={searchTerms}";
+                }
+              ];
+              # No keyword defined in original JSON, so omitted here
+            };
+
+            "Noogle" = {
+              urls = [
+                {
+                  template = "https://noogle.dev/?q={searchTerms}";
+                }
+              ];
+              # No keyword defined in original JSON
+            };
+
+            "MyNixOS" = {
+              urls = [
+                {
+                  template = "https://mynixos.com/search?q={searchTerms}";
+                }
+              ];
+              # No keyword defined in original JSON
+            };
+
+            "ComicK" = {
+              urls = [
+                {
+                  template = "https://comick.io/search?q={searchTerms}";
+                }
+              ];
+              # No keyword defined in original JSON
+            };
+
+            "SearXNG" = {
+              urls = [
+                {
+                  template = "https://searx.bndkt.io/search?q={searchTerms}";
+                }
+              ];
+              suggestionsURL = "https://searx.bndkt.io/autocompleter?q={searchTerms}";
+              # No keyword defined in original JSON
+            };
+
+            "YouTube" = {
+              urls = [
+                {
+                  template = "https://www.youtube.com/results?search_query={searchTerms}&utm_source=opensearch";
+                }
+              ];
+              keyword = "@y";
+              definedAliases = ["@y"];
+            };
+          };
         };
 
         # userChrome = builtins.readFile ./userChrome.css;
