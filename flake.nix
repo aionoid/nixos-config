@@ -89,45 +89,46 @@
     };
 
     # Common configuration for all systems
-    homePkgsConfig =
-      commonPkgsConfig
-      // {
-        cudaSupport = true;
-      };
+    # homePkgsConfig =
+    #   commonPkgsConfig
+    #   // {
+    #     cudaSupport = true;
+    #   };
 
     # Python overlay (moved to a separate variable for clarity) FIX for onnxruntime
     # TODO: use "https://github.com/NixOS/nixpkgs/pull/382920"
-    pythonOverlay = final: prev: {
-      pythonPackagesExtensions =
-        prev.pythonPackagesExtensions
-        ++ [
-          (python-final: python-prev: {
-            # onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
-            #   buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
-            # });
-            rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (oldAttrs: {
-              disabledTests =
-                [
-                  # Needs Internet access
-                  "test_long_img"
-                ]
-                ++ lib.optionals python-prev.onnxruntime.cudaSupport [
-                  # segfault when built with cuda support but GPU is not availaible in build environment
-                  "test_ort_cuda_warning"
-                  "test_ort_dml_warning"
-                ];
-            });
-          })
-        ];
-    };
+    # pythonOverlay = final: prev: {
+    #   pythonPackagesExtensions =
+    #     prev.pythonPackagesExtensions
+    #     ++ [
+    #       (python-final: python-prev: {
+    #         # onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
+    #         #   buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
+    #         # });
+    #         rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (oldAttrs: {
+    #           disabledTests =
+    #             [
+    #               # Needs Internet access
+    #               "test_long_img"
+    #             ]
+    #             ++ lib.optionals python-prev.onnxruntime.cudaSupport [
+    #               # segfault when built with cuda support but GPU is not availaible in build environment
+    #               "test_ort_cuda_warning"
+    #               "test_ort_dml_warning"
+    #             ];
+    #         });
+    #       })
+    #     ];
+    # };
 
     #TODO: refactore this >>
     # Base package import function
-    basePkgs = system:
-      import nixpkgs {
-        inherit system;
-        config = commonPkgsConfig;
-      };
+
+    # basePkgs = system:
+    #   import nixpkgs {
+    #     inherit system;
+    #     config = commonPkgsConfig;
+    #   };
 
     # System-specific package sets
     pkgsFor = system:
@@ -166,7 +167,7 @@
             cudaSupport = true;
             allowUnfree = true;
           };
-          overlays = [pythonOverlay];
+          # overlays = [pythonOverlay];
         };
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
