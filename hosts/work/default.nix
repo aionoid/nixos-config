@@ -14,8 +14,8 @@
     # desktop manager
     ../hyprland.nix
     # greeter
-    ../greetd.nix
-    # ../sddm.nix
+    # ../greetd.nix
+    ../sddm.nix
     ## boot theme
     ../plymouth.nix
     # containers

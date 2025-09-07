@@ -1,21 +1,18 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; #SDDM
-  
-    [
-      (catppuccin-sddm.override
-        {
-          flavor = "mocha";
-          background = "${pkgs.gnome-backgrounds}/share/backgrounds/gnome/morphogenesis-d.svg";
-          loginBackground = true;
-        })
-    ];
-  #SDDM
+{...}: {
   services.displayManager.sddm = {
+    autoNumlock = true;
     wayland.enable = true;
     enable = true;
-    autoNumlock = true;
-    # settings.Theme.Current = "catppuccin-mocha";
-    theme = "catppuccin-mocha";
-    package = pkgs.kdePackages.sddm;
+    sugarCandyNix = {
+      enable = true;
+      settings = {
+        # Background = lib.cleanSource ./background.png;
+        # ScreenWidth = 1920;
+        # ScreenHeight = 1080;
+        FormPosition = "left";
+        HaveFormBackground = true;
+        PartialBlur = true;
+      };
+    };
   };
 }

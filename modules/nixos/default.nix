@@ -7,6 +7,7 @@
     inputs.stylix.nixosModules.stylix
     inputs.disko.nixosModules.disko
     inputs.hyprland.nixosModules.default
+    inputs.sddm-sugar-candy-nix.nixosModules.default
     ./googlefonts.nix
     ./theme.nix
     ./gaming.nix
