@@ -30,7 +30,6 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/boot/efi";
     };
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
