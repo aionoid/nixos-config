@@ -25,6 +25,8 @@
     ## rgb controle
     ../openrgb.nix
     ../waydroid.nix
+    ## obs-studio
+    ../obs.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
