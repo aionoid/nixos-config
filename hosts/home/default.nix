@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./disko-config.nix
+    # ./printer.nix
 
     ../global.nix
     # desktop manager
