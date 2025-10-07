@@ -8,8 +8,8 @@
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
     # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
     nvf = {
-      url = "github:notashelf/nvf";
-      # url = "github:aionoid/nvf-avante-nvim";
+      # url = "github:notashelf/nvf";
+      url = "github:aionoid/nvf/mcphub-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.obsidian-nvim.follows = "obsidian-nvim";
     };

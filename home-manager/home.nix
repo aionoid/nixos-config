@@ -48,7 +48,7 @@
       # download helper
       vdhcoapp
       # youtube downloader
-      yt-dlp
+      # yt-dlp
       uv # python package manger in Rust
       nodejs # for npx and npm
     ];

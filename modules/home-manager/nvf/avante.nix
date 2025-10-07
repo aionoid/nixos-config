@@ -9,15 +9,15 @@
             # for v0.0.24^
             providers = {
               ollama = {
-                model = "qwen2.5-coder-ins-unc:nvim";
+                model = "qwen25coder:7bq4kl";
               };
-              ollama_qwen_7b_q6 = {
+              glm4 = {
                 __inherited_from = "ollama";
-                model = "qwen2.5u-coder:7b";
+                model = "glm4:q4xl";
               };
-              ollama_ds_8b_q6 = {
+              qwen3coder = {
                 __inherited_from = "ollama";
-                model = "deepseek-r1u:8b";
+                model = "qwen3coder:q4xl";
               };
             };
             # qwen_nvim = {

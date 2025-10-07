@@ -18,6 +18,7 @@
     ./mini.nix
     # ./codecompanion.nix
     ./avante.nix
+    ./mcphub.nix
   ];
 
   programs.nvf = {
