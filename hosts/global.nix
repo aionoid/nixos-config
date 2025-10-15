@@ -10,7 +10,11 @@
     git.enable = true;
     adb.enable = true;
     dconf.enable = true;
-    firefox.enable = true;
+    # firefox.enable = true;
+    # firefox = {
+    #   enable = true;
+    #   package = pkgs.librewolf;
+    # };
     zsh.enable = true;
   };
 
