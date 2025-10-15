@@ -14,12 +14,12 @@
       text = builtins.readFile ./user.js;
       executable = false;
     };
-    ".mozilla/firefox/work/chrome" = {
+    ".mozilla/firefox/private/chrome" = {
       source = ./chrome;
       recursive = true;
       executable = false;
     };
-    ".mozilla/firefox/work/user.js" = {
+    ".mozilla/firefox/private/user.js" = {
       text = builtins.readFile ./user.js;
       executable = false;
     };
@@ -136,7 +136,7 @@
 
         search = {
           force = true;
-          default = "Google"; # Set your default search engine here
+          default = "google"; # Set your default search engine here
           order = [
             "Yandex"
             "NixOS packages"
@@ -148,7 +148,7 @@
             "MyNixOS"
             "ComicK"
             "SearXNG"
-            "YouTube"
+            "youtube"
           ];
           engines = {
             "Yandex" = {
@@ -268,7 +268,7 @@
               # No keyword defined in original JSON
             };
 
-            "YouTube" = {
+            "youtube" = {
               urls = [
                 {
                   template = "https://www.youtube.com/results?search_query={searchTerms}&utm_source=opensearch";
@@ -284,9 +284,10 @@
         # userContent = builtins.readFile ./userContent.css;
       };
 
-      work = {
+      private = {
         id = 1;
-        name = "antiroot";
+        name = "I2P";
+        isDefault = false;
 
         extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
           ublock-origin
@@ -334,6 +335,16 @@
           "media.rdd-vpx.enabled" = true;
           "browser.tabs.tabmanager.enabled" = false;
           "full-screen-api.ignore-widgets" = false;
+          # I2P setup
+          "network.proxy.type" = true;
+          "network.proxy.http" = "127.0.0.1";
+          "network.proxy.http_port" = 4444;
+          "network.proxy.ssl" = "127.0.0.1";
+          "network.proxy.ssl_port" = 4444;
+          "network.proxy.socks" = "127.0.0.1";
+          "network.proxy.socks_port" = 4447;
+          "dom.security.https_only_mode" = false;
+          "keyword.enabled" = false;
         };
 
         # userChrome = builtins.readFile ./userChrome.css;
