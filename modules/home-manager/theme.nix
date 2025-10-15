@@ -25,12 +25,21 @@
     };
   };
 
-  stylix.targets.firefox = {
-    enable = true;
-    profileNames = [
-      "default"
-      "work"
-    ];
+  stylix.targets = {
+    librewolf = {
+      enable = true;
+      profileNames = [
+        "default"
+        # "work"
+      ];
+    };
+    firefox = {
+      enable = true;
+      profileNames = [
+        "default"
+        # "work"
+      ];
+    };
   };
 
   # qt = {
