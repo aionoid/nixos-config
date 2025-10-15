@@ -1,6 +1,7 @@
 {
   imports = [
     ./firefox
+    ./librewolf
     # ./alacritty
     # ./foot
     # ./imv
