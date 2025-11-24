@@ -24,6 +24,7 @@
     noto-fonts-cjk-sans
     google-fonts
     icomoon-feather
+    kacst
     # google-fonts.override
     # {fonts = ["reem-kufi" "aref-ruqaa"];}
   ];

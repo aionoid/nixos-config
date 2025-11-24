@@ -50,6 +50,7 @@
       git
       kitty
       wget
+      lsof
       uv # python package manger in Rust
       nodePackages.gitmoji-cli
       home-manager

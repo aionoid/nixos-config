@@ -8,7 +8,7 @@
     inputs.disko.nixosModules.disko
     inputs.hyprland.nixosModules.default
     inputs.sddm-sugar-candy-nix.nixosModules.default
-    ./googlefonts.nix
+    ./fonts.nix
     ./theme.nix
     ./gaming.nix
     ./ollama.nix

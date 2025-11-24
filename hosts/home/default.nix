@@ -30,6 +30,8 @@
     ../obs.nix
     ## VM
     ../vm.nix
+    ## office
+    ../office.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
