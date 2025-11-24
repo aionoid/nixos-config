@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./disko-config.nix
-    # ./printer.nix
+    ./printer.nix
 
     ../global.nix
     # desktop manager
@@ -28,6 +28,8 @@
     ../waydroid.nix
     ## obs-studio
     ../obs.nix
+    ## VM
+    ../vm.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
@@ -36,7 +38,7 @@
   users.users.ovo = {
     isNormalUser = true;
     description = "ovo";
-    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin"];
     useDefaultShell = true;
     # packages = with pkgs; [];
   };
