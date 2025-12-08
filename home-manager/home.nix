@@ -40,6 +40,8 @@
       alsa-utils
       usbutils
       gparted
+      baobab
+      lsof
       # pdf
       # editor
       sysstat
