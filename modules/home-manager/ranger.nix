@@ -41,7 +41,7 @@
     # lynx, w3m or elinks to preview html pages
     w3m
     # pdftotext or mutool (and fmt) for textual pdf previews, pdftoppm to preview as image
-    poppler_utils
+    poppler-utils
     # djvutxt for textual DjVu previews, ddjvu to preview as image
     djvulibre
     # calibre or epub-thumbnailer for image previews of ebooks

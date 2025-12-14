@@ -21,7 +21,7 @@ in {
       #-- General ----------------------------------------------------
       general = {
         border_size = hypr_border_size;
-        no_border_on_floating = false;
+        # no_border_on_floating = false; REMOVED
         gaps_in = hypr_gaps_in;
         gaps_out = hypr_gaps_out;
         layout = "dwindle";

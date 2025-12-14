@@ -181,7 +181,7 @@ in {
               allPorts;
             services.postgresql = {
               enable = true;
-              package = pkgs.postgresql_13;
+              package = pkgs.postgresql; # postgresql_13 is EOL
               settings = {
                 logging_collector = lib.mkForce "on";
                 log_directory = lib.mkForce "pg_log";
@@ -261,7 +261,7 @@ in {
             in {
               enable = true;
               enablePHP = true;
-              phpPackage = pkgs.php81;
+              phpPackage = pkgs.php82; # php81 end of life
               virtualHosts.localhost = {
                 documentRoot = source-code;
               };

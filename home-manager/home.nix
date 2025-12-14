@@ -104,8 +104,10 @@
 
     git = {
       enable = true;
-      userName = "Farouk Brown";
-      userEmail = "aionoid.xd@gmail.com";
+      settings = {
+        user.name = "Farouk Brown";
+        user.email = "aionoid.xd@gmail.com";
+      };
     };
   };
 

@@ -35,7 +35,7 @@
       };
       #
       # #-- Blurring Layer Surfaces ------------------------------------
-      layerrule = "blur";
+      layerrule = "blur on";
 
       # #-- Output -----------------------------------------------------
       # monitor = ,preferred,auto,1
@@ -63,26 +63,26 @@
         special_scale_factor = 0.8;
         new_on_top = false;
         orientation = "left";
-        inherit_fullscreen = true;
+        # inherit_fullscreen = true; # REMOVED
       };
 
       # #-- Window Rules -----------------------------------------------
       windowrule = [
-        "float, class:foot-float"
-        "float, class:kitty-float"
-        "float, class:yad|nm-connection-editor|pavucontrolk"
-        "float, class:xfce-polkit|kvantummanager|qt5ct"
-        "float, class:feh|Viewnior|Gpicview|Gimp|MPlayer"
-        "float, class:VirtualBox Manager|qemu|Qemu-system-x86_64"
-        "float, title:File Operation Progress"
-        "float, title:Confirm to replace files"
+        "float on, match:class foot-float"
+        "float on, match:class kitty-float"
+        "float on, match:class yad|nm-connection-editor|pavucontrolk"
+        "float on, match:class xfce-polkit|kvantummanager|qt5ct"
+        "float on, match:class feh|Viewnior|Gpicview|Gimp|MPlayer"
+        "float on, match:class VirtualBox Manager|qemu|Qemu-system-x86_64"
+        "float on, match:title File Operation Progress"
+        "float on, match:title Confirm to replace files"
 
-        "size 60% 64%, class:Viewnior"
-        "center, class:Viewnior"
+        "size 60% 64%, match:class Viewnior"
+        "center on, match:class Viewnior"
 
-        "animation slide down,class:foot-full"
-        "animation slide down,class:kitty-full"
-        "animation slide up,class:wlogout"
+        "animation slide down,match:class foot-full"
+        "animation slide down,match:class kitty-full"
+        "animation slide up,match:class wlogout"
       ];
 
       bindl = let

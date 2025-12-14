@@ -57,7 +57,7 @@
         name = "ovo";
         isDefault = true;
 
-        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
           ublock-origin
           # bitwarden
           darkreader
@@ -289,7 +289,7 @@
         name = "I2P";
         isDefault = false;
 
-        extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
           ublock-origin
           # bitwarden
           darkreader

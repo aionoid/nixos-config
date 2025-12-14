@@ -11,7 +11,7 @@
     ./fonts.nix
     ./theme.nix
     ./gaming.nix
-    ./ollama.nix
+    # ./ollama.nix
     # ./open-webui.nix
     ./privacy.nix
   ];

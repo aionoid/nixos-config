@@ -7,7 +7,7 @@
   programs.steam.gamescopeSession.enable = true;
 
   environment.systemPackages = with pkgs; [
-    protonup
+    protonup-ng # renamed from protonup
     # mangohud
     # lutris
     # heroic

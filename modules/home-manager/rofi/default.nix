@@ -5,9 +5,9 @@
 }: {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi; # rofi-wayland; merged to rofi
     plugins = [
-      pkgs.rofi-emoji-wayland
+      pkgs.rofi-emoji #rofi-emoji-wayland merged to rofi-emoji
     ];
   };
   # rofi themes
