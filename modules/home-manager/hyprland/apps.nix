@@ -10,7 +10,7 @@
         colorpicker = "colorpicker";
         files = "nautilus";
         editor = "nvim";
-        browser = "firefox";
+        browser = "zen"; # "firefox";
         rofi_emoji = "rofi_emoji";
         rofi_launcher = "rofi_launcher";
         rofi_runner = "rofi_apps";
