@@ -26,6 +26,12 @@
   };
 
   stylix.targets = {
+    zen-browser = {
+      enable = false;
+      profileNames = [
+        "default"
+      ];
+    };
     librewolf = {
       enable = true;
       profileNames = [
