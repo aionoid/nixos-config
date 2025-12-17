@@ -1,6 +1,7 @@
 {
   imports = [
     ./firefox
+    ./zen
     # ./librewolf
     # ./alacritty
     # ./foot

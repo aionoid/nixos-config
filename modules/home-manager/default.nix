@@ -10,6 +10,7 @@
     # inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
     inputs.nvf.homeManagerModules.default
+    inputs.zen-browser.homeModules.beta
     # ./nixvim
     ./nvf
     ./shell
