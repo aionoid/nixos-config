@@ -1,3 +1,6 @@
-_: {
-  virtualisation.waydroid.enable = true;
+{pkgs, ...}: {
+  virtualisation.waydroid = {
+    enable = true;
+    package = pkgs.waydroid-nftables;
+  };
 }
