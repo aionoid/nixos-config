@@ -3,4 +3,8 @@
     enable = true;
     package = pkgs.waydroid-nftables;
   };
+  environment.systemPackages = with pkgs; [
+    waydroid-helper
+    lzip
+  ];
 }

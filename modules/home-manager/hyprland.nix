@@ -76,6 +76,13 @@
         "float on, match:class VirtualBox Manager|qemu|Qemu-system-x86_64"
         "float on, match:title File Operation Progress"
         "float on, match:title Confirm to replace files"
+        "float on, match:class Waydroid"
+        "float on, match:class com\.jaoushingan\.WaydroidHelper"
+
+        "size 950 976, match:class Waydroid"
+
+        "workspace 4, match:class Waydroid"
+        "workspace 4, match:class com\.jaoushingan\.WaydroidHelper"
 
         "size 60% 64%, match:class Viewnior"
         "center on, match:class Viewnior"
