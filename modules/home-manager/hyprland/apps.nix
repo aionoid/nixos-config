@@ -8,7 +8,8 @@
         screenshot = "rofi_screenshot";
         lockscreen = "hyprlock";
         colorpicker = "colorpicker";
-        files = "nautilus";
+        # files = "nautilus";
+        files = "nemo";
         editor = "nvim";
         browser = "zen"; # "firefox";
         rofi_emoji = "rofi_emoji";

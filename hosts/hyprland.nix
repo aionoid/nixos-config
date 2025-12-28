@@ -20,7 +20,8 @@
   environment.systemPackages = with pkgs; #host/Hyprland
   
     [
-      nautilus
+      # nautilus
+      nemo-with-extensions
       gthumb
       loupe
       evince
