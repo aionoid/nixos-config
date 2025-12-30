@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     # hyprpanel
     networkmanagerapplet
-    swww
+    # swww
     libnotify
     xdg-user-dirs
   ];
@@ -10,7 +10,7 @@
     exec-once = [
       "swww-daemon"
       "nm-applet"
-      "scriptChangeWallpaper ~/Pictures/wallpaper"
+      # "scriptChangeWallpaper ~/Pictures/wallpaper"
       # "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent"
       "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
     ];

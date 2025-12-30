@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   # wallpaperChange = pkgs.writeShellScriptBin "wallpaperChange"
   home.packages = with pkgs; [
-    (writeShellScriptBin "scriptChangeWallpaper" (builtins.readFile ./changeWallpaper.sh))
+    # (writeShellScriptBin "scriptChangeWallpaper" (builtins.readFile ./changeWallpaper.sh))
     (writeShellScriptBin "rofi_launcher" (builtins.readFile ./launchers.sh))
     (writeShellScriptBin "rofi_emoji" (builtins.readFile ./emoji.sh))
     (writeShellScriptBin "rofi_apps" (builtins.readFile ./apps.sh))

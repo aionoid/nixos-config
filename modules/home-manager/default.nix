@@ -27,5 +27,6 @@
     ./hypridle.nix
     ./hyprlock.nix
     # ./googlefonts.nix
+    ./wpaperd.nix
   ];
 }
