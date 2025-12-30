@@ -24,6 +24,7 @@
     ../printing.nix
     # samba + win print
     # ../samba.nix
+    ../vm.nix
   ];
 
   networking.hostName = "work";
