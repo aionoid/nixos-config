@@ -116,6 +116,9 @@
 
     # GPU Info/Controle/Monitor temp,fan,OC
     lact.enable = true;
+
+    upower.enable = true;
+    power-profiles-daemon.enable = true;
   };
 
   # Enable Gnome Disks

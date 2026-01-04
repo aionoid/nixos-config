@@ -49,6 +49,8 @@
       #neovim-gtk
       # download helper
       vdhcoapp
+      qalculate-gtk
+      pc
       # youtube downloader
       # yt-dlp
       uv # python package manger in Rust

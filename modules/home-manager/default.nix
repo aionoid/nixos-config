@@ -11,6 +11,9 @@
     inputs.hyprland.homeManagerModules.default
     inputs.nvf.homeManagerModules.default
     inputs.zen-browser.homeModules.beta
+    # inputs.caelestia-shell.homeManagerModules.default
+    # inputs.dms.homeModules.dankMaterialShell.default
+    inputs.noctalia.homeModules.default
     # ./nixvim
     ./nvf
     ./shell
@@ -20,7 +23,10 @@
     ./rofi
     # ./gbar.nix
     ./hyprland.nix
-    ./waybar.nix
+    # ./waybar.nix
+    # ./quickshell_caelestia.nix
+    # ./quickshell_dms.nix
+    ./quickshell_noctalia.nix
     ./mako.nix
     # ./ags.nix
     ./ranger.nix
