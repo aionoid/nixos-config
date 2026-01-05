@@ -26,6 +26,7 @@
   };
 
   qt = {
+    enable = true;
     qt6ctSettings = {
       Appearance = {
         style = "kvantum-dark";

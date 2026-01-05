@@ -1,20 +1,10 @@
-{...}: let
+{lib, ...}: let
   # Elements
   hypr_border_size = 2;
   hypr_gaps_in = 5;
   hypr_gaps_out = 10;
-  hypr_rounding = 10;
-  #
-  # # Colors
-  # gradient_angle = "45deg";
-  # active_border_col_1 = "0xFFB4A1DB";
-  # active_border_col_2 = "0xFFD04E9D";
-  # inactive_border_col_1 = "1e2030";
-  # inactive_border_col_2 = "1e2030";
-  # active_shadow_col = "0x66000000";
+  hypr_rounding = 20;
   inactive_shadow_col = "0x66000000";
-  #group_border_col = "0xFFDB695B";
-  #group_border_active_col = "0xFF4BC66D";
 in {
   wayland.windowManager.hyprland = {
     settings = {
@@ -40,6 +30,7 @@ in {
       #-- Decoration -------------------------------------------------
       decoration = {
         rounding = hypr_rounding;
+        rounding_power = 3;
         #multisample_edges = true
         active_opacity = 0.9;
         inactive_opacity = 0.6;
@@ -48,21 +39,23 @@ in {
 
         dim_inactive = false;
         dim_strength = 0.5;
+
         shadow = {
           enabled = true;
-          range = 10;
+          range = 4;
           render_power = 3;
-          # color = active_shadow_col;
           color_inactive = inactive_shadow_col;
-          # offset = "[0, 0]";
+          color = lib.mkForce "rgba(1a1a1aee)";
           scale = 1.0;
         };
+
         blur = {
           enabled = true;
-          passes = 3;
-          size = 6;
+          size = 3;
+          passes = 2;
           brightness = 1;
           noise = 0.01;
+          vibrancy = 0.1696;
           # contrast = 1;
           popups = true;
           popups_ignorealpha = 0.6;

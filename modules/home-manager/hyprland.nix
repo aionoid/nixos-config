@@ -35,7 +35,14 @@
       };
       #
       # #-- Blurring Layer Surfaces ------------------------------------
-      layerrule = "blur on";
+      # layerrule = "blur on";
+      layerrule = [
+        "ignore_alpha = 0.5, match:namespace noctalia-.*$"
+        "blur = on , match:namespace noctalia-.*$"
+        "blur_popups = on , match:namespace noctalia-.*$"
+        # "match:namespace noctalia-.*$, blur_popups = on, ignore_alpha = 0.5, blur = on"
+        "blur on"
+      ];
 
       # #-- Output -----------------------------------------------------
       # monitor = ,preferred,auto,1
