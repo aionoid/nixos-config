@@ -76,15 +76,7 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
 
-      # QT_STYLE_OVERRIDE = "adwaita-dark";
-      # QT_STYLE_OVERRIDE = "adwaita";
-
       EDITOR = "nvim";
-
-      # GTK_IM_MODULE = "fcitx";
-      # QT_IM_MODULE = "fcitx";
-      # SDL_IM_MODULE = "fcitx";
-      # XMODIFIERS = "@im=fcitx";
     };
   };
   # enable automount for new drives

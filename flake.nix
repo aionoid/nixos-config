@@ -19,6 +19,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # dms = {
     #   url = "github:AvengeMedia/DankMaterialShell/stable";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -179,15 +180,6 @@
     overlays = import ./overlays {inherit inputs;};
     nixosModules = import ./modules/nixos {inherit inputs;};
     homeManagerModules = import ./modules/home-manager {inherit inputs;};
-    # Add empty homeManagerModules if ./modules/home-manager doesn't exist
-    # homeManagerModules =
-    #   if builtins.pathExists ./modules/home-manager
-    #   then import ./modules/home-manager {inherit inputs;}
-    #   else {};
-    # homeManagerModules = {
-    #   imports = [./modules/home-manager];
-    #   _module.args = {inherit inputs outputs;};
-    # };
 
     nixosConfigurations = {
       home = lib.nixosSystem {

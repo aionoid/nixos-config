@@ -24,14 +24,6 @@
         background_swap = "~/.config/hypr/scripts/background";
         waybar_themes = "~/.config/hypr/waybar/scripts/change-theme.sh";
         cheatsheet = "kitty --app-id='kitty-float' -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
-        # cheatsheet = "foot --app-id='foot-float' --config=\"$HOME/.config/hypr/foot/foot.ini\" -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
-        # backlight = "~/.config/hypr/scripts/brightness        ";
-        # wlogout = "~/.config/hypr/scripts/wlogout           ";
-        # wofi_launcher = "wofi -I";
-        # wofi_screenshot = "~/.config/sway/scripts/screenshot.sh";
-        #
-        # wofi_menu = "~/.config/hypr/scripts/wofi_menu           ";
-        # wofi_powermenu = "~/.config/hypr/scripts/wofi_powermenu      ";
       in [
         "SUPER, G, togglegroup"
         "SUPER, G, exec, ${notifycmd} 'Toggled Group Mode'"

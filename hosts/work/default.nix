@@ -25,6 +25,8 @@
     # samba + win print
     # ../samba.nix
     ../vm.nix
+    #waydroid
+    #../waydroid.nix
   ];
 
   networking.hostName = "work";

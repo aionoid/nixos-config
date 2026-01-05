@@ -25,7 +25,37 @@
     };
   };
 
+  qt = {
+    qt6ctSettings = {
+      Appearance = {
+        style = "kvantum-dark";
+        icon_theme = "kora";
+        standar_dialogs = "default";
+      };
+      Fonts = {
+        fixed = "\"JetBrainsMono Nerd Font Mono,12\"";
+        general = "\"DejaVu Sans,12\"";
+        # fixed = "\"Roboto Mono [GOOG],12\"";
+        # general = "\"Roboto,12\"";
+      };
+    };
+    qt5ctSettings = {
+      Appearance = {
+        style = "kvantum-dark";
+        icon_theme = "kora";
+        standar_dialogs = "default";
+      };
+      Fonts = {
+        fixed = "\"JetBrainsMono Nerd Font Mono,12\"";
+        general = "\"DejaVu Sans,12\"";
+        # fixed = "\"Roboto Mono [GOOG],12\"";
+        # general = "\"Roboto,12\"";
+      };
+    };
+  };
+
   stylix.targets = {
+    noctalia-shell.enable = true;
     zen-browser = {
       enable = false;
       profileNames = [
@@ -47,31 +77,4 @@
       ];
     };
   };
-
-  # qt = {
-  #   enable = true;
-  #   # platformTheme.name = "gtk3";
-  #   # style.name = "gtk2";
-  # };
-
-  # home.packages = with pkgs; [
-  #   themechanger
-  #   # adwaita-qt
-  #   # adwaita-qt6
-  #   libsForQt5.qt5ct
-  #   libsForQt5.qtstyleplugins
-  #   libsForQt5.qtstyleplugin-kvantum
-  #   qt6Packages.qt6ct
-  #   qt6Packages.qt6gtk2
-  #   qt6Packages.qtstyleplugin-kvantum
-  #   # qgnomeplatform
-  #   # qgnomeplatform-qt6
-  #   # libsForQt5.breeze-qt5
-  #   # libsForQt5.plasma-integration
-  #   # lxqt.lxqt-config
-  #   # lxqt.lxqt-qtplugin
-  # ];
-
-  # stylix.targets.waybar.enable = false;
-  # stylix.targets.hyprpaper.enable = lib.mkForce false;
 }
