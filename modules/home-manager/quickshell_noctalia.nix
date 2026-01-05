@@ -22,52 +22,74 @@
           left = [
             {
               id = "Launcher";
+              usePrimaryColor = true;
+              icon = "3d-cube-sphere";
             }
             {
-              id = "Clock";
-            }
-            {
-              id = "SystemMonitor";
+              id = "Workspace";
             }
             {
               id = "ActiveWindow";
-            }
-            {
-              id = "MediaMini";
+              colorizeIcons = true;
             }
           ];
           center = [
             {
-              id = "Workspace";
+              id = "Taskbar";
+            }
+            {
+              id = "MediaMini";
+            }
+            {
+              id = "SystemMonitor";
+              compactMode = false;
             }
           ];
           right = [
             {
-              id = "ScreenRecorder";
+              id = "KeyboardLayout";
+              showIcon = true;
+              displayMode = "forceOpen";
+            }
+            {
+              id = "LockKeys";
+              "showCapsLock" = true;
+              "showNumLock" = true;
+              "showScrollLock" = false;
+              "capsLockIcon" = "square-rounded-letter-c";
+              "numLockIcon" = "square-rounded-letter-n";
+              "scrollLockIcon" = "square-rounded-letter-s";
             }
             {
               id = "Tray";
+              colorizeIcons = true;
+            }
+            {
+              id = "ScreenRecorder";
             }
             {
               id = "NotificationHistory";
             }
             {
-              id = "Battery";
-            }
-            {
               id = "Volume";
             }
+            # {
+            #   id = "Brightness";
+            # }
             {
-              id = "Brightness";
+              id = "Clock";
             }
             {
               id = "ControlCenter";
+              icon = "settings";
+              enableColorization = true;
+              colorizeSystemIcon = "error";
             }
           ];
         };
       };
       general = {
-        avatarImage = "";
+        avatarImage = "~/.face";
         dimmerOpacity = 0.2;
         showScreenCorners = true;
         forceBlackScreenCorners = true;
@@ -149,7 +171,7 @@
         overviewEnabled = false;
         directory = "~/Pictures/wallpaper/";
         monitorDirectories = [];
-        enableMultiMonitorDirectories = false;
+        enableMultiMonitorDirectories = true;
         recursiveSearch = false;
         setWallpaperOnAllMonitors = true;
         fillMode = "crop";
@@ -390,7 +412,7 @@
         enableDdcSupport = false;
       };
       colorSchemes = {
-        useWallpaperColors = true;
+        useWallpaperColors = false;
         predefinedScheme = "Noctalia (default)";
         darkMode = true;
         schedulingMode = "off";
@@ -431,7 +453,7 @@
         enabled = true;
         forced = false;
         autoSchedule = true;
-        nightTemp = "4000";
+        nightTemp = "5600";
         dayTemp = "6500";
         manualSunrise = "06:30";
         manualSunset = "18:30";

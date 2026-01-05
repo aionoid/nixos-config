@@ -37,9 +37,9 @@
       # #-- Blurring Layer Surfaces ------------------------------------
       # layerrule = "blur on";
       layerrule = [
-        "ignore_alpha = 0.5, match:namespace noctalia-.*$"
-        "blur = on , match:namespace noctalia-.*$"
-        "blur_popups = on , match:namespace noctalia-.*$"
+        "ignore_alpha = 0.5, match:namespace noctalia-.*"
+        "blur = on , match:namespace noctalia-.*"
+        "blur_popups = on , match:namespace noctalia-.*"
         # "match:namespace noctalia-.*$, blur_popups = on, ignore_alpha = 0.5, blur = on"
         "blur on"
       ];
@@ -88,8 +88,10 @@
 
         "size 950 976, match:class Waydroid"
 
+        # "workspace 5, match:title .*Private.*"
         "workspace 4, match:class Waydroid"
         "workspace 4, match:class com\.jaoushingan\.WaydroidHelper"
+        "workspace 2, match:class zen-beta"
 
         "size 60% 64%, match:class Viewnior"
         "center on, match:class Viewnior"
