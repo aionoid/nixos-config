@@ -92,6 +92,7 @@
         "workspace 4, match:class Waydroid"
         "workspace 4, match:class com\.jaoushingan\.WaydroidHelper"
         "workspace 2, match:class zen-beta"
+        "opacity 1.0 override 0.85 override 0.95 overrid, match:class zen-beta"
 
         "size 60% 64%, match:class Viewnior"
         "center on, match:class Viewnior"
