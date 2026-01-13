@@ -34,9 +34,9 @@
             }
           ];
           center = [
-            {
-              id = "Taskbar";
-            }
+            # {
+            #   id = "Taskbar";
+            # }
             {
               id = "MediaMini";
             }
@@ -63,6 +63,14 @@
             {
               id = "Tray";
               colorizeIcons = true;
+              drawerEnabled = true;
+              hidePassive = false;
+              pinned = [
+                "nm-applet"
+                "udiskie"
+              ];
+              blacklist = [
+              ];
             }
             {
               id = "ScreenRecorder";
