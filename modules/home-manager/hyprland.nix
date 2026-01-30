@@ -86,7 +86,7 @@
         "float on, match:class Waydroid"
         "float on, match:class com\.jaoushingan\.WaydroidHelper"
 
-        "size 950 976, match:class Waydroid"
+        "size 414 896, match:class Waydroid"
 
         # "workspace 5, match:title .*Private.*"
         "workspace 4, match:class Waydroid"

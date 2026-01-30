@@ -23,6 +23,9 @@
         Cryptomining = true;
         Fingerprinting = true;
       };
+      HomePage = {
+        StartPage = "homepage";
+      };
     };
     profiles = {
       default = let
