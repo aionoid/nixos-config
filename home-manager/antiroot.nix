@@ -1,9 +1,21 @@
-{...}: {
+{pkgs, ...}: {
   imports = [./home.nix];
   # username
   home = {
     username = "antiroot";
     homeDirectory = "/home/antiroot";
+  };
+  nixpkgs.config.permittedInsecurePackages = [
+    "googleearth-pro-7.3.6.10201"
+  ];
+  home = {
+    packages = with pkgs; [
+      onlyoffice-desktopeditors
+      brasero
+      # google earth and GIS
+      qgis
+      googleearth-pro
+    ];
   };
 
   wayland.windowManager.hyprland = {
