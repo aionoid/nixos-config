@@ -51,6 +51,8 @@
     bluetooth.enable = true;
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
+    aic8800.enable = true;
+    usb-modeswitch.enable = true;
   };
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

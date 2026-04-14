@@ -14,6 +14,12 @@
       # inputs.obsidian-nvim.follows = "obsidian-nvim";
     };
 
+    # AIC8800 wifi key
+    aic8800 = {
+      url = "github:kurumeii/aic8800-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # QuickShell
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";

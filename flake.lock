@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "aic8800": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775126310,
+        "narHash": "sha256-0q3xs5vw91CxGcsUHCe2Zy1zxAiujFbJxaRtZb2vvH0=",
+        "owner": "kurumeii",
+        "repo": "aic8800-nix",
+        "rev": "32709a3778dba88f298564831cab6bc26ee8d1c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kurumeii",
+        "repo": "aic8800-nix",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -965,6 +985,7 @@
     },
     "root": {
       "inputs": {
+        "aic8800": "aic8800",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-utils": "flake-utils",

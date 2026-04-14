@@ -8,6 +8,7 @@
     inputs.disko.nixosModules.disko
     inputs.hyprland.nixosModules.default
     inputs.sddm-sugar-candy-nix.nixosModules.default
+    inputs.aic8800.nixosModules.default
     ./fonts.nix
     ./theme.nix
     ./gaming.nix
