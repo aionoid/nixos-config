@@ -33,6 +33,8 @@
     ## office
     ../office.nix
     ../podman_containers.nix
+    # AI
+    ../llama-cpp.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users

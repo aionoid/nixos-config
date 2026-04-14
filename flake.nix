@@ -20,6 +20,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # llama.cpp
+    llama-cpp = {
+      url = "github:ggml-org/llama.cpp"; #cuda";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # QuickShell
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -120,44 +126,6 @@
       "x86_64-darwin"
     ];
 
-    # Common configuration for all systems
-    commonPkgsConfig = {
-      allowUnfree = true;
-    };
-
-    # Common configuration for all systems
-    # homePkgsConfig =
-    #   commonPkgsConfig
-    #   // {
-    #     cudaSupport = true;
-    #   };
-
-    # Python overlay (moved to a separate variable for clarity) FIX for onnxruntime
-    # TODO: use "https://github.com/NixOS/nixpkgs/pull/382920"
-    # pythonOverlay = final: prev: {
-    #   pythonPackagesExtensions =
-    #     prev.pythonPackagesExtensions
-    #     ++ [
-    #       (python-final: python-prev: {
-    #         # onnxruntime = python-prev.onnxruntime.overridePythonAttrs (oldAttrs: {
-    #         #   buildInputs = lib.lists.remove final.onnxruntime oldAttrs.buildInputs;
-    #         # });
-    #         rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (oldAttrs: {
-    #           disabledTests =
-    #             [
-    #               # Needs Internet access
-    #               "test_long_img"
-    #             ]
-    #             ++ lib.optionals python-prev.onnxruntime.cudaSupport [
-    #               # segfault when built with cuda support but GPU is not availaible in build environment
-    #               "test_ort_cuda_warning"
-    #               "test_ort_dml_warning"
-    #             ];
-    #         });
-    #       })
-    #     ];
-    # };
-
     #TODO: refactore this >>
     # Base package import function
 
@@ -166,6 +134,12 @@
     #     inherit system;
     #     config = commonPkgsConfig;
     #   };
+
+    # Common configuration for all systems
+    commonPkgsConfig = {
+      allowUnfree = true;
+      cudaSupport = true;
+    };
 
     # System-specific package sets
     pkgsFor = system:
@@ -195,7 +169,7 @@
             cudaSupport = true;
             allowUnfree = true;
           };
-          # overlays = [pythonOverlay];
+          overlays = [inputs.llama-cpp.overlays.default];
         };
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
@@ -207,7 +181,7 @@
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config = commonPkgsConfig;
-          overlays = [];
+          overlays = [inputs.llama-cpp.overlays.default];
         };
         modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {
