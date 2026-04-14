@@ -19,11 +19,11 @@
       systemd.enable = true;
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
       kernelModules = [];
-      supportedFilesystems = ["ntfs" "btrfs"];
+      supportedFilesystems = ["ntfs" "btrfs" "hfsplus"];
     };
     kernelModules = ["kvm-amd" "v4l2loopback"];
     extraModulePackages = with config.boot.kernelPackages; [v4l2loopback.out];
-    blacklistedKernelModules = ["rt2x00usb" "rt2x00lib"]; # "rt2800usb"
+    blacklistedKernelModules = ["rt2x00usb rt2800usb"]; # rt2800usb
   };
   swapDevices = [
     {
@@ -42,9 +42,16 @@
     options iwlmvm power_scheme=1
 
     options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+
+    # Disable hardware encryption to stop driver crashes RT2870/3070 WifiSky
+    options rt2800usb nohwcrypt=y
   '';
 
-  hardware.bluetooth.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
+  };
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

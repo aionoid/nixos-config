@@ -62,6 +62,7 @@
       ntfs3g
       dosfstools
       ntfsprogs
+      hfsprogs
       #scrounge-ntfs
       #ntfs2btrfs
       #MTP fs
