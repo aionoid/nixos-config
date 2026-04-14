@@ -1,10 +1,16 @@
 # tool for testing local network test
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   services.llama-cpp = {
-    enable = true;
-    packages = pkgs.llama-cpp.packages.${pkgs.system}.cuda;
+    enable = false;
+    package = inputs.llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.cuda;
+    model = "/data/ollama/tiny-llm-q8_0.gguf";
   };
-  # environment.systemPackages = [
-  #   pkgs.llama-cpp # This is now the version from the github repo
-  # ];
+  environment.systemPackages = [
+    inputs.llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.cuda
+    # pkgs.llama-cpp # This is now the version from the github repo
+  ];
 }

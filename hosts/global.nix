@@ -56,6 +56,7 @@
       home-manager
       #setting FLAKE=/etc/nixos/ config for nh
       nh
+      usb-modeswitch
       # icon theme
       gnome-icon-theme
       # ntfs tools
