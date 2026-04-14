@@ -27,6 +27,9 @@
     ../vm.nix
     #waydroid
     #../waydroid.nix
+    # ../../modules/nixos/ollama.nix
+    ../iperf3.nix
+    ../podman_containers.nix
   ];
 
   networking.hostName = "work";

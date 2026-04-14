@@ -64,6 +64,8 @@
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
   # Bluetooth
   hardware.bluetooth.enable = true;
+  hardware.aic8800.enable = true;
+  hardware.usb-modeswitch.enable = true;
   # hardware.bluetooth.settings = {
   #   General = {
   #     ControllerMode = "le";
