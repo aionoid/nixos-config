@@ -28,7 +28,8 @@
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/80C9-8A3D";
+      # device = "/dev/disk/by-uuid/80C9-8A3D";
+      device = "/dev/disk/by-uuid/5FA6-65DC";
       fsType = "vfat";
       options = ["fmask=0077" "dmask=0077"];
     };
