@@ -32,6 +32,7 @@
     ../vm.nix
     ## office
     ../office.nix
+    ../podman_containers.nix
   ];
   networking.hostName = "home";
   # set defaultUserShell for all users
