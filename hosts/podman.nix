@@ -8,9 +8,10 @@ _: {
     };
   };
 
-  users.users.ovo = {
-    extraGroups = [
-      "podman"
-    ];
-  };
+  # add USER to group podman
+  # users.users.USER= {
+  #   extraGroups = [
+  #     "podman"
+  #   ];
+  # };
 }

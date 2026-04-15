@@ -29,7 +29,8 @@
     #../waydroid.nix
     # ../../modules/nixos/ollama.nix
     ../iperf3.nix
-    ../podman_containers.nix
+    ../podman.nix
+    ../llama-cpp.nix
   ];
 
   networking.hostName = "work";
@@ -39,7 +40,7 @@
   users.users.antiroot = {
     isNormalUser = true;
     description = "antiroot";
-    extraGroups = ["networkmanager" "wheel" "ollama"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin" "podman"];
     useDefaultShell = true;
     # packages = with pkgs; [ ];
   };

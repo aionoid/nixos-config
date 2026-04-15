@@ -32,7 +32,7 @@
     ../vm.nix
     ## office
     ../office.nix
-    ../podman_containers.nix
+    ../podman.nix
     # AI
     ../llama-cpp.nix
   ];
@@ -43,7 +43,7 @@
   users.users.ovo = {
     isNormalUser = true;
     description = "ovo";
-    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin" "podman"];
     useDefaultShell = true;
     # packages = with pkgs; [];
   };

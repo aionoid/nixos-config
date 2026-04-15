@@ -126,19 +126,9 @@
       "x86_64-darwin"
     ];
 
-    #TODO: refactore this >>
-    # Base package import function
-
-    # basePkgs = system:
-    #   import nixpkgs {
-    #     inherit system;
-    #     config = commonPkgsConfig;
-    #   };
-
     # Common configuration for all systems
     commonPkgsConfig = {
       allowUnfree = true;
-      cudaSupport = true;
     };
 
     # System-specific package sets
@@ -149,7 +139,6 @@
         overlays = [];
         config = commonPkgsConfig;
       };
-    #<< to this
 
     # Home-specific package set with the overlay
     homePkgs = pkgsFor "x86_64-linux"; # Adjust system as needed
