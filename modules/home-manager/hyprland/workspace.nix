@@ -22,6 +22,8 @@
       bind = let
         notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
       in [
+        # noctalia workspace-overview plugin
+        "SUPER, TAB, exec, noctalia-shell ipc call plugin:workspace-overview toggle"
         #
         # # -- Scratchpad --
         "SUPER_SHIFT, EQUAL, movetoworkspace,special"

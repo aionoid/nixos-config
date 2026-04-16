@@ -2,6 +2,85 @@
   programs.noctalia-shell = {
     enable = true;
     systemd.enable = true;
+    plugins = {
+      sources = [
+        {
+          enabled = true;
+          name = "Official Noctalia Plugins";
+          url = "https://github.com/noctalia-dev/noctalia-plugins";
+        }
+      ];
+      states = {
+        catwalk = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        usb-drive-manager = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        mpd = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        mawaqit = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        workspace-overview = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        screen-recorder = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        # latency-monitor = {
+        #   enabled = true;
+        #   sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        # };
+      };
+      version = 2;
+    };
+    # this may also be a string or a path to a JSON file.
+
+    pluginSettings = {
+      mawaqit = {
+        "city" = "Adrar";
+        "country" = "Algeria";
+        "method" = 3;
+        "school" = 0;
+        "showCountdown" = true;
+        "showElapsed" = false;
+        "hidePrayerName" = false;
+        "showNotifications" = true;
+        "playAzan" = false;
+        "azanFile" = "azan1.mp3";
+        "hijriDayOffset" = 0;
+        "tune" = false;
+        "tuneFajr" = 0;
+        "tuneDhuhr" = 0;
+        "tuneAsr" = 0;
+        "tuneMaghrib" = 0;
+        "tuneIsha" = 0;
+        "widgetIcon" = "building-mosque";
+        "dynamicIcon" = false;
+        "textColor" = "none";
+        "iconColor" = "none";
+        "activeColor" = "primary";
+      };
+      catwalk = {
+        minimumThreshold = 25;
+        hideBackground = true;
+      };
+      mpd = {
+        leftButton = "next";
+        rightButton = "toggle";
+        middleButton = "shuffle";
+        shuffleStopsPlayback = true;
+      };
+      # this may also be a string or a path to a JSON file.
+    };
     settings = lib.mkForce {
       settingsVersion = 0;
       bar = {
@@ -34,9 +113,15 @@
             }
           ];
           center = [
-            # {
-            #   id = "Taskbar";
-            # }
+            {
+              id = "plugin:catwalk";
+            }
+            {
+              id = "plugin:mawaqit";
+            }
+            {
+              id = "plugin:mpd";
+            }
             {
               id = "MediaMini";
             }
@@ -44,8 +129,14 @@
               id = "SystemMonitor";
               compactMode = false;
             }
+            # {
+            #   id = "plugin:latency-monitor";
+            # }
           ];
           right = [
+            {
+              id = "plugin:screen-recorder";
+            }
             {
               id = "KeyboardLayout";
               showIcon = true;
@@ -61,6 +152,9 @@
               "scrollLockIcon" = "square-rounded-letter-s";
             }
             {
+              id = "plugin:usb-drive-manager";
+            }
+            {
               id = "Tray";
               colorizeIcons = true;
               drawerEnabled = true;
@@ -71,9 +165,6 @@
               ];
               blacklist = [
               ];
-            }
-            {
-              id = "ScreenRecorder";
             }
             {
               id = "NotificationHistory";
