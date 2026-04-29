@@ -11,10 +11,6 @@
         }
       ];
       states = {
-        catwalk = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
         usb-drive-manager = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
@@ -82,7 +78,7 @@
       # this may also be a string or a path to a JSON file.
     };
     settings = lib.mkForce {
-      settingsVersion = 0;
+      settingsVersion = 59;
       bar = {
         position = "top";
         monitors = [];
@@ -113,9 +109,6 @@
             }
           ];
           center = [
-            {
-              id = "plugin:catwalk";
-            }
             {
               id = "plugin:mawaqit";
             }
@@ -177,6 +170,12 @@
             # }
             {
               id = "Clock";
+              clockColor = "none";
+              customFont = "";
+              formatHorizontal = "hh:mm AP ddd, MMM dd";
+              formatVertical = "hh mm AP - dd MM";
+              tooltipFormat = "hh:mm pm ddd, MMM dd";
+              useCustomFont = false;
             }
             {
               id = "ControlCenter";
@@ -209,6 +208,49 @@
         shadowOffsetY = 3;
         language = "";
         allowPanelsOnScreenWithoutBar = true;
+
+        allowPasswordWithFprintd = false;
+        autoStartAuth = false;
+        clockFormat = "hh\\nmm";
+        clockStyle = "custom";
+        enableBlurBehind = true;
+        enableLockScreenCountdown = true;
+        enableLockScreenMediaControls = false;
+        keybinds = {
+          keyDown = [
+            "Down"
+          ];
+          keyEnter = [
+            "Return"
+            "Enter"
+          ];
+          keyEscape = [
+            "Esc"
+          ];
+          keyLeft = [
+            "Left"
+          ];
+          keyRemove = [
+            "Del"
+          ];
+          keyRight = [
+            "Right"
+          ];
+          keyUp = [
+            "Up"
+          ];
+        };
+        lockScreenAnimations = false;
+        lockScreenBlur = 0;
+        lockScreenCountdownDuration = 10000;
+        lockScreenMonitors = [
+        ];
+        lockScreenTint = 0;
+        passwordChars = false;
+        reverseScroll = false;
+        showChangelogOnStartup = true;
+        smoothScrollEnabled = true;
+        telemetryEnabled = false;
       };
       ui = {
         fontDefault = "Roboto";
@@ -220,6 +262,9 @@
         panelsAttachedToBar = true;
         settingsPanelMode = "attached";
         boxBorderEnabled = false;
+        scrollbarAlwaysVisible = true;
+        settingsPanelSideBarCardStyle = false;
+        translucentWidgets = false;
       };
       location = {
         name = "Adrar, Algeria";
@@ -253,35 +298,39 @@
           }
         ];
       };
-      screenRecorder = {
-        directory = "";
-        frameRate = 60;
-        audioCodec = "opus";
-        videoCodec = "h264";
-        quality = "very_high";
-        colorRange = "limited";
-        showCursor = true;
-        copyToClipboard = false;
-        audioSource = "default_output";
-        videoSource = "portal";
-      };
       wallpaper = {
         enabled = true;
         overviewEnabled = false;
         directory = "~/Pictures/wallpaper/";
         monitorDirectories = [];
         enableMultiMonitorDirectories = true;
-        recursiveSearch = false;
+        automationEnabled = true;
+        favorites = [
+        ];
+        linkLightAndDarkWallpapers = true;
+        overviewBlur = 0.4;
+        overviewTint = 0.6;
+        showHiddenFiles = false;
+        skipStartupTransition = false;
+        sortOrder = "name";
+        useOriginalImages = false;
+        viewMode = "single";
         setWallpaperOnAllMonitors = true;
         fillMode = "crop";
         fillColor = "#000000";
         useSolidColor = false;
         solidColor = "#1a1a2e";
-        randomEnabled = true;
         wallpaperChangeMode = "random";
         randomIntervalSec = 300;
         transitionDuration = 1500;
-        transitionType = "random";
+        transitionType = [
+          "fade"
+          "disc"
+          "stripes"
+          "wipe"
+          "pixelate"
+          "honeycomb"
+        ];
         transitionEdgeSmoothness = 0.05;
         panelPosition = "follow_bar";
         hideWallpaperFilenames = true;
@@ -320,13 +369,10 @@
         shortcuts = {
           left = [
             {
-              id = "WiFi";
+              id = "Network";
             }
             {
               id = "Bluetooth";
-            }
-            {
-              id = "ScreenRecorder";
             }
             {
               id = "WallpaperSelector";
@@ -385,14 +431,13 @@
         memCriticalThreshold = 90;
         diskWarningThreshold = 80;
         diskCriticalThreshold = 90;
-        cpuPollingInterval = 3000;
-        tempPollingInterval = 3000;
-        gpuPollingInterval = 3000;
+        batteryCriticalThreshold = 5;
+        batteryWarningThreshold = 20;
+        diskAvailCriticalThreshold = 10;
+        diskAvailWarningThreshold = 20;
+        swapCriticalThreshold = 90;
+        swapWarningThreshold = 80;
         enableDgpuMonitoring = false;
-        memPollingInterval = 3000;
-        diskPollingInterval = 3000;
-        networkPollingInterval = 3000;
-        loadAvgPollingInterval = 3000;
         useCustomColors = false;
         warningColor = "";
         criticalColor = "";
@@ -414,7 +459,9 @@
         animationSpeed = 1;
       };
       network = {
-        wifiEnabled = true;
+        bluetoothAutoConnect = true;
+        disableDiscoverability = false;
+        networkPanelView = "wifi";
         bluetoothRssiPollingEnabled = false;
         bluetoothRssiPollIntervalMs = 10000;
         wifiDetailsViewMode = "grid";
@@ -426,9 +473,9 @@
         countdownDuration = 10000;
         position = "center";
         showHeader = true;
+        showKeybinds = true;
         largeButtonsStyle = false;
         largeButtonsLayout = "grid";
-        showNumberLabels = true;
         powerOptions = [
           {
             action = "lock";
@@ -459,6 +506,11 @@
       notifications = {
         enabled = true;
         monitors = [];
+        clearDismissed = true;
+        density = "default";
+        enableBatteryToast = true;
+        enableMarkdown = false;
+        enableMediaToast = false;
         location = "top_right";
         overlayLayer = true;
         backgroundOpacity = 1;
@@ -517,35 +569,13 @@
         schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "18:30";
-        matugenSchemeType = "scheme-fruit-salad";
-        generateTemplatesForPredefined = true;
+        generationMethod = "tonal-spot";
+        monitorForColors = "";
+        syncGsettings = true;
       };
       templates = {
-        gtk = false;
-        qt = false;
-        kcolorscheme = false;
-        alacritty = false;
-        kitty = false;
-        ghostty = false;
-        foot = false;
-        wezterm = false;
-        fuzzel = false;
-        discord = false;
-        pywalfox = false;
-        vicinae = false;
-        walker = false;
-        code = false;
-        spicetify = false;
-        telegram = false;
-        cava = false;
-        yazi = false;
-        emacs = false;
-        niri = false;
-        hyprland = false;
-        mango = false;
-        zed = false;
-        helix = false;
-        zenBrowser = false;
+        activeTemplates = [
+        ];
         enableUserTemplates = false;
       };
       nightLight = {
