@@ -43,7 +43,7 @@
   users.users.ovo = {
     isNormalUser = true;
     description = "ovo";
-    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin" "podman"];
+    extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin" "podman" "docker"];
     useDefaultShell = true;
     # packages = with pkgs; [];
   };
