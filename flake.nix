@@ -8,17 +8,21 @@
     nixpkgs-containers.url = "github:nixos/nixpkgs/nixos-24.05";
     # obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
     nvf = {
-      # url = "github:notashelf/nvf";
-      url = "github:aionoid/nvf/mcphub-nvim";
+      url = "github:notashelf/nvf";
+      # url = "github:aionoid/nvf/mcphub-nvim";
       inputs.nixpkgs.follows = "nixpkgs";
       # inputs.obsidian-nvim.follows = "obsidian-nvim";
     };
 
+    # nix-flatpak = {
+    #   url = "github:gmodena/nix-flatpak";
+    # };
+
     # AIC8800 wifi key
-    aic8800 = {
-      url = "github:kurumeii/aic8800-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # aic8800 = {
+    #   url = "github:kurumeii/aic8800-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # llama.cpp
     llama-cpp = {
@@ -73,10 +77,10 @@
     };
 
     # sddm sugar candy
-    sddm-sugar-candy-nix = {
-      url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # sddm-sugar-candy-nix = {
+    #   url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # auto ricing
     stylix.url = "github:danth/stylix";

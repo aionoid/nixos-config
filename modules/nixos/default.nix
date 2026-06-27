@@ -4,11 +4,11 @@
   # List your module files here
   # my-module = import ./my-module.nix;
   imports = [
+    # inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.stylix.nixosModules.stylix
     inputs.disko.nixosModules.disko
     inputs.hyprland.nixosModules.default
-    inputs.sddm-sugar-candy-nix.nixosModules.default
-    inputs.aic8800.nixosModules.default
+    # inputs.aic8800.nixosModules.default
     ./fonts.nix
     ./theme.nix
     ./gaming.nix
