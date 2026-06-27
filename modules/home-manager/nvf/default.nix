@@ -17,8 +17,8 @@
     ./theme.nix
     ./mini.nix
     # ./codecompanion.nix
-    ./avante.nix
-    ./mcphub.nix
+    # ./avante.nix
+    # ./mcphub.nix
   ];
 
   programs.nvf = {
@@ -46,6 +46,7 @@
         lspSignature.enable = true;
         otter-nvim.enable = false; #isMaximal;
         nvim-docs-view.enable = false; #isMaximal;
+        presets.tailwindcss-language-server.enable = false;
       };
 
       debugger = {
@@ -84,7 +85,7 @@
         sql.enable = false; #isMaximal;
         java.enable = false; #isMaximal;
         kotlin.enable = false; #isMaximal;
-        ts.enable = true; #isMaximal;
+        typescript.enable = true; #isMaximal;
         go.enable = false; #isMaximal;
         lua.enable = true; #isMaximal;
         zig.enable = false; #isMaximal;
@@ -92,7 +93,8 @@
         typst.enable = false; #isMaximal;
         rust = {
           enable = false; #isMaximal;
-          crates.enable = false; #isMaximal;
+          extensions.crates-nvim.enable = false;
+          # crates.enable = false; #isMaximal;
         };
 
         # Language modules that are not as common.
@@ -111,8 +113,9 @@
         haskell.enable = false;
         ruby.enable = false;
         fsharp.enable = false;
+        xml.enable = true;
 
-        tailwind.enable = false;
+        # tailwind.enable = false;
         svelte.enable = false;
 
         # Nim LSP is broken on Darwin and therefore
@@ -286,7 +289,7 @@
 
         motion = {
           hop.enable = true;
-          leap.enable = true;
+          leap.enable = false; # true :FIXME: download for leap plugin tar.gz not working
           precognition.enable = false; #isMaximal;
         };
         images = {
