@@ -1,18 +1,29 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./hyprland
   ];
+  xdg.autostart.enable = true;
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = ["hyprland" "gtk"];
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    #:INFO: hyprland and some plugins have version mismatch ?
 
     settings = {
       # #-- Miscellaneous ----------------------------------------------
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = false;
-        vfr = "on";
         vrr = 1;
         mouse_move_enables_dpms = false;
         always_follow_on_dnd = true;
@@ -37,10 +48,10 @@
       # #-- Blurring Layer Surfaces ------------------------------------
       # layerrule = "blur on";
       layerrule = [
-        "ignore_alpha = 0.5, match:namespace noctalia-.*"
+        # "ignore_alpha = 0.5, match:namespace noctalia-.*"
         "blur = on , match:namespace noctalia-.*"
         "blur_popups = on , match:namespace noctalia-.*"
-        # "match:namespace noctalia-.*$, blur_popups = on, ignore_alpha = 0.5, blur = on"
+        "match:namespace noctalia-.*$, blur_popups on,ignore_alpha 0.5, blur on"
         "blur on"
       ];
 
@@ -58,7 +69,7 @@
 
       # #-- Layout : Dwindle ------------------
       dwindle = {
-        pseudotile = false;
+        # pseudotile = false; #BUG: option removed ?
         force_split = 0;
         preserve_split = false;
         special_scale_factor = 0.8;
@@ -92,7 +103,7 @@
         "workspace 4, match:class Waydroid"
         "workspace 4, match:class com\.jaoushingan\.WaydroidHelper"
         "workspace 2, match:class zen-beta"
-        "opacity 1.0 override 0.85 override 0.95 overrid, match:class zen-beta"
+        "opacity 1.0 override 0.85 override 0.95 override, match:class zen-beta"
 
         "size 60% 64%, match:class Viewnior"
         "center on, match:class Viewnior"

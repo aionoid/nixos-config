@@ -11,7 +11,7 @@
         # files = "nautilus";
         files = "nemo";
         editor = "nvim";
-        browser = "zen"; # "firefox";
+        browser = "zen-beta"; # "firefox";
         rofi_emoji = "rofi_emoji";
         rofi_launcher = "rofi_launcher";
         rofi_runner = "rofi_apps";
@@ -80,6 +80,7 @@
         # # -- Hyprland --
         # # bind = SUPER,       C,      killactive,
         "SUPER,       Q,      killactive,                         "
+        "SUPER,       K,      exec,    hyprctl kill,              "
         "CTRL_ALT,    Delete, exit,                               "
         "SUPER,       F,      fullscreen, 0                       "
         "SUPER,       F,      exec, ${notifycmd} 'Fullscreen Mode'  "
