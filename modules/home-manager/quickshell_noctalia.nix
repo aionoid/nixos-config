@@ -1,7 +1,7 @@
 {lib, ...}: {
   programs.noctalia-shell = {
     enable = true;
-    systemd.enable = true;
+    # systemd.enable = true;
     plugins = {
       sources = [
         {
@@ -15,10 +15,10 @@
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
-        mpd = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
+        # mpd = {
+        #   enabled = true;
+        #   sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        # };
         mawaqit = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
@@ -111,9 +111,6 @@
           center = [
             {
               id = "plugin:mawaqit";
-            }
-            {
-              id = "plugin:mpd";
             }
             {
               id = "MediaMini";
@@ -511,7 +508,7 @@
         enableBatteryToast = true;
         enableMarkdown = false;
         enableMediaToast = false;
-        location = "top_right";
+        location = "bottom_right";
         overlayLayer = true;
         backgroundOpacity = 1;
         respectExpireTimeout = false;
