@@ -3,10 +3,9 @@
   pkgs,
   ...
 }: {
-  # nix.settings = {
-  #   substituters = ["https://hyprland.cachix.org"];
-  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  # };
+  #------------------------------
+  security.rtkit.enable = true;
+  services.gvfs.enable = true; # Mounts the /run/user/1000/gvfsd directory
 
   programs.hyprland = {
     enable = true;
@@ -16,7 +15,6 @@
   # allow home-manager hyprlock to work
   security.pam.services.hyprlock = {};
 
-  #TODO: clean for only apps used by hyprland
   environment.systemPackages = with pkgs; #host/Hyprland
   
     [
@@ -26,20 +24,6 @@
       loupe
       evince
       file-roller
-      # nemo-with-extensions
-      # gnome-icon-theme
-      # ENABLED IN STARTUP APPS
-      # swww
-
-      #==> #### Yurihikari #### <== #
-      # swaylock-effects
-      # ENABLED FORM HOME CONFIGURATIONS
-      # hyprlock
-      # cava
-      # foot
-      # btop
-      # networkmanager
-      # networkmanagerapplet
       mpc # mpc-cli has been renamed to mpc
       font-awesome
       hyprpicker
@@ -55,16 +39,10 @@
       wl-clipboard
       # tools to get/generate color chema
       dart-sass
-      blueberry
+      # blueberry
       # tools for screenshots
       slurp
       grim
       grimblast
-      # TODO: for later case of use
-      # matugen
-      # brightnessctl
-      # gnome-bluetooth
-      # aylurs-gtk-shell
-      # swayfx
     ];
 }
