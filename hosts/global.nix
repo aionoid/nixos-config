@@ -1,14 +1,23 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
   ];
   hardware.graphics.enable = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  hardware.graphics.enable32Bit = true;
+  nix = {
+    settings.experimental-features = ["nix-command" "flakes"];
+    nixPath = ["nixpkgs=flake:nixpkgs"];
+    registry.nixpkgs.flake = inputs.nixpkgs;
+  };
   system.autoUpgrade.channel = "https://nixos.org/channels/nixpkgs-unstable";
 
   # Install firefox.adb,dconf,zsh
   programs = {
     git.enable = true;
-    adb.enable = true;
+    # adb.enable = true;
     dconf.enable = true;
     # firefox.enable = true;
     # firefox = {
@@ -47,12 +56,13 @@
 
   environment = {
     systemPackages = with pkgs; [
+      pciutils
       git
       kitty
       wget
       lsof
       uv # python package manger in Rust
-      nodePackages.gitmoji-cli
+      gitmoji-cli
       home-manager
       #setting FLAKE=/etc/nixos/ config for nh
       nh

@@ -34,7 +34,7 @@
       fastfetch
       vlc
       qbittorrent
-      inkscape
+      # inkscape
       gimp
       icomoon-feather
       alsa-utils
@@ -47,14 +47,14 @@
       sysstat
       gedit
       #neovim-gtk
-      # download helper
-      vdhcoapp
       qalculate-gtk
       pc
       # youtube downloader
       # yt-dlp
       uv # python package manger in Rust
       nodejs # for npx and npm
+      # epub reader
+      foliate
     ];
 
     shellAliases = {
@@ -118,7 +118,8 @@
 
   fonts.fontconfig.enable = true;
 
-  home.stateVersion = "24.11";
+  # home.stateVersion = "24.11";
+  home.stateVersion = "26.05";
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
