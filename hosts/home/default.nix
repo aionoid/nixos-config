@@ -27,11 +27,11 @@
     ../openrgb.nix
     ../waydroid.nix
     ## obs-studio
-    ../obs.nix
+    # ../obs.nix
     ## VM
     ../vm.nix
     ## office
-    ../office.nix
+    # ../office.nix
     ../podman.nix
     # AI
     ../llama-cpp.nix
@@ -46,6 +46,19 @@
     extraGroups = ["networkmanager" "wheel" "audio" "adbusers" "users" "pipewire" "input" "ollama" "i2c" "lp" "lpadmin" "podman" "docker"];
     useDefaultShell = true;
     # packages = with pkgs; [];
+  };
+
+  environment.sessionVariables = {
+    # GTK_USE_PORTAL = "1";
+    # AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:05:00.0-card:/dev/dri/by-path/pci-0000:0b:00.0-card";
+    # WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:05:00.0-card:/dev/dri/by-path/pci-0000:0b:00.0-card";
+    AQ_DRM_DEVICES = "/var/card3070:/var/card3090";
+    WLR_DRM_DEVICES = "/var/card3070:/var/card3090";
+
+    # GBM_BACKEND = "nvidia-drm";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # LIBVA_DRIVER_NAME = "nvidia";
+    # WLR_NO_HARDWARE_CURSORS = "1";
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 }
