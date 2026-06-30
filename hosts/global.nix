@@ -17,6 +17,7 @@
   # Install firefox.adb,dconf,zsh
   programs = {
     git.enable = true;
+    direnv.enable = true;
     # adb.enable = true;
     dconf.enable = true;
     # firefox.enable = true;
