@@ -28,6 +28,16 @@
         file = "share/zsh/site-functions/F-Sy-H.plugin.zsh";
         src = pkgs.zsh-f-sy-h;
       }
+      {
+        name = "zsh-autoswitch-virtualenv";
+        file = "autoswitch_virtualenv.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "MichaelAquilina";
+          repo = "zsh-autoswitch-virtualenv";
+          rev = "9020833b13f8982d1fdc0d1541ccdc87670beb23";
+          hash = "sha256-j2YX+OcYbvS2G/KUNzcWbJepm9bZlegp1r8ZjcY6Nnw=";
+        };
+      }
       # {
       #   name = "colored-man-pages";
       #   file = "share/oh-my-zsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh";
