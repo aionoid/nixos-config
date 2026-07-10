@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./nix-ld.nix
   ];
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -32,11 +33,6 @@
   programs.appimage = {
     enable = true;
     binfmt = true;
-  };
-
-  # enable nix-ld
-  programs.nix-ld = {
-    enable = true;
   };
 
   # Bootloader.
