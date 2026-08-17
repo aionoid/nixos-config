@@ -81,7 +81,9 @@
       settingsVersion = 59;
       bar = {
         position = "top";
-        monitors = [];
+        monitors = [
+          "HDMI-A-1"
+        ];
         density = "default";
         showOutline = false;
         showCapsule = true;
@@ -596,7 +598,51 @@
       desktopWidgets = {
         enabled = true;
         gridSnap = false;
-        monitorWidgets = [];
+        # monitorWidgets = [];
+        gridSnapScale = false;
+        overviewEnabled = true;
+        monitorWidgets = [
+          {
+            name = "DP-2";
+            widgets = [
+              # {
+              #   clockColor = "none";
+              #   clockStyle = "digital";
+              #   customFont = "";
+              #   format = "HH:mm\\nd MMMM yyyy";
+              #   id = "Clock";
+              #   roundedCorners = true;
+              #   scale = 5;
+              #   showBackground = true;
+              #   useCustomFont = false;
+              #   x = 82;
+              #   y = 323;
+              # }
+              # {
+              #   diskPath = "/";
+              #   id = "SystemStat";
+              #   layout = "bottom";
+              #   roundedCorners = true;
+              #   scale = 1.5441223509708668;
+              #   showBackground = true;
+              #   statType = "CPU";
+              #   x = 61;
+              #   y = 1123;
+              # }
+              # {
+              #   diskPath = "/";
+              #   id = "SystemStat";
+              #   layout = "bottom";
+              #   roundedCorners = true;
+              #   scale = 1.5270339370921922;
+              #   showBackground = true;
+              #   statType = "Network";
+              #   x = 483;
+              #   y = 1122;
+              # }
+            ];
+          }
+        ];
       };
     };
   };

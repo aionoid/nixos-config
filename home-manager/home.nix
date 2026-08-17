@@ -56,6 +56,8 @@
       python3 # for zsh-autoswitch-virtualenv
       # epub reader
       foliate
+      # for testing
+      chromium
     ];
 
     shellAliases = {

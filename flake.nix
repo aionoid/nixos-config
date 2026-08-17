@@ -25,10 +25,10 @@
     # };
 
     # llama.cpp
-    llama-cpp = {
-      url = "github:ggml-org/llama.cpp"; #cuda";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # llama-cpp = {
+    #   url = "github:ggml-org/llama.cpp"; #cuda";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # QuickShell
     noctalia = {
@@ -162,7 +162,7 @@
             cudaSupport = true;
             allowUnfree = true;
           };
-          overlays = [inputs.llama-cpp.overlays.default];
+          # overlays = [inputs.llama-cpp.overlays.default];
         };
         modules = [self.nixosModules ./hosts/home ./cachix.nix];
         specialArgs = {
@@ -174,7 +174,7 @@
         pkgs = import nixpkgs {
           system = "x86_64-linux";
           config = commonPkgsConfig;
-          overlays = [inputs.llama-cpp.overlays.default];
+          # overlays = [inputs.llama-cpp.overlays.default];
         };
         modules = [self.nixosModules ./hosts/work ./cachix.nix];
         specialArgs = {

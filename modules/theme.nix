@@ -13,7 +13,7 @@
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
 
   stylix.opacity = {
-    terminal = 0.9;
+    terminal = 1.0;
     popups = 0.8;
     desktop = 0.1;
     applications = 1.0;
@@ -26,6 +26,9 @@
   };
 
   stylix.fonts = {
+    sizes = {
+      terminal = 11;
+    };
     serif = {
       package = pkgs.dejavu_fonts;
       name = "DejaVu Serif";

@@ -32,8 +32,8 @@ in {
         rounding = hypr_rounding;
         rounding_power = 3;
         #multisample_edges = true
-        active_opacity = 0.9;
-        inactive_opacity = 0.6;
+        active_opacity = 1.0;
+        inactive_opacity = 0.8;
         fullscreen_opacity = 1.0;
         # :FIX: stylix theme :mkDefault
 

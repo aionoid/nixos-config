@@ -30,7 +30,7 @@
     # ../../modules/nixos/ollama.nix
     ../iperf3.nix
     ../podman.nix
-    ../llama-cpp.nix
+    # ../llama-cpp.nix
   ];
 
   networking.hostName = "work";

@@ -48,9 +48,9 @@
           fade_on_empty = " true";
           placeholder_text = " <i>Password...</i>"; # Text rendered in the input box when it's empty.";
           hide_input = " false";
-          position = " 0, 150";
+          position = " 0, 20%";
           halign = " center";
-          valign = " bottom";
+          valign = " center";
         }
       ];
       #

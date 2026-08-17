@@ -53,11 +53,13 @@
 
   environment = {
     systemPackages = with pkgs; [
+      androidenv.androidPkgs.platform-tools
       pciutils
       git
       kitty
       wget
       lsof
+      mpv
       uv # python package manger in Rust
       gitmoji-cli
       home-manager
