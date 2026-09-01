@@ -22,8 +22,10 @@ in {
   wayland.windowManager.hyprland = {
     extraConfig = ''
       -- #-- Groups & Focus --
-      hl.bind("SUPER + G", hl.dsp.group.toggle())
-      hl.bind("SUPER + G", hl.dsp.exec_cmd("${notifycmd} 'Toggled Group Mode'"))
+      hl.bind("SUPER + G", function()
+          hl.dispatch(hl.dsp.group.toggle())
+          hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Toggled Group Mode'"))
+      end)
       -- # hl.bind("SUPER + H", hl.dsp.group.change_active("b"))
       -- # hl.bind("SUPER + L", hl.dsp.group.change_active("f"))
 
@@ -66,17 +68,25 @@ in {
 
       -- # -- Hyprland Control Actions --
       hl.bind("SUPER + Q", hl.dsp.window.kill())
-      hl.bind("SUPER + K", hl.dsp.exec_cmd("hyprctl kill"))
+      hl.bind("SUPER + C", hl.dsp.window.kill())
       hl.bind("CTRL + ALT + DELETE", hl.dsp.exit())
 
-      hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = 0 }))
-      hl.bind("SUPER + F", hl.dsp.exec_cmd("${notifycmd} 'Fullscreen Mode'"))
+      hl.bind("SUPER + F", function()
+          hl.dispatch(hl.dsp.window.fullscreen())
+          hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Fullscreen Mode'"))
+      end)
 
-      hl.bind("SUPER + S", hl.dsp.window.pseudo())
-      hl.bind("SUPER + S", hl.dsp.exec_cmd("${notifycmd} 'Pseudo Mode'"))
+      hl.bind("SUPER + S", function()
+          hl.dispatch(hl.dsp.window.pseudo())
+          hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Pseudo Mode'"))
+      end)
 
       -- # hl.bind("SUPER + SPACE", hl.dsp.window.toggle_floating())
       hl.bind("SUPER + SPACE", hl.dsp.window.center())
+
+      -- # Mouse: drag / resize windows while holding SUPER (bindm equivalents)
+      hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { drag = true })
+      hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { drag = true })
     '';
   };
 }

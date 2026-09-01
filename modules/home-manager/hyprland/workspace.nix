@@ -1,14 +1,9 @@
-{lib, ...}: let
-  lua = lib.generators.mkLuaInline;
+{inputs, lib, ...}: let
   notify = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
-
-  # Helper shortcuts for mapping your custom workspace / split dispatchers cleanly in Lua
-  dsp = {
-    exec = cmd: "hl.dsp.exec_cmd(\"${cmd}\")";
-    splitWs = ws: "hl.dsp.exec_cmd(\"hyprsome workspace ${ws}\")"; # Adjust to your split manager command if different
-    splitMovWs = ws: "hl.dsp.exec_cmd(\"hyprsome move ${ws}\")";
-    splitMon = dir: "hl.dsp.exec_cmd(\"hyprsome monitor ${dir}\")";
-  };
+  # Pure-Lua split-monitor-workspaces package. The flake's `packages` output is only
+  # the (now-deprecated) C++ build, so we require the Lua directly from the flake
+  # source tree. `builtins.toString` on the flake yields its sourceInfo path.
+  smwSrc = builtins.toString inputs.split-monitor-workspaces;
 in {
   wayland.windowManager.hyprland = {
     settings = {
@@ -24,11 +19,26 @@ in {
       };
     };
 
-    # The new Lua-structured bind format via Home Manager generator
+    # Self-contained: the smw bootstrap (package.path + require + setup) lives here,
+    # immediately before the binds that use it, so it does not depend on which
+    # module's extraConfig home-manager renders first.
     extraConfig = ''
+      -- #-- split-monitor-workspaces (pure Lua) --
+      package.path = package.path .. ";${smwSrc}/?.lua"
+      local smw = require("lua.split-monitor-workspaces")
+      smw.setup({
+        workspace_count = 10,     -- 10 split workspaces per monitor (SUPER+1 .. SUPER+0)
+        enable_wrapping = true,   -- cycling past the edges wraps around
+        keep_focused = true,      -- keep the focused workspace across reloads
+        enable_persistent_workspaces = true,
+        -- Explicit priorities so the left monitor (DP-2, 0x0) owns workspaces 1-10
+        -- and the right monitor (HDMI-A-1) owns 11-20, regardless of detection order.
+        monitor_priority = { "DP-2", "HDMI-A-1" },
+      })
+
       -- #-- Workspace Gestures & Setup ---------------------------------
 
-      -- Noctalia workspace-overview plugin
+      -- Noctalia workspace-overview plugin (signature Noctalia binding on SUPER+TAB)
       hl.bind("SUPER + TAB", hl.dsp.exec_cmd("noctalia ipc call plugin:workspace-overview toggle"))
 
       -- # -- Scratchpad --
@@ -65,37 +75,26 @@ in {
       hl.bind("SUPER + ALT + UP", hl.dsp.window.move({ x = 0, y = -20 }))
       hl.bind("SUPER + ALT + DOWN", hl.dsp.window.move({ x = 0, y = 20 }))
 
-      -- # Switch between windows (Lambda block)
-      hl.bind("SUPER + TAB", function()
-          hl.dispatch(hl.dsp.window.cycle_next())
-          hl.dispatch(hl.dsp.window.bring_to_top())
-      end)
+      -- # Workspaces (split-monitor-workspaces: Nth workspace on the active monitor)
+      -- SUPER + 1..9 -> workspaces 1..9, SUPER + 0 -> workspace 10
+      for i = 1, 9 do
+        hl.bind("SUPER + " .. tostring(i), smw.workspace(tostring(i)))
+      end
+      hl.bind("SUPER + 0", smw.workspace("10"))
 
-      -- # Workspaces (Split plugin mapping)
-      hl.bind("SUPER + 1", hl.dsp.exec_cmd("hyprsome workspace 1"))
-      hl.bind("SUPER + 2", hl.dsp.exec_cmd("hyprsome workspace 2"))
-      hl.bind("SUPER + 3", hl.dsp.exec_cmd("hyprsome workspace 3"))
-      hl.bind("SUPER + 4", hl.dsp.exec_cmd("hyprsome workspace 4"))
-      hl.bind("SUPER + 5", hl.dsp.exec_cmd("hyprsome workspace 5"))
-      hl.bind("SUPER + 6", hl.dsp.exec_cmd("hyprsome workspace 6"))
-      hl.bind("SUPER + 7", hl.dsp.exec_cmd("hyprsome workspace 7"))
-      hl.bind("SUPER + 8", hl.dsp.exec_cmd("hyprsome workspace 8"))
-      hl.bind("SUPER + 9", hl.dsp.exec_cmd("hyprsome workspace 9"))
-      hl.bind("SUPER + 0", hl.dsp.exec_cmd("hyprsome workspace 10"))
+      -- # Send active window to the Nth workspace on the active monitor (silent, no focus change)
+      for i = 1, 9 do
+        hl.bind("SUPER + SHIFT + " .. tostring(i), smw.move_to_workspace_silent(tostring(i)))
+      end
+      hl.bind("SUPER + SHIFT + 0", smw.move_to_workspace_silent("10"))
 
-      -- # Send to Workspaces
-      hl.bind("SUPER + SHIFT + 1", hl.dsp.exec_cmd("hyprsome move 1"))
-      hl.bind("SUPER + SHIFT + 2", hl.dsp.exec_cmd("hyprsome move 2"))
-      hl.bind("SUPER + SHIFT + 3", hl.dsp.exec_cmd("hyprsome move 3"))
-      hl.bind("SUPER + SHIFT + 4", hl.dsp.exec_cmd("hyprsome move 4"))
-      hl.bind("SUPER + SHIFT + 5", hl.dsp.exec_cmd("hyprsome move 5"))
-      hl.bind("SUPER + SHIFT + 6", hl.dsp.exec_cmd("hyprsome move 6"))
-      hl.bind("SUPER + SHIFT + 7", hl.dsp.exec_cmd("hyprsome move 7"))
-      hl.bind("SUPER + SHIFT + 8", hl.dsp.exec_cmd("hyprsome move 8"))
+      -- # Cycle workspaces on the active monitor with the mouse wheel (SUPER held)
+      hl.bind("SUPER + mouse_down", smw.cycle_workspaces("next"))
+      hl.bind("SUPER + mouse_up", smw.cycle_workspaces("prev"))
 
-      -- ==> Send to MONITOR <== #
-      hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprsome monitor next"))
-      hl.bind("SUPER + SHIFT + H", hl.dsp.exec_cmd("hyprsome monitor prev"))
+      -- ==> Send active window to the next/previous MONITOR <== #
+      hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ monitor = "+1" }))
+      hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ monitor = "-1" }))
 
       -- # Change Workspace Mode
       -- # hl.bind("SUPER + CTRL + F", hl.dsp.workspace.opt({ option = "allfloat" }))
@@ -107,7 +106,6 @@ in {
       -- # Misc
       hl.bind("SUPER + SHIFT + P", hl.dsp.window.pin())
       hl.bind("SUPER + SHIFT + S", hl.dsp.window.swap({ next = true }))
-      hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("${notify} 'Toggled Pin'"))
     '';
   };
 }
