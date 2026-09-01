@@ -31,9 +31,9 @@ in {
         enable_wrapping = true,   -- cycling past the edges wraps around
         keep_focused = true,      -- keep the focused workspace across reloads
         enable_persistent_workspaces = true,
-        -- Explicit priorities so the left monitor (DP-2, 0x0) owns workspaces 1-10
-        -- and the right monitor (HDMI-A-1) owns 11-20, regardless of detection order.
-        monitor_priority = { "DP-2", "HDMI-A-1" },
+        -- Explicit priorities so the right monitor (HDMI-A-1) owns workspaces 1-10
+        -- and the left monitor (DP-2, 0x0) owns 11-20, regardless of detection order.
+        monitor_priority = { "HDMI-A-1", "DP-2" },
       })
 
       -- #-- Workspace Gestures & Setup ---------------------------------
