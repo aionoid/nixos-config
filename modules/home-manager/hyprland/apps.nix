@@ -81,8 +81,8 @@ in {
           hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Pseudo Mode'"))
       end)
 
-      -- # hl.bind("SUPER + SPACE", hl.dsp.window.toggle_floating())
-      hl.bind("SUPER + SPACE", hl.dsp.window.center())
+      -- # Toggle float <-> tile for the focused window
+      hl.bind("SUPER + SPACE", hl.dsp.window.float())
 
       -- # Mouse: drag / resize windows while holding SUPER (bindm equivalents)
       hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { drag = true })
