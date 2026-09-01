@@ -1,10 +1,20 @@
-{...}: {
+{lib, ...}: let
+  lua = lib.generators.mkLuaInline;
+  notify = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
+
+  # Helper shortcuts for mapping your custom workspace / split dispatchers cleanly in Lua
+  dsp = {
+    exec = cmd: "hl.dsp.exec_cmd(\"${cmd}\")";
+    splitWs = ws: "hl.dsp.exec_cmd(\"hyprsome workspace ${ws}\")"; # Adjust to your split manager command if different
+    splitMovWs = ws: "hl.dsp.exec_cmd(\"hyprsome move ${ws}\")";
+    splitMon = dir: "hl.dsp.exec_cmd(\"hyprsome monitor ${dir}\")";
+  };
+in {
   wayland.windowManager.hyprland = {
     settings = {
       # #-- Workspace Gestures -----------------------------------------
-      gestures = {
-        # workspace_swipe = true;      # REMOVED
-        # workspace_swipe_fingers = 3; # REMOVED
+      config.gestures = {
+        # Legacy workspace_swipe / workspace_swipe_fingers removed in new gesture backend
         workspace_swipe_distance = 300;
         workspace_swipe_invert = true;
         workspace_swipe_min_speed_to_force = 30;
@@ -12,108 +22,92 @@
         workspace_swipe_create_new = true;
         workspace_swipe_forever = false;
       };
-      # #-- WORKSPACE ------------------------
-      # workspace = [
-      #   "1,monitor:DP-2,default:true"
-      #   "2,monitor:DP-2,persistent:true"
-      # ];
-      #
-
-      bind = let
-        notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
-      in [
-        # noctalia workspace-overview plugin
-        "SUPER, TAB, exec, noctalia-shell ipc call plugin:workspace-overview toggle"
-        #
-        # # -- Scratchpad --
-        "SUPER_SHIFT, EQUAL, movetoworkspace,special"
-        "SUPER, EQUAL, togglespecialworkspace,      "
-        #
-        # # Change Focus
-        "SUPER, left,  movefocus, l"
-        "SUPER, right, movefocus, r"
-        "SUPER, up,    movefocus, u"
-        "SUPER, down,  movefocus, d"
-        #
-        # ==> Focus to MONITOR <== #
-        "SUPER, l, movefocus,r"
-        "SUPER, h, movefocus,l"
-        "SUPER, k, movefocus,u"
-        "SUPER, j, movefocus,d"
-
-        # # Move Active
-        "SUPER_SHIFT, left,  movewindow, l"
-        "SUPER_SHIFT, right, movewindow, r"
-        "SUPER_SHIFT, up,    movewindow, u"
-        "SUPER_SHIFT, down,  movewindow, d"
-        #
-        # # Resize Active
-        "SUPER_CTRL, left,  resizeactive, -20 0"
-        "SUPER_CTRL, right, resizeactive, 20 0 "
-        "SUPER_CTRL, up,    resizeactive, 0 -20"
-        "SUPER_CTRL, down,  resizeactive, 0 20 "
-        #
-        # # Move Active (Floating Only)
-        "SUPER_ALT, left,  moveactive, -20 0"
-        "SUPER_ALT, right, moveactive, 20 0 "
-        "SUPER_ALT, up,    moveactive, 0 -20"
-        "SUPER_ALT, down,  moveactive, 0 20 "
-        #
-        # # Switch between windows
-        "SUPER,Tab,cyclenext,"
-        "SUPER,Tab,bringactivetotop,"
-        #
-        # # Workspaces
-        "SUPER, 1, split-workspace, 1 "
-        "SUPER, 2, split-workspace, 2 "
-        "SUPER, 3, split-workspace, 3 "
-        "SUPER, 4, split-workspace, 4 "
-        "SUPER, 5, split-workspace, 5 "
-        "SUPER, 6, split-workspace, 6 "
-        "SUPER, 7, split-workspace, 7 "
-        "SUPER, 8, split-workspace, 8 "
-        "SUPER, 9, split-workspace, 9 "
-        "SUPER, 0, split-workspace, 10"
-        #
-        #
-        # # Send to Workspaces
-        "SUPER_SHIFT, 1, split-movetoworkspace, 1"
-        "SUPER_SHIFT, 2, split-movetoworkspace, 2"
-        "SUPER_SHIFT, 3, split-movetoworkspace, 3"
-        "SUPER_SHIFT, 4, split-movetoworkspace, 4"
-        "SUPER_SHIFT, 5, split-movetoworkspace, 5"
-        "SUPER_SHIFT, 6, split-movetoworkspace, 6"
-        "SUPER_SHIFT, 7, split-movetoworkspace, 7"
-        "SUPER_SHIFT, 8, split-movetoworkspace, 8"
-        #
-        # ==> Send to MONITOR <== #
-        "SUPER_SHIFT, l, split-changemonitor, next"
-        "SUPER_SHIFT, h, split-changemonitor, prev"
-        #
-        # # Change Workspace Mode
-        "SUPER_CTRL, F, workspaceopt, allfloat                    "
-        "SUPER_CTRL, F, exec, ${notifycmd} 'Toggled All Float Mode' "
-
-        "SUPER_CTRL, S, workspaceopt, allpseudo                   "
-        "SUPER_CTRL, S, exec, ${notifycmd} 'Toggled All Pseudo Mode'"
-        #
-        # # Misc
-        # # bind = "SUPER_SHIFT, O, toggleopaque                "
-        "SUPER_SHIFT, P, pin,                          "
-        "SUPER_SHIFT, S, swapnext                      "
-        "SUPER_SHIFT, P, exec, ${notifycmd} 'Toggled Pin'"
-        # # -- Function keys --
-        # bind = ,XF86MonBrightnessUp,   exec, $backlight --inc
-        # bind = ,XF86MonBrightnessDown, exec, $backlight --dec
-        # bind = ,XF86AudioRaiseVolume,  exec, $volume --inc
-        # bind = ,XF86AudioLowerVolume,  exec, $volume --dec
-        # bind = ,XF86AudioMute,         exec, $volume --toggle
-        # bind = ,XF86AudioMicMute,      exec, $volume --toggle-mic
-        # bind = ,XF86AudioNext,         exec, playerctl next
-        # bind = ,XF86AudioPrev,         exec, playerctl previous
-        # bind = ,XF86AudioPlay,         exec, playerctl play
-        # bind = ,XF86AudioStop,         exec, playerctl pause
-      ];
     };
+
+    # The new Lua-structured bind format via Home Manager generator
+    extraConfig = ''
+      -- #-- Workspace Gestures & Setup ---------------------------------
+
+      -- Noctalia workspace-overview plugin
+      hl.bind("SUPER + TAB", hl.dsp.exec_cmd("noctalia ipc call plugin:workspace-overview toggle"))
+
+      -- # -- Scratchpad --
+      hl.bind("SUPER + SHIFT + EQUAL", hl.dsp.window.move({ workspace = "special" }))
+      hl.bind("SUPER + EQUAL", hl.dsp.workspace.toggle_special())
+
+      -- # Change Focus
+      hl.bind("SUPER + LEFT", hl.dsp.focus({ direction = "l" }))
+      hl.bind("SUPER + RIGHT", hl.dsp.focus({ direction = "r" }))
+      hl.bind("SUPER + UP", hl.dsp.focus({ direction = "u" }))
+      hl.bind("SUPER + DOWN", hl.dsp.focus({ direction = "d" }))
+
+      -- ==> Focus to MONITOR <== #
+      hl.bind("SUPER + L", hl.dsp.focus({ direction = "r" }))
+      hl.bind("SUPER + H", hl.dsp.focus({ direction = "l" }))
+      hl.bind("SUPER + K", hl.dsp.focus({ direction = "u" }))
+      hl.bind("SUPER + J", hl.dsp.focus({ direction = "d" }))
+
+      -- # Move Active
+      hl.bind("SUPER + SHIFT + LEFT", hl.dsp.window.move({ direction = "l" }))
+      hl.bind("SUPER + SHIFT + RIGHT", hl.dsp.window.move({ direction = "r" }))
+      hl.bind("SUPER + SHIFT + UP", hl.dsp.window.move({ direction = "u" }))
+      hl.bind("SUPER + SHIFT + DOWN", hl.dsp.window.move({ direction = "d" }))
+
+      -- # Resize Active
+      hl.bind("SUPER + CTRL + LEFT", hl.dsp.window.resize({ x = -20, y = 0 }))
+      hl.bind("SUPER + CTRL + RIGHT", hl.dsp.window.resize({ x = 20, y = 0 }))
+      hl.bind("SUPER + CTRL + UP", hl.dsp.window.resize({ x = 0, y = -20 }))
+      hl.bind("SUPER + CTRL + DOWN", hl.dsp.window.resize({ x = 0, y = 20 }))
+
+      -- # Move Active (Floating Only)
+      hl.bind("SUPER + ALT + LEFT", hl.dsp.window.move({ x = -20, y = 0 }))
+      hl.bind("SUPER + ALT + RIGHT", hl.dsp.window.move({ x = 20, y = 0 }))
+      hl.bind("SUPER + ALT + UP", hl.dsp.window.move({ x = 0, y = -20 }))
+      hl.bind("SUPER + ALT + DOWN", hl.dsp.window.move({ x = 0, y = 20 }))
+
+      -- # Switch between windows (Lambda block)
+      hl.bind("SUPER + TAB", function()
+          hl.dispatch(hl.dsp.window.cycle_next())
+          hl.dispatch(hl.dsp.window.bring_to_top())
+      end)
+
+      -- # Workspaces (Split plugin mapping)
+      hl.bind("SUPER + 1", hl.dsp.exec_cmd("hyprsome workspace 1"))
+      hl.bind("SUPER + 2", hl.dsp.exec_cmd("hyprsome workspace 2"))
+      hl.bind("SUPER + 3", hl.dsp.exec_cmd("hyprsome workspace 3"))
+      hl.bind("SUPER + 4", hl.dsp.exec_cmd("hyprsome workspace 4"))
+      hl.bind("SUPER + 5", hl.dsp.exec_cmd("hyprsome workspace 5"))
+      hl.bind("SUPER + 6", hl.dsp.exec_cmd("hyprsome workspace 6"))
+      hl.bind("SUPER + 7", hl.dsp.exec_cmd("hyprsome workspace 7"))
+      hl.bind("SUPER + 8", hl.dsp.exec_cmd("hyprsome workspace 8"))
+      hl.bind("SUPER + 9", hl.dsp.exec_cmd("hyprsome workspace 9"))
+      hl.bind("SUPER + 0", hl.dsp.exec_cmd("hyprsome workspace 10"))
+
+      -- # Send to Workspaces
+      hl.bind("SUPER + SHIFT + 1", hl.dsp.exec_cmd("hyprsome move 1"))
+      hl.bind("SUPER + SHIFT + 2", hl.dsp.exec_cmd("hyprsome move 2"))
+      hl.bind("SUPER + SHIFT + 3", hl.dsp.exec_cmd("hyprsome move 3"))
+      hl.bind("SUPER + SHIFT + 4", hl.dsp.exec_cmd("hyprsome move 4"))
+      hl.bind("SUPER + SHIFT + 5", hl.dsp.exec_cmd("hyprsome move 5"))
+      hl.bind("SUPER + SHIFT + 6", hl.dsp.exec_cmd("hyprsome move 6"))
+      hl.bind("SUPER + SHIFT + 7", hl.dsp.exec_cmd("hyprsome move 7"))
+      hl.bind("SUPER + SHIFT + 8", hl.dsp.exec_cmd("hyprsome move 8"))
+
+      -- ==> Send to MONITOR <== #
+      hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprsome monitor next"))
+      hl.bind("SUPER + SHIFT + H", hl.dsp.exec_cmd("hyprsome monitor prev"))
+
+      -- # Change Workspace Mode
+      -- # hl.bind("SUPER + CTRL + F", hl.dsp.workspace.opt({ option = "allfloat" }))
+      -- # hl.bind("SUPER + CTRL + F", hl.dsp.exec_cmd("${notify} 'Toggled All Float Mode'"))
+      -- #
+      -- # hl.bind("SUPER + CTRL + S", hl.dsp.workspace.opt({ option = "allpseudo" }))
+      -- # hl.bind("SUPER + CTRL + S", hl.dsp.exec_cmd("${notify} 'Toggled All Pseudo Mode'"))
+
+      -- # Misc
+      hl.bind("SUPER + SHIFT + P", hl.dsp.window.pin())
+      hl.bind("SUPER + SHIFT + S", hl.dsp.window.swap({ next = true }))
+      hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("${notify} 'Toggled Pin'"))
+    '';
   };
 }

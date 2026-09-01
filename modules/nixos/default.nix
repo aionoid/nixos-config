@@ -14,6 +14,6 @@
     ./gaming.nix
     # ./ollama.nix
     # ./open-webui.nix
-    ./privacy.nix
+    # ./privacy.nix
   ];
 }

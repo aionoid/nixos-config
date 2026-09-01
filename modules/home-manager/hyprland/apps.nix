@@ -1,95 +1,82 @@
-{...}: {
+{lib, ...}: let
+  notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
+  term = "terminal";
+  screenshot = "rofi_screenshot";
+  lockscreen = "hyprlock";
+  colorpicker = "colorpicker";
+  files = "nemo";
+  editor = "nvim";
+  browser = "zen-beta";
+  rofi_emoji = "rofi_emoji";
+  rofi_launcher = "rofi_launcher";
+  rofi_runner = "rofi_apps";
+  rofi_music = "rofi_music";
+  rofi_network = "rofi_network";
+  rofi_powermenu = "rofi_powermenu";
+  rofi_screenshot = "rofi_screenshot";
+  rofi_volume = "rofi_volume";
+  background_swap = "~/.config/hypr/scripts/background";
+  waybar_themes = "~/.config/hypr/waybar/scripts/change-theme.sh";
+  cheatsheet = "kitty --app-id='kitty-float' -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
+in {
   wayland.windowManager.hyprland = {
-    settings = {
-      bind = let
-        notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
-        term = "terminal";
-        # screenshot = "~/.config/hypr/scripts/screenshot        ";
-        screenshot = "rofi_screenshot";
-        lockscreen = "hyprlock";
-        colorpicker = "colorpicker";
-        # files = "nautilus";
-        files = "nemo";
-        editor = "nvim";
-        browser = "zen-beta"; # "firefox";
-        rofi_emoji = "rofi_emoji";
-        rofi_launcher = "rofi_launcher";
-        rofi_runner = "rofi_apps";
-        # rofi_appasroot = "rofi_appasroot";
-        rofi_music = "rofi_music";
-        rofi_network = "rofi_network";
-        rofi_powermenu = "rofi_powermenu";
-        rofi_screenshot = "rofi_screenshot";
-        rofi_volume = "rofi_volume";
-        background_swap = "~/.config/hypr/scripts/background";
-        waybar_themes = "~/.config/hypr/waybar/scripts/change-theme.sh";
-        cheatsheet = "kitty --app-id='kitty-float' -t cheatsheet -e nvim ~/.config/hypr/cheatsheet.md";
-      in [
-        "SUPER, G, togglegroup"
-        "SUPER, G, exec, ${notifycmd} 'Toggled Group Mode'"
-        "SUPER, H, changegroupactive, b"
-        "SUPER, L, changegroupactive, f"
+    extraConfig = ''
+      -- #-- Groups & Focus --
+      hl.bind("SUPER + G", hl.dsp.group.toggle())
+      hl.bind("SUPER + G", hl.dsp.exec_cmd("${notifycmd} 'Toggled Group Mode'"))
+      -- # hl.bind("SUPER + H", hl.dsp.group.change_active("b"))
+      -- # hl.bind("SUPER + L", hl.dsp.group.change_active("f"))
 
-        # # -- Terminal --
-        # "SUPER,       Return, exec, kitty   "
-        "SUPER,       Return, exec, ${term}   "
-        "SUPER_SHIFT, Return, exec, ${term} -f"
-        "SUPER_ALT,   Return, exec, ${term} -s"
-        "SUPER,       T,      exec, ${term} -F"
-        #
-        # # -- Apps --
-        "SUPER, N, exec, ${files}        "
-        "SUPER_SHIFT, E, exec, ${editor} "
-        "SUPER_SHIFT, W, exec, ${browser}"
-        #
-        # # -- Rofi --
-        # # bindr = SUPER, SUPER_L, exec, ${rofi_launcher}
-        "SUPER, D,       exec, ${rofi_launcher}   "
-        "SUPER, R,       exec, ${rofi_runner}     "
-        "SUPER, M,       exec, ${rofi_music}      "
-        "SUPER_SHIFT, N, exec, ${rofi_network}    "
-        "SUPER, X,       exec, ${rofi_powermenu}  "
-        "SUPER, A,       exec, ${rofi_screenshot} "
-        "SUPER, V,       exec, ${rofi_volume} "
-        "SUPER, e,       exec, ${rofi_emoji} "
-        #
-        # # -- Wofi --
-        #  "SUPER, SUPER_L, exec, ${wofi_menu      }"
-        #  "SUPER, D,       exec, ${wofi_menu      }"
-        #  "SUPER, X,       exec, ${wofi_powermenu }"
-        #  "SUPER, A,       exec, ${wofi_screenshot}"
-        #
-        # # -- Misc --
-        # "SUPER,    N, exec, nm-connection-editor  "
-        # "SUPER,    X, exec, ${wlogout}              "
-        "SUPER,    P, exec, ${colorpicker}"
-        "CTRL_ALT, L, exec, ${lockscreen}"
-        "SUPER_SHIFT, B, exec, ${background_swap}"
-        "SUPER_SHIFT, T, exec, ${waybar_themes}"
-        #
-        # # -- CHEATSHEET --
-        "SUPER_SHIFT, I, exec, ${cheatsheet}"
-        #
-        # # -- Screenshots --
-        ",      Print, exec, ${screenshot} --now  "
-        "ALT,   Print, exec, ${screenshot} --in5  "
-        "SHIFT, Print, exec, ${screenshot} --in10 "
-        "CTRL,  Print, exec, ${screenshot} --win  "
-        "SUPER, Print, exec, ${screenshot} --area "
-        #
-        # # -- Hyprland --
-        # # bind = SUPER,       C,      killactive,
-        "SUPER,       Q,      killactive,                         "
-        "SUPER,       K,      exec,    hyprctl kill,              "
-        "CTRL_ALT,    Delete, exit,                               "
-        "SUPER,       F,      fullscreen, 0                       "
-        "SUPER,       F,      exec, ${notifycmd} 'Fullscreen Mode'  "
-        "SUPER,       S,      pseudo,                             "
-        "SUPER,       S,      exec, ${notifycmd} 'Pseudo Mode'      "
-        "SUPER,       Space,  togglefloating,                     "
-        "SUPER,       Space,  centerwindow,                       "
-        #
-      ];
-    };
+      -- # -- Terminal --
+      hl.bind("SUPER + RETURN", hl.dsp.exec_cmd("${term}"))
+      hl.bind("SUPER + SHIFT + RETURN", hl.dsp.exec_cmd("${term} -f"))
+      hl.bind("SUPER + ALT + RETURN", hl.dsp.exec_cmd("${term} -s"))
+      hl.bind("SUPER + T", hl.dsp.exec_cmd("${term} -F"))
+
+      -- # -- Apps --
+      hl.bind("SUPER + N", hl.dsp.exec_cmd("${files}"))
+      hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("${editor}"))
+      hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("${browser}"))
+
+      -- # -- Rofi Launchers --
+      hl.bind("SUPER + D", hl.dsp.exec_cmd("${rofi_launcher}"))
+      hl.bind("SUPER + R", hl.dsp.exec_cmd("${rofi_runner}"))
+      hl.bind("SUPER + M", hl.dsp.exec_cmd("${rofi_music}"))
+      hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd("${rofi_network}"))
+      hl.bind("SUPER + X", hl.dsp.exec_cmd("${rofi_powermenu}"))
+      hl.bind("SUPER + A", hl.dsp.exec_cmd("${rofi_screenshot}"))
+      hl.bind("SUPER + V", hl.dsp.exec_cmd("${rofi_volume}"))
+      hl.bind("SUPER + E", hl.dsp.exec_cmd("${rofi_emoji}"))
+
+      -- # -- Misc Tools --
+      hl.bind("SUPER + P", hl.dsp.exec_cmd("${colorpicker}"))
+      hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd("${lockscreen}"))
+      hl.bind("SUPER + SHIFT + B", hl.dsp.exec_cmd("${background_swap}"))
+      hl.bind("SUPER + SHIFT + T", hl.dsp.exec_cmd("${waybar_themes}"))
+
+      -- # -- Cheatsheet --
+      hl.bind("SUPER + SHIFT + I", hl.dsp.exec_cmd("${cheatsheet}"))
+
+      -- # -- Screenshots --
+      hl.bind("PRINT", hl.dsp.exec_cmd("${screenshot} --now"))
+      hl.bind("ALT + PRINT", hl.dsp.exec_cmd("${screenshot} --in5"))
+      hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("${screenshot} --in10"))
+      hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("${screenshot} --win"))
+      hl.bind("SUPER + PRINT", hl.dsp.exec_cmd("${screenshot} --area"))
+
+      -- # -- Hyprland Control Actions --
+      hl.bind("SUPER + Q", hl.dsp.window.kill())
+      hl.bind("SUPER + K", hl.dsp.exec_cmd("hyprctl kill"))
+      hl.bind("CTRL + ALT + DELETE", hl.dsp.exit())
+
+      hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = 0 }))
+      hl.bind("SUPER + F", hl.dsp.exec_cmd("${notifycmd} 'Fullscreen Mode'"))
+
+      hl.bind("SUPER + S", hl.dsp.window.pseudo())
+      hl.bind("SUPER + S", hl.dsp.exec_cmd("${notifycmd} 'Pseudo Mode'"))
+
+      -- # hl.bind("SUPER + SPACE", hl.dsp.window.toggle_floating())
+      hl.bind("SUPER + SPACE", hl.dsp.window.center())
+    '';
   };
 }

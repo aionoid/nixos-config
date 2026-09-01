@@ -24,7 +24,7 @@
     # ./quickshell_caelestia.nix
     # ./quickshell_dms.nix
     ./quickshell_noctalia.nix
-    ./mako.nix
+    # ./mako.nix
     # ./ags.nix
     ./ranger.nix
     ./hypridle.nix

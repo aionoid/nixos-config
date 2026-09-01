@@ -21,7 +21,7 @@
 
     settings = {
       # #-- Miscellaneous ----------------------------------------------
-      misc = {
+      config.misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = false;
         vrr = 1;
@@ -37,17 +37,17 @@
       };
 
       # #-- Debug (Only for developers) --------------------------------
-      debug = {
-        overlay = false;
-        damage_blink = false;
-        disable_logs = false;
-        disable_time = true;
-        damage_tracking = 2;
-      };
+      # debug = {
+      #   overlay = false;
+      #   damage_blink = false;
+      #   disable_logs = false;
+      #   disable_time = true;
+      #   damage_tracking = 2;
+      # };
       #
       # #-- Blurring Layer Surfaces ------------------------------------
       # layerrule = "blur on";
-      layerrule = [
+      config.layerrule = [
         # "ignore_alpha = 0.5, match:namespace noctalia-.*"
         "blur = on , match:namespace noctalia-.*"
         "blur_popups = on , match:namespace noctalia-.*"
@@ -68,7 +68,7 @@
       # ];
 
       # #-- Layout : Dwindle ------------------
-      dwindle = {
+      config.dwindle = {
         # pseudotile = false; #BUG: option removed ?
         force_split = 0;
         preserve_split = false;
@@ -77,7 +77,7 @@
         use_active_for_splits = true;
       };
       # #-- Layout : Master --------------------------
-      master = {
+      config.master = {
         special_scale_factor = 0.8;
         new_on_top = false;
         orientation = "left";
@@ -85,7 +85,7 @@
       };
 
       # #-- Window Rules -----------------------------------------------
-      windowrule = [
+      config.windowrule = [
         "float on, match:class foot-float"
         "float on, match:class kitty-float"
         "float on, match:class yad|nm-connection-editor|pavucontrolk"
@@ -113,18 +113,18 @@
         "animation slide up,match:class wlogout"
       ];
 
-      bindl = let
-        lockscreen = "hyprlock";
-      in [
-        ",switch:Lid Switch, exec, echo 'Lid Switch'"
-        ",switch:on:Lid Switch, exec, ${lockscreen}"
-      ];
-      #
-      # #-- Mouse Buttons ----------------------------------------------
-      bindm = [
-        "SUPER, mouse:272, movewindow"
-        "SUPER, mouse:273, resizewindow"
-      ];
+      # bindl = let
+      #   lockscreen = "hyprlock";
+      # in [
+      #   ",switch:Lid Switch, exec, echo 'Lid Switch'"
+      #   ",switch:on:Lid Switch, exec, ${lockscreen}"
+      # ];
+      # #
+      # # #-- Mouse Buttons ----------------------------------------------
+      # bindm = [
+      #   "SUPER, mouse:272, movewindow"
+      #   "SUPER, mouse:273, resizewindow"
+      # ];
     };
   };
 }

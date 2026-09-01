@@ -7,8 +7,8 @@
     xdg-user-dirs
   ];
   wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      "noctalia-shell" # run noctalia with hyprland
+    exec_cmd = [
+      "noctalia" # run noctalia with hyprland
       "swww-daemon"
       "nm-applet"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"

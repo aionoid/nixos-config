@@ -260,7 +260,7 @@
 
       minimap = {
         minimap-vim.enable = false;
-        codewindow.enable = false; #isMaximal; # lighter, faster, and uses lua for configuration
+        # codewindow.enable = false; #isMaximal; # lighter, faster, and uses lua for configuration
       };
 
       dashboard = {
@@ -301,7 +301,7 @@
         obsidian.enable = false; # FIXME: neovim fails to build if obsidian is enabled
         neorg.enable = false;
         orgmode.enable = false;
-        mind-nvim.enable = false; #isMaximal;
+        # mind-nvim.enable = false; #isMaximal;
         todo-comments.enable = true;
       };
 

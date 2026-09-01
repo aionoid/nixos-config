@@ -2,7 +2,7 @@
   wayland.windowManager.hyprland = {
     settings = {
       #-- Input: Keyboard, Mouse, Touchpad ---------------------------
-      input = {
+      config.input = {
         # kb_model =
         # kb_rules =
         # kb_file =
@@ -27,7 +27,7 @@
           scroll_factor = 1.0;
           middle_button_emulation = false;
           clickfinger_behavior = false;
-          tap-to-click = true;
+          # tap-to-click = true;
           drag_lock = false;
         };
         touchdevice = {

@@ -22,10 +22,10 @@
     ## boot theme
     ../plymouth.nix
     ## containers
-    ../containers
+    # ../containers
     ## rgb controle
     ../openrgb.nix
-    ../waydroid.nix
+    # ../waydroid.nix
     ## obs-studio
     # ../obs.nix
     ## VM

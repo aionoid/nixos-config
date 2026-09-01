@@ -67,7 +67,7 @@
       nh
       usb-modeswitch
       # icon theme
-      gnome-icon-theme
+      # gnome-icon-theme
       # ntfs tools
       ntfs3g
       dosfstools
@@ -76,7 +76,7 @@
       #scrounge-ntfs
       #ntfs2btrfs
       #MTP fs
-      jmtpfs
+      # jmtpfs
     ];
     sessionVariables = {
       NH_FLAKE = "/etc/nixos";

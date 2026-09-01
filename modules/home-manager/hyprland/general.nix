@@ -9,7 +9,7 @@ in {
   wayland.windowManager.hyprland = {
     settings = {
       #-- General ----------------------------------------------------
-      general = {
+      config.general = {
         border_size = hypr_border_size;
         # no_border_on_floating = false; REMOVED
         gaps_in = hypr_gaps_in;
@@ -28,7 +28,7 @@ in {
       };
 
       #-- Decoration -------------------------------------------------
-      decoration = {
+      config.decoration = {
         rounding = hypr_rounding;
         rounding_power = 3;
         #multisample_edges = true
@@ -65,7 +65,7 @@ in {
       };
 
       #-- Animations -------------------------------------------------
-      animations = {
+      config.animations = {
         enabled = true;
         animation = [
           "windowsIn,1,5,default,popin 0%"
