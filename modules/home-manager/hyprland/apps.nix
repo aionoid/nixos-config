@@ -85,8 +85,8 @@ in {
       hl.bind("SUPER + SPACE", hl.dsp.window.float())
 
       -- # Mouse: drag / resize windows while holding SUPER (bindm equivalents)
-      hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { drag = true })
-      hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { drag = true })
+      hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
+      hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
     '';
   };
 }
