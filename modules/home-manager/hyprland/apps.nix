@@ -67,7 +67,7 @@ in {
       hl.bind("SUPER + PRINT", hl.dsp.exec_cmd("${screenshot} --area"))
 
       -- # -- Hyprland Control Actions --
-      hl.bind("SUPER + Q", hl.dsp.window.kill())
+      hl.bind("SUPER + Q", hl.dsp.window.close())
       hl.bind("SUPER + C", hl.dsp.window.kill())
       hl.bind("CTRL + ALT + DELETE", hl.dsp.exit())
 
