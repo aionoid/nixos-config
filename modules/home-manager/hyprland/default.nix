@@ -7,5 +7,6 @@
     ./inputs.nix
     ./workspace.nix
     ./apps.nix
+    ./noctalia.nix
   ];
 }

@@ -1,7 +1,9 @@
 {lib, ...}: {
   programs.noctalia = {
     enable = true;
-    # systemd.enable = true;
+    # Autostart is handled by the Hyprland Lua hook (hl.on "hyprland.start" in
+    # hyprland/noctalia.nix) instead of the systemd user service, so keep it off.
+    systemd.enable = false;
     # this may also be a string or a path to a JSON file.
 
     settings = lib.mkForce {

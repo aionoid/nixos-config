@@ -76,13 +76,17 @@ in {
           hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Fullscreen Mode'"))
       end)
 
-      hl.bind("SUPER + S", function()
+      -- Pseudo toggle. Moved off SUPER+S (now the Noctalia control-center
+      -- panel, per the Noctalia docs) to the free key SUPER+Y.
+      hl.bind("SUPER + Y", function()
           hl.dispatch(hl.dsp.window.pseudo())
           hl.dispatch(hl.dsp.exec_cmd("${notifycmd} 'Pseudo Mode'"))
       end)
 
-      -- # Toggle float <-> tile for the focused window
-      hl.bind("SUPER + SPACE", hl.dsp.window.float())
+      -- # Toggle float <-> tile for the focused window.
+      -- Moved off SUPER+SPACE (now the Noctalia launcher, per the Noctalia
+      -- docs) to the free key SUPER+O.
+      hl.bind("SUPER + O", hl.dsp.window.float())
 
       -- # Mouse: drag / resize windows while holding SUPER (bindm equivalents)
       hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })

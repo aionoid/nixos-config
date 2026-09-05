@@ -64,30 +64,22 @@
         # inherit_fullscreen = true; # REMOVED
       };
 
-      # #-- Blurring Layer Surfaces ------------------------------------
+      # #-- Blurring Noctalia Layer Surfaces ---------------------------
       # Modern Lua API: hl.layer_rule({ match = { namespace = ... }, ... })
       # (replaces the legacy hyprlang `layerrule` string list, which the
       # 0.56 hl.config walker silently drops).
+      # Noctalia docs "Blur" section: blur the bar/panels/dock/notifications,
+      # and disable Hyprland's own layer animations for those surfaces so they
+      # don't fight Noctalia's own animations.
       layer_rule = [
-        # "ignore_alpha = 0.5, match:namespace noctalia-.*"
         {
-          match.namespace = "noctalia-.*";
-          blur = true;
-        }
-        {
-          match.namespace = "noctalia-.*";
-          blur_popups = true;
-        }
-        {
-          match.namespace = "noctalia-.*$";
-          blur_popups = true;
+          name = "noctalia";
+          match.namespace =
+            "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$";
+          no_anim = true;
           ignore_alpha = 0.5;
           blur = true;
-        }
-        # Legacy catch-all `blur on` (no match) -> match every namespace
-        {
-          match.namespace = ".*";
-          blur = true;
+          blur_popups = true;
         }
       ];
 
