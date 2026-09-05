@@ -87,9 +87,8 @@ in {
       end)
 
       -- # Toggle float <-> tile for the focused window.
-      -- Moved off SUPER+SPACE (now the Noctalia launcher, per the Noctalia
-      -- docs) to the free key SUPER+O.
-      hl.bind("SUPER + O", hl.dsp.window.float())
+      -- (SUPER+SPACE restored; the Noctalia launcher moved to SUPER+SHIFT+SPACE.)
+      hl.bind("SUPER + SPACE", hl.dsp.window.float())
 
       -- # Mouse: drag / resize windows while holding SUPER (bindm equivalents)
       hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })

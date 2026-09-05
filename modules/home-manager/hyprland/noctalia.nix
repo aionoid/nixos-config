@@ -41,7 +41,7 @@
       -- #-- Noctalia IPC keybinds --------------------------------------
       -- `noctalia msg <cmd>` talks to the running Noctalia instance.
       local ipc = "noctalia msg "
-      hl.bind("SUPER + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+      hl.bind("SUPER + SHIFT + SPACE", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
       hl.bind("SUPER + S", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
       hl.bind("SUPER + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
       hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
