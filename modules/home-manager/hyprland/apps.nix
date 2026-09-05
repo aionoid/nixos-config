@@ -2,7 +2,10 @@
   notifycmd = "notify-send -h string:x-canonical-private-synchronous:hypr-cfg -u low";
   term = "terminal";
   screenshot = "rofi_screenshot";
-  lockscreen = "hyprlock";
+  # Noctalia v5 lock screen (replaces hyprlock). `noctalia msg session lock`
+  # raises Noctalia's own lock surface, which authenticates via the PAM
+  # "login" service. Bound to CTRL+ALT+L below.
+  lockscreen = "noctalia msg session lock";
   colorpicker = "colorpicker";
   files = "nemo";
   editor = "nvim";

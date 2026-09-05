@@ -8,6 +8,14 @@
 
     settings = lib.mkForce {
       settingsVersion = 59;
+      # Auto-sync wallpaper, colors, and the live multi-monitor layout to the
+      # Noctalia Greeter on startup / on change (greeter itself is configured in
+      # hosts/greetd.nix). This is what makes the login screen match the current
+      # monitor arrangement. The v5 schema key is snake_case (shell.greeter_sync);
+      # the loader also accepts the camelCase used elsewhere in this file.
+      shell = {
+        greeter_sync.auto_sync = true;
+      };
       plugins = {
         sources = [
           {

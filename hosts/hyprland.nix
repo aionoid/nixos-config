@@ -12,8 +12,10 @@
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-  # allow home-manager hyprlock to work
-  security.pam.services.hyprlock = {};
+  # hyprlock replaced by the Noctalia v5 lock screen, which authenticates via
+  # the PAM "login" service (present by default in the linux-pam stack), so the
+  # dedicated hyprlock PAM service is no longer needed.
+  # security.pam.services.hyprlock = {};
 
   environment.systemPackages = with pkgs; #host/Hyprland
   

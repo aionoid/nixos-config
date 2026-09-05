@@ -5,13 +5,14 @@
       general = {
         after_sleep_cmd = "hyprctl dispatch dpms on";
         ignore_dbus_inhibit = false;
-        lock_cmd = "hyprlock";
+        # Noctalia v5 lock screen (replaces hyprlock).
+        lock_cmd = "noctalia msg session lock";
       };
 
       listener = [
         {
           timeout = 900;
-          on-timeout = "hyprlock";
+          on-timeout = "noctalia msg session lock";
         }
         {
           timeout = 1200;

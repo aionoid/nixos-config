@@ -28,7 +28,7 @@
     # ./ags.nix
     ./ranger.nix
     ./hypridle.nix
-    ./hyprlock.nix
+    # ./hyprlock.nix  # replaced by the Noctalia v5 lock screen (see hyprland/apps.nix)
     # ./googlefonts.nix
     # ./wpaperd.nix
   ];
