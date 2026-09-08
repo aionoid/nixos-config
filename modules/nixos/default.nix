@@ -12,6 +12,7 @@
     ./fonts.nix
     ./theme.nix
     ./gaming.nix
+    ./hypervisor.nix
     # ./ollama.nix
     # ./open-webui.nix
     # ./privacy.nix
