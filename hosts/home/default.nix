@@ -50,6 +50,15 @@
     # packages = with pkgs; [];
   };
 
+  services.displayManager.noctalia-greeter = {
+    settings = {
+      output = {
+        name = "HDMI-A-1;DP-2";
+        transforms = "HDMI-A-1:normal;DP-2:90";
+      };
+    };
+  };
+
   environment.sessionVariables = {
     # GTK_USE_PORTAL = "1";
     # AQ_DRM_DEVICES = "/dev/dri/by-path/pci-0000:05:00.0-card:/dev/dri/by-path/pci-0000:0b:00.0-card";

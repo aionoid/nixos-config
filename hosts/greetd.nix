@@ -3,8 +3,17 @@
   services.displayManager.noctalia-greeter = {
     enable = true;
     settings = {
+      session.default = "Hyprland";
       cursor.size = 24;
       keyboard.layout = "us";
+      appearance = {
+        scheme = "Gruvbox";
+        # scheme = "Synced";
+      };
+      # output = {
+      #   name = "HDMI-A-1;DP-2";
+      #   transforms = "HDMI-A-1:normal;DP-2:90";
+      # };
     };
     cursorTheme = {
       package = pkgs.bibata-cursors;
