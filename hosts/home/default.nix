@@ -25,7 +25,7 @@
     # ../containers
     ## rgb controle
     ../openrgb.nix
-    # ../waydroid.nix
+    ../waydroid.nix
     ## obs-studio
     # ../obs.nix
     ## VM
