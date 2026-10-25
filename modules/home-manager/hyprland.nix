@@ -132,8 +132,8 @@
         {
           match.class = ".*Waydroid.*";
           size = [
-            414
-            896
+            1280
+            720
           ];
         }
         # "workspace 5, match:title .*Private.*"
