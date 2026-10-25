@@ -13,7 +13,7 @@
     libsForQt5.qtstyleplugins
     libsForQt5.qtstyleplugin-kvantum
     qt6Packages.qt6ct
-    qt6Packages.qt6gtk2
+    # qt6Packages.qt6gtk2
     qt6Packages.qtstyleplugin-kvantum
   ];
 }
