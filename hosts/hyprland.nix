@@ -46,5 +46,6 @@
       slurp
       grim
       grimblast
+      gdk-pixbuf
     ];
 }

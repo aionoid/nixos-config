@@ -33,6 +33,23 @@
   programs.appimage = {
     enable = true;
     binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          gdk-pixbuf
+          librsvg
+        ];
+    };
+    # package = pkgs.appimage-run.override {
+    #   extraPkgs = pkgs: [
+    #     pkgs.gtk3
+    #     pkgs.gdk-pixbuf
+    #     pkgs.gsettings-desktop-schemas
+    #     pkgs.glib-networking
+    #     pkgs.wayland
+    #     pkgs.libxkbcommon
+    #   ];
+    # };
   };
 
   # Bootloader.
@@ -77,6 +94,7 @@
       #ntfs2btrfs
       #MTP fs
       # jmtpfs
+      glycin-loaders
     ];
     sessionVariables = {
       NH_FLAKE = "/etc/nixos";
@@ -131,6 +149,8 @@
     upower.enable = true;
     power-profiles-daemon.enable = true;
   };
+
+  programs.gdk-pixbuf.modulePackages = [pkgs.librsvg];
 
   # Enable Gnome Disks
   programs.gnome-disks.enable = true;
