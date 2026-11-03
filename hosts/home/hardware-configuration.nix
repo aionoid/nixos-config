@@ -16,7 +16,7 @@
       efi.efiSysMountPoint = "/boot/efi";
     };
     initrd = {
-      systemd.enable = true;
+      # systemd.enable = true;
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
       kernelModules = [];
       supportedFilesystems = ["ntfs" "btrfs" "hfsplus"];
