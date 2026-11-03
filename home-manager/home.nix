@@ -52,7 +52,7 @@
       # youtube downloader
       # yt-dlp
       uv # python package manger in Rust
-      nodejs # for npx and npm
+      nodejs_latest # for npx and npm
       python3 # for zsh-autoswitch-virtualenv
       # epub reader
       foliate
