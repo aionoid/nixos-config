@@ -70,6 +70,13 @@
     # Nix hardware
     hardware.url = "github:nixos/nixos-hardware";
 
+    # GPU unlock (CMP-locked GA10x cards, must load before nvidia)
+    # not a flake itself -> source input
+    gpu-unlock = {
+      url = "github:Zagitta/gpu-unlock";
+      flake = false;
+    };
+
     # disko
     disko = {
       url = "github:nix-community/disko";
