@@ -1,6 +1,7 @@
 {
   stdenv,
   kernel,
+  kmodigest,
 }:
 stdenv.mkDerivation {
   pname = "cpuid_fault_emulation";
@@ -8,7 +9,10 @@ stdenv.mkDerivation {
 
   src = ./source;
 
-  nativeBuildInputs = kernel.moduleBuildDependencies;
+  nativeBuildInputs = [
+    kernel.moduleBuildDependencies
+    kmodigest
+  ];
   hardeningDisable = [
     "pic"
     "format"
@@ -24,6 +28,10 @@ stdenv.mkDerivation {
   installPhase = ''
     install -D cpuid_fault_emulation.ko \
       $out/lib/modules/${kernel.modDirVersion}/extra/cpuid_fault_emulation.ko
+    # xanmod-signed nixpkgs expect every external module to carry a
+    # kmodigest certificate so the merged modules tree can fold it into
+    # modules.cer (pkgs/os-specific/linux/kmod/aggregator.nix).
+    ${kmodigest}/bin/kmodigest $out/lib/modules/${kernel.modDirVersion}/extra/cpuid_fault_emulation.ko
   '';
 
   meta.platforms = ["x86_64-linux"];

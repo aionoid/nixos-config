@@ -7,6 +7,7 @@
   # cpuid-fault-emulation = pkgs.callPackage ../../../pkgs/cpuid_fault_emulation {
   cpuid-fault-emulation = pkgs.callPackage ../../pkgs/cpuid-fault-emulation {
     kernel = config.boot.kernelPackages.kernel;
+    kmodigest = pkgs.kmodigest;
   };
 in {
   # Disable UMIP

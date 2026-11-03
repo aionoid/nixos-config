@@ -12,7 +12,8 @@
     ./fonts.nix
     ./theme.nix
     ./gaming.nix
-    ./hypervisor.nix
+    # ./hypervisor.nix
+    # ./gpu-unlock.nix
     # ./ollama.nix
     # ./open-webui.nix
     # ./privacy.nix

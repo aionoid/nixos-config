@@ -11,6 +11,8 @@
     ./nvidia.nix
     ./disko-config.nix
     ./printer.nix
+    ../../modules/nixos/hypervisor.nix
+    ../../modules/nixos/gpu-unlock.nix
 
     ../global.nix
     # desktop manager
