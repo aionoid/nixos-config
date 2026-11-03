@@ -168,6 +168,10 @@
           config = {
             cudaSupport = true;
             allowUnfree = true;
+            #BUG: remove later when gtk2 is removed
+            problems.handlers = {
+              "gtk+".broken = "warn"; # or "ignore"
+            };
           };
           # overlays = [inputs.llama-cpp.overlays.default];
         };
